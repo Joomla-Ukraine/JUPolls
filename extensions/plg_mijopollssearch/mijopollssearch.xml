@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="2.5.0" group="search" method="upgrade">
+	<name>Search - MijoPolls</name>
+	<author>Mijosoft LLC</author>
+	<creationDate>10 February 2011</creationDate>
+	<copyright>2009-2011 Mijosoft LLC</copyright>
+	<license>GNU GPL</license>
+	<authorEmail>info@mijosoft.com</authorEmail>
+	<authorUrl>www.mijosoft.com</authorUrl>
+	<version>1.0.0</version>
+	<description>Search plugin for MijoPolls</description>
+	<files>
+		<filename plugin="mijopollssearch">mijopollssearch.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="search_limit" type="text" size="5" default="50" label="Search Limit" description="Number of Search items to return" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

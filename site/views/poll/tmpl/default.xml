@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Single Poll">
+		<message>
+			<![CDATA[This layout will display a single poll.]]>
+		</message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request">
+			<field name="id" type="text" label="COM_MIJOPOLLS_MENU_POLL_ID" required="true" description="COM_MIJOPOLLS_MENU_POLL_ID_DESC"	/>
+		</fieldset>
+	</fields>
+	<state>
+		<name>Single Poll Layout</name>
+		<description>STANDARD POLL LAYOUT DESC</description>
+		<url addpath="/administrator/components/com_mijopolls/elements">
+			<param name="id" type="poll" default="0" label="COM_MIJOPOLLS_POLL" description="Select poll" />
+		</url>
+		<params />
+
+	</state>
+</metadata>
