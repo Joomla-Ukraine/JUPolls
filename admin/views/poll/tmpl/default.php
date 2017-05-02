@@ -204,9 +204,9 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
                         <?php
                         JHtml::_('jquery.framework');
 
-                        $document = JFactory::getDocument();
-                        $document->addScript('../media/mijopolls/js/jquery.tablednd.js');
-                        $document->addScript('../media/mijopolls/js/jquery.mijopolls.js');
+                        $doc = JFactory::getDocument();
+                        $doc->addScript('../media/mijopolls/js/jquery.tablednd.js');
+                        $doc->addScript('../media/mijopolls/js/jquery.mijopolls.js');
                         ?>
 
                         <fieldset class="adminform">

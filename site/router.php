@@ -30,7 +30,10 @@ function MijopollsBuildRoute(&$query)
     $segments = array();
     $itemid   = null;
 
-    if(isset($query['id']) && strpos($query['id'], ':')) list($query['id'], $query['alias']) = explode(':', $query['id'], 2);
+    if(isset($query['id']) && strpos($query['id'], ':'))
+    {
+        list($query['id'], $query['alias']) = explode(':', $query['id'], 2);
+    }
 
     if(!$items)
     {

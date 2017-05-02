@@ -27,17 +27,17 @@ jimport('joomla.html.parameter.element');
 
 class JElementPoll extends JElement
 {
-
     var $_name = 'Poll';
 
     function fetchElement($name, $value, &$node, $control_name)
     {
-        $db = JFactory::getDBO();
+        $db = JFactory::getDbo();
 
-        $query = 'SELECT a.id, a.title'
-            . ' FROM ' . $db->nameQuote("#__mijopolls_polls") . ' AS a'
-            . ' WHERE a.published = 1'
-            . ' ORDER BY a.title';
+        $query = $db->getQuery(true);
+        $query->select('a.id, a.title');
+        $query->from('#__mijopolls_polls AS a');
+        $query->where('a.published = ' . $db->Quote('package'));
+        $query->order('a.title');
         $db->setQuery($query);
         $options = $db->loadObjectList();
 

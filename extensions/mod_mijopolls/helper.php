@@ -41,9 +41,7 @@ class modMijopollsHelper
 
         if(!($options = $db->loadObjectList()))
         {
-            echo "helper " . $db->stderr();
-
-            return;
+            return "helper " . $db->stderr();
         }
 
         return $options;
@@ -77,16 +75,12 @@ class modMijopollsHelper
         $agent   = $browser->getAgentString();
         $agent   = MD5($agent);
 
-        //$query = "SELECT ip FROM #__mijopolls_votes WHERE poll_id=". (int) $poll_id ." AND ip = '". $ip ."' AND browser = '". $agent ."'";
-        //$db->setQuery($query);
-
         $query = $db->getQuery(true);
         $query->select('ip');
         $query->from('#__mijopolls_votes');
         $query->where('poll_id = ' . $db->Quote($poll_id));
         $query->where('(ip = ' . $db->Quote($ip) . ' AND browser = ' . $db->Quote($agent) . ')');
         $db->setQuery($query);
-        $res = $db->loadResult();
 
         return $ipVoted = ($db->loadResult()) ? 1 : 0;
     }

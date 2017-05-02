@@ -23,29 +23,28 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsViewPoll extends MijosoftView
+class MijopollsViewPoll extends JViewLegacy
 {
     function display($tpl = null)
     {
-        $poll_id = JRequest::getInt('id', 0);
+        $app = JFactory::getApplication();
+        $poll_id = $app->input->getInt('id', 0);
 
         $poll = JTable::getInstance('Poll', 'Table');
         $poll->load($poll_id);
 
         if($poll->id > 0 && $poll->published != 1)
         {
-            JError::raiseError(403, JText::_('Access Forbidden'));
+            $app->enqueueMessage(JText::_('Access Forbidden'), 'error');
 
             return;
         }
 
-        $this->mainframe = JFactory::getApplication();
-
         $db       = JFactory::getDBO();
         $user     = JFactory::getUser();
         $date     = JFactory::getDate();
-        $document = JFactory::getDocument();
-        $pathway  = $this->mainframe->getPathway();
+        $doc = JFactory::getDocument();
+        $pathway  = $app->getPathway();
 
         $now = $date->toSql();
 
@@ -53,7 +52,7 @@ class MijopollsViewPoll extends MijosoftView
 
         // Adds parameter handling
         $temp   = new JRegistry($poll->params);
-        $params = clone($this->mainframe->getParams());
+        $params = clone($app->getParams());
         $params->merge($temp);
 
         $menu = JSite::getMenu()->getActive();
@@ -80,10 +79,10 @@ class MijopollsViewPoll extends MijosoftView
         {
             $poll_desc = str_replace("\r\n", ' ', $poll_param->description);
             $poll_desc = trim($poll_desc);
-            $document->setMetaData('description', $poll_desc, 'content');
+            $doc->setMetaData('description', $poll_desc, 'content');
         }
 
-        $document->setTitle($params->get('page_title'));
+        $doc->setTitle($params->get('page_title'));
 
         //Set pathway information
         $pathway->addItem($poll->title, '');
@@ -184,7 +183,7 @@ class MijopollsViewPoll extends MijosoftView
             }
         }
 
-        $cookieName      = JApplication::getHash($this->mainframe->getName() . 'poll' . $poll_id);
+        $cookieName      = JApplication::getHash($app->getName() . 'poll' . $poll_id);
         $cookieVoted     = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
         $cookieVotedDone = @$_COOKIE['_donepoll' . $poll_id];
 

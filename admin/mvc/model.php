@@ -25,23 +25,7 @@ defined('_JEXEC') or die ('Restricted access');
 
 jimport('joomla.application.component.model');
 
-if(!class_exists('MijosoftModel'))
-{
-    if(interface_exists('JModel'))
-    {
-        abstract class MijosoftModel extends JModelLegacy
-        {
-        }
-    }
-    else
-    {
-        class MijosoftModel extends JModel
-        {
-        }
-    }
-}
-
-class MijopollsModel extends MijosoftModel
+class MijopollsModel extends JModelLegacy
 {
 
     public function __construct()

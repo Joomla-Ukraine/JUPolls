@@ -25,16 +25,19 @@ defined('_JEXEC') or die('Restricted access');
 
 class MijopollsViewVotes extends MijopollsView
 {
+    /**
+     * @param null $tpl
+     */
     function display($tpl = null)
     {
-        $document = JFactory::getDocument();
-        $document->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
+        $doc = JFactory::getDocument();
+        $doc->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
 
         $title = $this->get('Title');
 
         $t_title = ($title) ? JText::_('COM_MIJOPOLLS_VOTES_FOR') . ': ' . $title : JText::_('COM_MIJOPOLLS_SELECT_POLL');
         JToolBarHelper::title($t_title, 'mijopolls');
-        JToolBarHelper::deleteList(JText::_('COM_MIJOPOLLS_DELETE_CONFIRM'), "deleteVotes", JText::_('COM_MIJOPOLLS_DELETE'), true);
+        JToolBarHelper::deleteList(JText::_('COM_MIJOPOLLS_DELETE_CONFIRM'), "deleteVotes", JText::_('COM_MIJOPOLLS_DELETE'));
         JToolBarHelper::divider();
         JToolBarHelper::preferences('com_mijopolls', 500);
 

@@ -27,7 +27,10 @@ $controller = JRequest::getCmd('controller', 'polls');
 
 JHTML::_('behavior.switcher');
 
-$controllers = array('polls' => JText::_('COM_MIJOPOLLS_POLLS'), 'votes' => JText::_('COM_MIJOPOLLS_VOTES'));
+$controllers = array(
+    'polls' => JText::_('COM_MIJOPOLLS_POLLS'),
+    'votes' => JText::_('COM_MIJOPOLLS_VOTES')
+);
 
 foreach ($controllers as $key => $val)
 {

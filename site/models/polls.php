@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsModelPolls extends MijosoftModel
+class MijopollsModelPolls extends JModelLegacy
 {
     var $_query = null;
     var $_data = null;
@@ -34,15 +34,14 @@ class MijopollsModelPolls extends MijosoftModel
     {
         parent::__construct();
 
-        $this->mainframe = JFactory::getApplication();
-        $this->option    = JRequest::getWord('option');
+        $this->app    = JFactory::getApplication();
+        $this->option = $this->app->input->getWord('option');
 
-        // Get the pagination request variables
         $config            = JFactory::getConfig();
         $config_list_limit = $config->get('config.list_limit');
 
         // Get the pagination request variables
-        $this->setState('limit', $this->mainframe->getUserStateFromRequest('limit', 'limit', $config_list_limit, 'int'));
+        $this->setState('limit', $this->app->getUserStateFromRequest('limit', 'limit', $config_list_limit, 'int'));
         $this->setState('limitstart', JRequest::getVar('limitstart', 0, '', 'int'));
 
         // In case limit has been changed, adjust limitstart accordingly
@@ -113,8 +112,8 @@ class MijopollsModelPolls extends MijosoftModel
 
     function _buildViewOrderBy()
     {
-        $filter_order     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.publish_down DESC', 'cmd');
-        $filter_order_Dir = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
+        $filter_order     = $this->app->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.publish_down DESC', 'cmd');
+        $filter_order_Dir = $this->app->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
 
         $orderby = ' ORDER BY ' . $filter_order . ' ' . $filter_order_Dir;
 
@@ -124,9 +123,9 @@ class MijopollsModelPolls extends MijosoftModel
     function _buildViewWhere()
     {
         $db               = JFactory::getDBO();
-        $filter_order     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.id', 'cmd');
-        $filter_order_Dir = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
-        $search           = $this->mainframe->getUserStateFromRequest($this->option . '.polls.search', 'search', '', 'string');
+        $filter_order     = $this->app->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.id', 'cmd');
+        $filter_order_Dir = $this->app->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
+        $search           = $this->app->getUserStateFromRequest($this->option . '.polls.search', 'search', '', 'string');
         $search           = JString::strtolower($search);
 
         $where = array();

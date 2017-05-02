@@ -156,7 +156,9 @@ class MijopollsModelVotes extends MijopollsModel
         //Get the title for the site=the active poll
         foreach ($pList as $p)
         {
-            if($p->id == $poll_id) $title = $p->title;
+            if($p->id == $poll_id) {
+                $title = $p->title;
+            }
         }
 
         //Make the URLs for the dropdown

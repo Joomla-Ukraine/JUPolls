@@ -45,14 +45,13 @@ class MijopollsModelAjaxvote extends MijosoftModel
         {
             $mainframe->redirect('index.php', JText::_('ALERTNOTAUTH'));
 
-            //JError::raiseWarning(404, JText::_('ALERTNOTAUTH'));
-            return;
+            return true;
         }
 
         require_once(JPATH_COMPONENT . '/models/poll.php');
         $model      = new MijopollsModelPoll();
         $params     = new JRegistry($poll->params);
-        $cookieName = JApplication::getHash($mainframe->getName() . 'poll' . $poll_id);
+        $cookieName = JApplicationHelper::getHash($mainframe->getName() . 'poll' . $poll_id);
 
 
         $voted_cookie = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
@@ -60,7 +59,7 @@ class MijopollsModelAjaxvote extends MijosoftModel
 
         if($params->get('ip_check') and ($voted_cookie or $voted_ip or !$option_id))
         {
-            if($voted_cookie || $voted_ip)
+            /*if($voted_cookie || $voted_ip)
             {
                 $msg = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
                 $tom = "error";
@@ -71,6 +70,7 @@ class MijopollsModelAjaxvote extends MijosoftModel
                 $msg = JText::_('COM_MIJOPOLLS_NO_SELECTED');
                 $tom = "error";
             }
+            */
 
             $this->_voted = 0;
         }
@@ -79,7 +79,7 @@ class MijopollsModelAjaxvote extends MijosoftModel
             if($model->vote($poll_id, $option_id))
             {
                 $this->_voted = 1;
-                //Set cookie showing that user has voted
+
                 setcookie($cookieName, '1', time() + 60 * $poll->lag);
             }
             else

@@ -25,14 +25,14 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.environment.browser');
 
-class MijopollsModelPoll extends MijosoftModel
+class MijopollsModelPoll extends JModelLegacy
 {
     public function vote($poll_id, $option_id)
     {
-        $db        = JFactory::getDBO();
-        $user      = JFactory::getUser();
-        $date      = JFactory::getDate();
-        $mainframe = JFactory::getApplication();
+        $db   = JFactory::getDBO();
+        $user = JFactory::getUser();
+        $date = JFactory::getDate();
+
         $poll_id   = (int) $poll_id;
         $option_id = (int) $option_id;
 
@@ -60,8 +60,9 @@ class MijopollsModelPoll extends MijosoftModel
 
     public function getOptions()
     {
-        $db      = JFactory::getDBO();
-        $poll_id = JRequest::getInt('id', 0);
+        $db = JFactory::getDBO();
+
+        $poll_id = JFactory::getApplication()->input->getInt('id', 0);
 
         $query = "SELECT o.*, COUNT(v.id) AS hits,
     	(SELECT COUNT(id) FROM #__mijopolls_votes WHERE poll_id=" . $poll_id . ") AS voters"

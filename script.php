@@ -67,7 +67,10 @@ class com_MijopollsInstallerScript
         $db->setQuery('SELECT params FROM #__extensions WHERE element = "com_mijopolls" AND type = "component"');
         $config = $db->loadResult();
 
-        if(!empty($config)) $this->_is_new_installation = false;
+        if(!empty($config))
+        {
+            $this->_is_new_installation = false;
+        }
     }
 
     public function postflight($type, $parent)
@@ -92,7 +95,7 @@ class com_MijopollsInstallerScript
 		  `lag` int(11) NOT NULL default '0',
 		  PRIMARY KEY  (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;");
-        $db->query();
+        $db->execute();
 
         $db->setQuery("CREATE TABLE IF NOT EXISTS `#__mijopolls_options` (
 		  `id` int(11) NOT NULL auto_increment,
@@ -103,7 +106,7 @@ class com_MijopollsInstallerScript
 		  PRIMARY KEY  (`id`),
 		  KEY `poll_id` (`poll_id`,`text`(1))
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;");
-        $db->query();
+        $db->execute();
 
         $db->setQuery("CREATE TABLE IF NOT EXISTS `#__mijopolls_votes` (
 		  `id` bigint(20) NOT NULL auto_increment,
@@ -116,7 +119,7 @@ class com_MijopollsInstallerScript
 		  PRIMARY KEY  (`id`),
 		  KEY `poll_id` (`poll_id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;");
-        $db->query();
+        $db->execute();
 
         $installer = new JInstaller();
         $installer->install($src . '/extensions/mod_mijopolls');
@@ -138,7 +141,8 @@ class com_MijopollsInstallerScript
             $query = $db->getQuery(true);
             $query->select('*');
             $query->from('#__extensions');
-            $query->where('`type` = "component" AND `element` = "com_mijopolls"');
+            $query->where('`type` = "component"');
+            $query->where('`element` = "com_mijopolls"');
             $db->setQuery($query);
             $manifests = $db->loadObjectList();
 
@@ -176,13 +180,13 @@ class com_MijopollsInstallerScript
                 }
 
                 $db->setQuery("ALTER TABLE `#__mijopolls_votes` ENGINE=InnoDB");
-                $db->query();
+                $db->execute();
 
                 $db->setQuery("ALTER TABLE `#__mijopolls_options` ENGINE=InnoDB");
-                $db->query();
+                $db->execute();
 
                 $db->setQuery("ALTER TABLE `#__mijopolls_polls` ENGINE=InnoDB");
-                $db->query();
+                $db->execute();
             }
         }
 
@@ -207,8 +211,7 @@ class com_MijopollsInstallerScript
     {
         $status = new JObject();
 
-        $db  = JFactory::getDBO();
-        $src = $parent->getParent()->getPath('source');
+        $db = JFactory::getDBO();
 
         $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'module' AND element = 'mod_mijopolls' LIMIT 1");
         $id = $db->loadResult();
@@ -242,17 +245,29 @@ class com_MijopollsInstallerScript
 
     public function unlinkRecursive($dir, $deleteRootToo)
     {
-        if(!$dh = @opendir($dir)) return;
+        if(!$dh = @opendir($dir))
+        {
+            return;
+        }
 
         while (false !== ($obj = readdir($dh)))
         {
-            if($obj == '.' || $obj == '..') continue;
+            if($obj == '.' || $obj == '..')
+            {
+                continue;
+            }
 
-            if(!@unlink($dir . '/' . $obj)) $this->unlinkRecursive($dir . '/' . $obj, true);
+            if(!@unlink($dir . '/' . $obj))
+            {
+                $this->unlinkRecursive($dir . '/' . $obj, true);
+            }
         }
         closedir($dh);
 
-        if($deleteRootToo == 1) @rmdir($dir);
+        if($deleteRootToo == 1)
+        {
+            @rmdir($dir);
+        }
 
         return;
     }

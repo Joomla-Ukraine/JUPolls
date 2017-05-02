@@ -23,16 +23,16 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsViewPolls extends MijosoftView
+class MijopollsViewPolls extends JViewLegacy
 {
     function display($tpl = null)
     {
-        $this->mainframe = JFactory::getApplication();
-        $this->option    = JRequest::getCmd('option');
+        $app          = JFactory::getApplication();
+        $this->option = JRequest::getCmd('option');
 
-        $filter_order     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.title', 'string');
-        $filter_order_Dir = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
-        $search           = $this->mainframe->getUserStateFromRequest($this->option . '.polls.search', 'search', '', 'string');
+        $filter_order     = $app->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.title', 'string');
+        $filter_order_Dir = $app->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
+        $search           = $app->getUserStateFromRequest($this->option . '.polls.search', 'search', '', 'string');
 
         $lists['order_Dir'] = $filter_order_Dir;
         $lists['order']     = $filter_order;
@@ -40,7 +40,7 @@ class MijopollsViewPolls extends MijosoftView
 
         $menu        = JSite::getMenu()->getActive();
         $menu_params = new JRegistry($menu->params);
-        $params      = clone($this->mainframe->getParams());
+        $params      = clone($app->getParams());
         $params->merge($menu_params);
 
         $this->lists      = $lists;

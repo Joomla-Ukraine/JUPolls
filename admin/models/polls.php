@@ -35,12 +35,11 @@ class MijopollsModelPolls extends MijopollsModel
     {
         parent::__construct();
 
-        $this->mainframe = JFactory::getApplication();
         $this->option    = JRequest::getWord('option');
 
         // Get the pagination request variables
-        $limit      = $this->mainframe->getUserStateFromRequest($this->option . '.polls.limit', 'limit', $this->mainframe->getCfg('list_limit'), 'int');
-        $limitstart = $this->mainframe->getUserStateFromRequest($this->option . '.polls.limitstart', 'limitstart', 0, 'int');
+        $limit      = JFactory::getApplication()->getUserStateFromRequest($this->option . '.polls.limit', 'limit', JFactory::getApplication()->getCfg('list_limit'), 'int');
+        $limitstart = JFactory::getApplication()->getUserStateFromRequest($this->option . '.polls.limitstart', 'limitstart', 0, 'int');
 
         // In case limit has been changed, adjust limitstart accordingly
         $limitstart = ($limit != 0 ? (floor($limitstart / $limit) * $limit) : 0);
@@ -86,8 +85,6 @@ class MijopollsModelPolls extends MijopollsModel
     {
         if(empty($this->_query))
         {
-            $db = JFactory::getDBO();
-
             $where   = $this->_buildViewWhere();
             $orderby = $this->_buildViewOrderBy();
 
@@ -105,8 +102,8 @@ class MijopollsModelPolls extends MijopollsModel
 
     function _buildViewOrderBy()
     {
-        $filter_order     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.publish_down', 'cmd');
-        $filter_order_Dir = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', 'DESC', 'word');
+        $filter_order     = JFactory::getApplication()->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.publish_down', 'cmd');
+        $filter_order_Dir = JFactory::getApplication()->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', 'DESC', 'word');
 
         $orderby = ' ORDER BY ' . $filter_order . ' ' . $filter_order_Dir;
 
@@ -117,10 +114,10 @@ class MijopollsModelPolls extends MijopollsModel
     {
         $db = JFactory::getDBO();
 
-        $filter_order     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.title', 'string');
-        $filter_order_Dir = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'word');
-        $filter_state     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_state', 'filter_state', '', 'word');
-        $search           = $this->mainframe->getUserStateFromRequest($this->option . '.polls.search', 'search', '', 'string');
+        //$filter_order     = JFactory::getApplication()->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.title', 'string');
+        //$filter_order_Dir = JFactory::getApplication()->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'word');
+        $filter_state     = JFactory::getApplication()->getUserStateFromRequest($this->option . '.polls.filter_state', 'filter_state', '', 'word');
+        $search           = JFactory::getApplication()->getUserStateFromRequest($this->option . '.polls.search', 'search', '', 'string');
         $search           = JString::strtolower($search);
 
         $where = array();

@@ -25,25 +25,8 @@ defined('_JEXEC') or die ('Restricted access');
 
 jimport('joomla.application.component.controller');
 
-if(!class_exists('MijosoftController'))
+class MijopollsController extends JControllerLegacy
 {
-    if(interface_exists('JController'))
-    {
-        abstract class MijosoftController extends JControllerLegacy
-        {
-        }
-    }
-    else
-    {
-        class MijosoftController extends JController
-        {
-        }
-    }
-}
-
-class MijopollsController extends MijosoftController
-{
-
     public function __construct()
     {
         parent::__construct();

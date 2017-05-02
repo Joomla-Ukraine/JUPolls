@@ -21,76 +21,87 @@
  * @link           http://www.afactory.org
  */
 
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.application.component.controller');
 
-class MijopollsController extends JController
+class MijopollsController extends JControllerLegacy
 {
-	public function display()
-	{
-		$view = JRequest::getCmd('view');
+    /**
+     * @param bool $cachable
+     * @param bool $urlparams
+     *
+     * @return JControllerLegacy
+     *
+     * @since 1.5
+     */
+    public function display($cachable = false, $urlparams = false)
+    {
+        $cachable = false;
+        $vName    = JRequest::getCmd('view', 'polls');
 
-		if (empty($view)) JRequest::setVar('view', 'polls');
+        JRequest::setVar('view', $vName);
 
-		parent::display();
-	}
+        return parent::display($cachable, array('Itemid' => 'INT'));
+    }
 
-	public function vote()
-	{
-		JRequest::checkToken() or jexit('Invalid Token');
+    public function vote()
+    {
+        JRequest::checkToken() or jexit('Invalid Token');
 
-		$mainframe 	= JFactory::getApplication();
-		$poll_id	= JRequest::getInt('id', 0);
-		$option_id	= JRequest::getInt('voteid', 0);
-		$poll 		= JTable::getInstance('Poll', 'Table');
-		
-		if (!$poll->load($poll_id) || $poll->published != 1)
+        $app       = JFactory::getApplication();
+        $poll_id   = $app->input->getInt('id', 0);
+        $option_id = $app->input->getInt('voteid', 0);
+        $poll      = JTable::getInstance('Poll', 'Table');
+
+        if(!$poll->load($poll_id) || $poll->published != 1)
         {
-			JError::raiseWarning(404, JText::_('ALERTNOTAUTH'));
+            $app->enqueueMessage(JText::_('ALERTNOTAUTH'), 'error');
 
-			return;
-		}
+            return;
+        }
 
         $model = $this->getModel('Poll');
 
-		$cookieName	= JUtility::getHash($mainframe->getName().'poll'.$poll_id);
-		$voted_cookie = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
-        $voted_ip = $model->ipVoted($poll, $poll_id);
-		
-		$params = new JRegistry($poll->params);
+        $cookieName   = JUtility::getHash($app->getName() . 'poll' . $poll_id);
+        $voted_cookie = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
+        $voted_ip     = $model->ipVoted($poll, $poll_id);
 
-		if ($params->get('ip_check') and ($voted_cookie or $voted_ip or !$option_id))
-		{
-			if ($voted_cookie || $voted_ip)
-            {
-				$msg = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
-				$tom = "error";
-			}
+        $params = new JRegistry($poll->params);
 
-			if (!$option_id)
+        if($params->get('ip_check') and ($voted_cookie or $voted_ip or !$option_id))
+        {
+            if($voted_cookie || $voted_ip)
             {
-				$msg = JText::_('COM_MIJOPOLLS_NO_SELECTED');
-				$tom = "error";
-			}
-		}
-        else {
-			if ($model->vote($poll_id, $option_id)) {
-				setcookie($cookieName, '1', time() + 60*$poll->lag);
+                $msg = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
+                $tom = "error";
             }
-			
-			if (JFactory::getUser()->id != 0)
+
+            if(!$option_id)
             {
-				JPluginHelper::importPlugin('mijopolls');
-				$dispatcher = JDispatcher::getInstance();
-				$dispatcher->trigger('onAfterVote', array($poll, $option_id));
-			}
-		}
+                $msg = JText::_('COM_MIJOPOLLS_NO_SELECTED');
+                $tom = "error";
+            }
+        }
+        else
+        {
+            if($model->vote($poll_id, $option_id))
+            {
+                setcookie($cookieName, '1', time() + 60 * $poll->lag);
+            }
 
-		$menu = JSite::getMenu();
-		$items = $menu->getItems('link', 'index.php?option=com_mijopolls');
-		$itemid = isset($items[0]) ? '&Itemid='.$items[0]->id : '';
+            if(JFactory::getUser()->id != 0)
+            {
+                JPluginHelper::importPlugin('mijopolls');
+                $dispatcher = JDispatcher::getInstance();
+                $dispatcher->trigger('onAfterVote', array($poll, $option_id));
+            }
+        }
 
-		$this->setRedirect(JRoute::_('index.php?option=com_mijopolls&view=poll&id='. $poll_id.':'.$poll->alias.$itemid, false));
-	}
+        $menu   = JSite::getMenu();
+        $items  = $menu->getItems('link', 'index.php?option=com_mijopolls');
+        $itemid = isset($items[0]) ? '&Itemid=' . $items[0]->id : '';
+
+        $this->setRedirect(JRoute::_('index.php?option=com_mijopolls&view=poll&id=' . $poll_id . ':' . $poll->alias . $itemid, false));
+    }
 }

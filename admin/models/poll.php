@@ -62,6 +62,8 @@ class MijopollsModelPoll extends JModelAdmin
                 return $this->_data->checked_out;
             }
         }
+
+        return true;
     }
 
     public function checkin($pks = array())

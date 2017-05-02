@@ -25,23 +25,7 @@ defined('_JEXEC') or die ('Restricted access');
 
 jimport('joomla.application.component.view');
 
-if(!class_exists('MijosoftView'))
-{
-    if(interface_exists('JView'))
-    {
-        abstract class MijosoftView extends JViewLegacy
-        {
-        }
-    }
-    else
-    {
-        class MijosoftView extends JView
-        {
-        }
-    }
-}
-
-class MijopollsView extends MijosoftView
+class MijopollsView extends JViewLegacy
 {
 
     public function __construct()

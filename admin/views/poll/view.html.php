@@ -29,8 +29,8 @@ class MijopollsViewPoll extends MijopollsView
 {
     function display($tpl = null)
     {
-        $document = JFactory::getDocument();
-        $document->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
+        $doc = JFactory::getDocument();
+        $doc->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
 
         $cid  = JRequest::getVar('cid', array(0), '', 'array');
         $edit = JRequest::getVar('edit', true);

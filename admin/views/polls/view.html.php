@@ -28,8 +28,8 @@ class MijopollsViewPolls extends MijopollsView
 
     function display($tpl = null)
     {
-        $document = JFactory::getDocument();
-        $document->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
+        $doc = JFactory::getDocument();
+        $doc->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
 
         JToolBarHelper::title(JText::_('COM_MIJOPOLLS_POLLS'), 'mijopolls');
         JToolBarHelper::addNew();
@@ -39,7 +39,7 @@ class MijopollsViewPolls extends MijopollsView
         JToolBarHelper::publishList();
         JToolBarHelper::unpublishList();
         JToolBarHelper::divider();
-        JToolBarHelper::custom('resetVotes', 'cancel.png', 'cancel.png', JText::_('COM_MIJOPOLLS_RESET_VOTES'), true, false);
+        JToolBarHelper::custom('resetVotes', 'cancel.png', 'cancel.png', JText::_('COM_MIJOPOLLS_RESET_VOTES'), true);
         JToolBarHelper::preferences('com_mijopolls', 500);
 
         $this->mainframe = JFactory::getApplication();

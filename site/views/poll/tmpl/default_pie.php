@@ -26,7 +26,7 @@ defined('_JEXEC') or die('Restricted access');
 $db       = JFactory::getDBO();
 $user     = JFactory::getUser();
 $date     = JFactory::getDate();
-$document = JFactory::getDocument();
+$doc = JFactory::getDocument();
 $pathway  = $this->mainframe->getPathway();
 
 $poll_id = JRequest::getInt('id', 0);
@@ -42,7 +42,7 @@ if($poll->id > 0 && $poll->published != 1)
     return;
 }
 
-$document->setTitle($params->get('page_title'));
+$doc->setTitle($params->get('page_title'));
 
 $pathway->addItem($poll->title, '');
 
@@ -161,10 +161,10 @@ function drawChart() {
     chart.draw(data, options);
 }';
 
-$document = JFactory::getDocument();
+$doc = JFactory::getDocument();
 
-$document->addScript('//www.google.com/jsapi');
-$document->addScriptDeclaration($js);
+$doc->addScript('//www.google.com/jsapi');
+$doc->addScriptDeclaration($js);
 
 ?>
 <div id="chart_div" style="width: 728px; height: 550px;" class="clear"></div>
