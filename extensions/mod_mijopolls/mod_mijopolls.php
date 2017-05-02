@@ -55,9 +55,7 @@ if($poll_id > 0)
 }
 else
 {
-    echo '<div class="panel panel-default panel-flat"><div class="panel-body"><b class="text-grey">Опитування відсутні!</b><br><a href="/polls">Переглянути архів »»</a></div></div>';
-
-    return;
+    return '<div class="panel panel-default panel-flat"><div class="panel-body"><b class="text-grey">Опитування відсутні!</b><br><a href="/polls">Переглянути архів »»</a></div></div>';
 }
 
 JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_mijopolls/tables');

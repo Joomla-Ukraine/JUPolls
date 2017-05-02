@@ -51,7 +51,7 @@ class modMijopollsHelper
     function alreadyVoted($id)
     {
         $mainframe  = JFactory::getApplication();
-        $cookieName = JApplication::getHash($mainframe->getName() . 'poll' . $id);
+        $cookieName = JApplicationHelper::getHash($mainframe->getName() . 'poll' . $id);
         $voted      = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
 
         return $voted;
