@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" version="2.5.0" group="content" method="upgrade">
-	<name>Content - Load MijoPolls</name>
+	<name>Content - Load Polls</name>
 	<author>Mijosoft LLC</author>
 	<creationDate>10 February 2011</creationDate>
 	<copyright>2009-2011 Mijosoft LLC</copyright>

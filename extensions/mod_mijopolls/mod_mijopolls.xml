@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="2.5.0" client="site" method="upgrade">
-    <name>MijoPolls</name>
+    <name>Polls</name>
     <author>Denys Nosov</author>
     <creationDate>06.04.2016</creationDate>
     <authorEmail>denys@joomla-ua.org</authorEmail>
