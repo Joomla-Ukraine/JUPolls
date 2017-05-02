@@ -31,11 +31,7 @@ class plgContentMijopolls extends JPlugin
     function onContentPrepare($context, &$row, &$params, $limitstart)
     {
         $regex = '/{mijopolls\s*.*?}/i';
-
-        // find all instances of plugin and put in $matches
         preg_match_all($regex, $row->text, $matches);
-
-        // Number of plugins
         $count = count($matches[0]);
 
         // plugin only processes if there are any instances of the plugin in the text
@@ -59,10 +55,13 @@ class plgContentMijopolls extends JPlugin
             $module  = JModuleHelper::getModule('mod_mijopolls');
             $content = self::_renderModule($module, array(), $id);
 
+            $row->introtext = str_replace($matches[0][$i], $content, $row->introtext);
+            $row->fulltext = str_replace($matches[0][$i], $content, $row->fulltext);
             $row->text = str_replace($matches[0][$i], $content, $row->text);
         }
 
-        // removes tags without matching module positions
+        $row->introtext = preg_replace($regex, '', $row->introtext);
+        $row->fulltext = preg_replace($regex, '', $row->fulltext);
         $row->text = preg_replace($regex, '', $row->text);
     }
 
