@@ -232,7 +232,7 @@ class MijopollsController extends JControllerLegacy
 
     public function publish()
     {
-        $mainframe = JFactory::getApplication();
+        $app = JFactory::getApplication();
 
         // Check for request forgeries
         JRequest::checkToken() or jexit('Invalid Token');
@@ -256,7 +256,7 @@ class MijopollsController extends JControllerLegacy
             JError::raiseError(500, JText::_('Select an item to' . $action, true));
         }
 
-        $mainframe->redirect('index.php?option=com_mijopolls');
+        $app->redirect('index.php?option=com_mijopolls');
     }
 
     public function cancel()
@@ -298,14 +298,14 @@ class MijopollsController extends JControllerLegacy
         // Check for request forgeries
         JRequest::checkToken() or jexit('Invalid Token');
 
-        $mainframe = JFactory::getApplication();
+        $app = JFactory::getApplication();
         $poll_id   = JRequest::getInt('id', 0);
         $option_id = JRequest::getInt('voteid', 0);
         $poll      = JTable::getInstance('Poll', 'Table');
 
         if(!$poll->load($poll_id) || $poll->published != 1)
         {
-            JError::raiseWarning(404, JText::_('ALERTNOTAUTH'));
+            JError::raiseWarning(404, JText::_('ALERTNOTAUTH 2'));
 
             return;
         }
@@ -313,7 +313,7 @@ class MijopollsController extends JControllerLegacy
         $model = $this->getModel('Poll');
 
         $params     = new JRegistry($poll->params);
-        $cookieName = JApplication::getHash($mainframe->getName() . 'poll' . $poll_id);
+        $cookieName = JApplication::getHash($app->getName() . 'poll' . $poll_id);
 
         $voted_cookie = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
         $voted_ip     = $model->ipVoted($poll, $poll_id);
@@ -352,7 +352,7 @@ class MijopollsController extends JControllerLegacy
         }
 
         // set Itemid id for links
-        $menu  = JSite::getMenu();
+        $menu  = $app->getMenu();
         $items = $menu->getItems('link', 'index.php?option=com_mijopolls');
 
         $itemid = isset($items[0]) ? '&Itemid=' . $items[0]->id : '';

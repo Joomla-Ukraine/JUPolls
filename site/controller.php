@@ -56,7 +56,7 @@ class MijopollsController extends JControllerLegacy
 
         if(!$poll->load($poll_id) || $poll->published != 1)
         {
-            $app->enqueueMessage(JText::_('ALERTNOTAUTH'), 'error');
+            $app->enqueueMessage(JText::_('ALERTNOTAUTH 3'), 'error');
 
             return;
         }
@@ -69,18 +69,22 @@ class MijopollsController extends JControllerLegacy
 
         $params = new JRegistry($poll->params);
 
-        if($params->get('ip_check') and ($voted_cookie or $voted_ip or !$option_id))
+        if($params->get('ip_check') and
+            ($voted_cookie or $voted_ip or !$option_id)
+        )
         {
             if($voted_cookie || $voted_ip)
             {
-                $msg = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
-                $tom = "error";
+                $app->enqueueMessage(JText::_('COM_MIJOPOLLS_ALREADY_VOTED'), 'error');
+
+                return;
             }
 
             if(!$option_id)
             {
-                $msg = JText::_('COM_MIJOPOLLS_NO_SELECTED');
-                $tom = "error";
+                $app->enqueueMessage(JText::_('COM_MIJOPOLLS_NO_SELECTED'), 'error');
+
+                return;
             }
         }
         else
@@ -98,7 +102,7 @@ class MijopollsController extends JControllerLegacy
             }
         }
 
-        $menu   = JSite::getMenu();
+        $menu   = $app->getMenu();
         $items  = $menu->getItems('link', 'index.php?option=com_mijopolls');
         $itemid = isset($items[0]) ? '&Itemid=' . $items[0]->id : '';
 
