@@ -46,5 +46,5 @@ $classname  = 'MijopollsController' . ucfirst($controller);
 $controller = new $classname();
 
 $controller->registerTask('results', 'display');
-$controller->execute(JRequest::getCmd('task'));
+$controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();

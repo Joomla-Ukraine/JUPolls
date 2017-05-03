@@ -28,7 +28,7 @@ $lang_file->load('com_mijopolls', JPATH_SITE);
 
 require_once(__DIR__ . '/helper.php');
 
-$menu    = JSite::getMenu();
+$menu    = $app->getMenu();
 $items   = $menu->getItems('link', 'index.php?option=com_mijopolls&view=poll');
 $itemid  = isset($items[0]) ? '&Itemid=' . $items[0]->id : '';
 $details = "";
@@ -79,7 +79,7 @@ $ipVoted = modMijopollsHelper::ipVoted($poll_id);
 
 $display_poll = 0;
 
-$mainframe = JFactory::getApplication();
+$app = JFactory::getApplication();
 $date      = JFactory::getDate();
 
 $now          = JHtml::date($date->toSql(), 'Y-m-d H:i:s');

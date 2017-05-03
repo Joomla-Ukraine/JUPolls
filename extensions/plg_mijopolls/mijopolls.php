@@ -68,11 +68,11 @@ class plgContentMijopolls extends JPlugin
     function _renderModule($module, $attribs = array(), $id)
     {
         static $chrome;
-        $mainframe = JFactory::getApplication();
+        $app = JFactory::getApplication();
         $option    = JRequest::getCmd('option');
 
-        $scope            = $mainframe->scope; //record the scope
-        $mainframe->scope = $module->module;  //set scope to component name
+        $scope            = $app->scope; //record the scope
+        $app->scope = $module->module;  //set scope to component name
 
         // Get module parameters
         $params = new JRegistry($module->params);
@@ -102,7 +102,7 @@ class plgContentMijopolls extends JPlugin
         }
 
         require_once(JPATH_BASE . '/templates/system/html/modules.php');
-        $chromePath = JPATH_BASE . '/templates/' . $mainframe->getTemplate() . '/html/modules.php';
+        $chromePath = JPATH_BASE . '/templates/' . $app->getTemplate() . '/html/modules.php';
         if(!isset($chrome[$chromePath]))
         {
             if(file_exists($chromePath))
@@ -140,7 +140,7 @@ class plgContentMijopolls extends JPlugin
             }
         }
 
-        $mainframe->scope = $scope; //revert the scope
+        $app->scope = $scope; //revert the scope
 
         return $module->content;
     }

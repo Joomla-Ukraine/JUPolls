@@ -50,8 +50,8 @@ class modMijopollsHelper
     // checks if user has voted (if cookie is set)
     function alreadyVoted($id)
     {
-        $mainframe  = JFactory::getApplication();
-        $cookieName = JApplicationHelper::getHash($mainframe->getName() . 'poll' . $id);
+        $app  = JFactory::getApplication();
+        $cookieName = JApplicationHelper::getHash($app->getName() . 'poll' . $id);
         $voted      = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
 
         return $voted;

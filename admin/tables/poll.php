@@ -56,7 +56,7 @@ class TablePoll extends JTable
 
     function check()
     {
-        $mainframe = JFactory::getApplication();
+        $app = JFactory::getApplication();
 
         // check for valid name
         if(trim($this->title) == '')
@@ -85,7 +85,7 @@ class TablePoll extends JTable
         {
 
             $datenow = JFactory::getDate();
-            $datenow->setOffset($mainframe->getCfg('offset'));
+            $datenow->setOffset($app->getCfg('offset'));
             $this->alias = $datenow->toFormat("%Y-%m-%d-%H-%M-%S");
         }
 

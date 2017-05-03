@@ -36,14 +36,14 @@ class MijopollsModelAjaxvote extends MijosoftModel
         // Check for request forgeries
         JRequest::checkToken() or jexit('Invalid Token');
 
-        $mainframe = JFactory::getApplication();
+        $app = JFactory::getApplication();
         $poll_id   = JRequest::getInt('id', 0);
         $option_id = JRequest::getInt('voteid', 0);
         $poll      = JTable::getInstance('Poll', 'Table');
 
         if(!$poll->load($poll_id) || $poll->published != 1)
         {
-            $mainframe->redirect('index.php', JText::_('ALERTNOTAUTH'));
+            $app->redirect('index.php', JText::_('ALERTNOTAUTH 1'));
 
             return true;
         }
@@ -51,7 +51,7 @@ class MijopollsModelAjaxvote extends MijosoftModel
         require_once(JPATH_COMPONENT . '/models/poll.php');
         $model      = new MijopollsModelPoll();
         $params     = new JRegistry($poll->params);
-        $cookieName = JApplicationHelper::getHash($mainframe->getName() . 'poll' . $poll_id);
+        $cookieName = JApplicationHelper::getHash($app->getName() . 'poll' . $poll_id);
 
 
         $voted_cookie = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
