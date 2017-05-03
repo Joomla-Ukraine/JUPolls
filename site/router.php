@@ -27,6 +27,8 @@ function MijopollsBuildRoute(&$query)
 {
     static $items;
 
+    $app = JFactory::getApplication();
+
     $segments = array();
     $itemid   = null;
 
@@ -38,7 +40,7 @@ function MijopollsBuildRoute(&$query)
     if(!$items)
     {
         $component = JComponentHelper::getComponent('com_mijopolls');
-        $menu      = JSite::getMenu();
+        $menu      = $app->getMenu();
         $items     = $menu->getItems('component_id', $component->id);
     }
 
@@ -66,7 +68,9 @@ function MijopollsBuildRoute(&$query)
         {
             foreach ($items as $item)
             {
-                if(isset($query['view']) && $query['view'] == 'poll' && isset($item->query['view']) && $item->query['view'] == 'polls')
+                if(isset($query['view']) && $query['view'] == 'poll' &&
+                    isset($item->query['view']) && $item->query['view'] == 'polls'
+                )
                 {
                     if(isset($query['id']))
                     {
@@ -76,7 +80,7 @@ function MijopollsBuildRoute(&$query)
 
                         $url = str_replace('index.php?', '', $item->link);
                         parse_str($url, $vars);
-                        JRequest::set($vars, 'get');
+                        JInput::set($vars, 'get');
                     }
                 }
             }
