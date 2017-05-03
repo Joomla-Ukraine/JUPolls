@@ -21,57 +21,64 @@
  * @link           http://www.afactory.org
  */
 
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access');
 
-<div id="polldiv_<?php echo $this->id; ?>" class="poll">
-    <?php
-    $iclr = '1';
-    foreach ($this->options as $row) :
-        if($iclr == 1):
-            $color = '';
-        elseif($iclr == 2):
-            $color = ' progress-bar-info bar-info';
-        elseif($iclr == 3):
-            $color = ' progress-bar-success bar-success';
-        elseif($iclr == 4):
-            $color = ' progress-bar-warning bar-warning';
-        elseif($iclr == 5):
-            $color = ' progress-bar-danger bar-danger';
-        endif;
+$iclr = '1';
+foreach ($this->options as $row)
+{
+    if($iclr == 1):
+        $color = '';
+    elseif($iclr == 2):
+        $color = ' progress-bar-info bar-info';
+    elseif($iclr == 3):
+        $color = ' progress-bar-success bar-success';
+    elseif($iclr == 4):
+        $color = ' progress-bar-warning bar-warning';
+    elseif($iclr == 5):
+        $color = ' progress-bar-danger bar-danger';
+    endif;
 
-        $percent = $row->percent;
-        $width   = ($percent < 3 ? 3 : $percent);
+    $percent = $row->percent;
+    $width   = ($percent < 3 ? 3 : $percent);
 
+    ?>
+    <div class="form-group">
+        <?php
+        $poll = explode("===", $row->text);
+        if($poll[1])
+        {
+            echo '<a href="' . trim($poll[1]) . '">' . html_entity_decode(trim($poll[0])) . '</a>';
+        }
+        else
+        {
+            echo html_entity_decode(trim($poll[0]));
+        }
         ?>
-        <div class="form-group">
-            <?php
-            $poll = explode("===", $row->text);
-            if($poll[1])
-            {
-                echo '<a href="' . trim($poll[1]) . '">' . html_entity_decode(trim($poll[0])) . '</a>';
-            }
-            else
-            {
-                echo html_entity_decode(trim($poll[0]));
-            }
-            ?>
-            <?php if($this->params->get('show_hits')) : ?>
-                <span class="pull-right text-grey"><i
-                            class="icon-list fa fa-chart-bar"></i> <?php echo $row->hits; ?></span>
-            <?php endif; ?>
-            <div class="checkbox">
-                <div class="progress progress-striped">
-                    <div class="progress-bar bar <?php echo $color; ?>" role="progressbar"
-                         aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0" aria-valuemax="100"
-                         style="width: <?php echo $width; ?>%">
-                        <?php echo $percent; ?>%
-                    </div>
+        <?php if($this->params->get('show_hits')) : ?>
+            <span class="pull-right text-grey">
+                <i class="icon-list fa fa-chart-bar"></i> <?php echo $row->hits; ?>
+            </span>
+        <?php endif; ?>
+        <div class="checkbox">
+            <div class="progress progress-striped">
+
+                <div
+                        class="progress-bar bar <?php echo $color; ?>"
+                        role="progressbar"
+                        aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0" aria-valuemax="100"
+                        style="width: <?php echo $width; ?>%"
+                >
+                    <?php echo $percent; ?>%
                 </div>
+
             </div>
         </div>
-        <?php
-        $iclr++;
-        if($iclr == 6) $iclr = 1;
-    endforeach;
-    ?>
-</div>
+    </div>
+    <?php
+
+    $iclr++;
+    if($iclr == 6)
+    {
+        $iclr = 1;
+    }
+}

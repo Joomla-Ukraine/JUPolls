@@ -24,21 +24,23 @@
 defined('_JEXEC') or die('Restricted access');
 
 $component  = JComponentHelper::getComponent('com_mijopolls');
-$menus      = JApplication::getMenu('site', array());
+$app        = JFactory::getApplication();
+$menus      = $app->getMenu('site');
 $menu_items = $menus->getItems('component_id', $component->id);
 $doc        = JFactory::getDocument();
 $param      = $this->params;
 
 ?>
+
 <?php if($param->get('show_title', 1)) : ?>
-    <h1 class="head">
-        <?php echo $param->get('page_title'); ?>
-    </h1>
+    <h1 class="head"><?php echo $param->get('page_title'); ?></h1>
 <?php endif; ?>
 
 <?php if(!$this->allowToVote && $param->get('show_component_msg')) : ?>
     <div class="alert alert-<?php echo($this->msgdone == 1 ? 'success' : 'danger'); ?>" role="alert"
-         id="poll_comp_form"><?php echo JText::_($this->msg); ?></div>
+         id="poll_comp_form">
+        <?php echo JText::_($this->msg); ?>
+    </div>
 <?php endif; ?>
 
 <?php if($param['cover'] || $param['description']): ?>
@@ -117,16 +119,18 @@ $param      = $this->params;
                                 <dd>
                                     <strong class="text-primary"><?php if(isset($this->options[0])) echo $this->options[0]->voters; ?></strong>
                                 </dd>
-                                <dt>
-                                    <?php echo JText::_('COM_MIJOPOLLS_START'); ?>:
-                                </dt>
-                                <dd class="text-muted"><?php echo JHtml::date($this->poll->publish_up, JText::_('DATE_FORMAT_LC')); ?></dd>
-                                <dt>
-                                    <?php echo JText::_('COM_MIJOPOLLS_END'); ?>:
-                                </dt>
-                                <dd class="text-muted">
-                                    <?php echo JHtml::date($this->poll->publish_down, JText::_('DATE_FORMAT_LC')); ?>
-                                </dd>
+                                <?php if($param->get('show_times')): ?>
+                                    <dt>
+                                        <?php echo JText::_('COM_MIJOPOLLS_START'); ?>:
+                                    </dt>
+                                    <dd class="text-muted"><?php echo JHtml::date($this->poll->publish_up, JText::_('DATE_FORMAT_LC')); ?></dd>
+                                    <dt>
+                                        <?php echo JText::_('COM_MIJOPOLLS_END'); ?>:
+                                    </dt>
+                                    <dd class="text-muted">
+                                        <?php echo JHtml::date($this->poll->publish_down, JText::_('DATE_FORMAT_LC')); ?>
+                                    </dd>
+                                <?php endif; ?>
                             </dl>
                             <?php if(!$this->allowToVote) : ?>
                         </div>
@@ -146,24 +150,18 @@ $param      = $this->params;
         </div>
     </div>
 
-<?php
-if($component->params->get('show_dropdown') == 1)
-{
-    if($param->get('show_dropdown'))
-    {
-        ?>
-        <form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="poll" id="poll">
-            <div class="contentpane<?php echo $param->get('pageclass_sfx') ?>">
-                <label for="id">
-                    <?php echo JText::_('COM_MIJOPOLLS_VIEW_RESULTS'); ?>
-                    <?php echo $this->lists['polls']; ?>
-                </label>
-            </div>
-        </form>
-        <?php
-    }
-}
+<?php if($component->params->get('show_dropdown') == 1 && $param->get('show_dropdown') == 1) : ?>
+    <form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="poll" id="poll">
+        <div class="contentpane<?php echo $param->get('pageclass_sfx') ?>">
+            <label for="id">
+                <?php echo JText::_('COM_MIJOPOLLS_VIEW_RESULTS'); ?>
+                <?php echo $this->lists['polls']; ?>
+            </label>
+        </div>
+    </form>
+<?php endif; ?>
 
+<?php
 if($component->params->get('show_what') == 1)
 {
     if($param->get('show_what', '0') == '1')
@@ -186,13 +184,10 @@ else
 <?php endif; ?>
 
 <?php
-
-$comments = $param->get('show_comments', '0');
-if($comments != 0)
+if($component->params->get('show_comments') == 1 && $param->get('show_comments', '0') == 1)
 {
     $jcomments = JPATH_SITE . '/components/com_jcomments/jcomments.php';
-
-    if($comments == 1 && file_exists($jcomments))
+    if(file_exists($jcomments))
     {
         require_once($jcomments);
         echo JComments::showComments($this->poll->id, 'com_mijopolls', $this->poll->title);

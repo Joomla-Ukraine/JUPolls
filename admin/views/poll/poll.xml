@@ -27,6 +27,10 @@
 			<option value="0">COM_MIJOPOLLS_JOOMLA_DEFAULT_WAY</option>
 			<option value="1">COM_MIJOPOLLS_PIE_CHART</option>
 		</param>
+		<field name="show_comments" type="list" default="1" label="COM_MIJOPOLLS_SHOW_COMMENTS" description="COM_MIJOPOLLS_SHOW_COMMENTS_DESC">
+			<option value="0">No</option>
+			<option value="1">JComments</option>
+		</field>
 		<param name="show_hits" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_HITS" description="COM_MIJOPOLLS_SHOW_HITS_DESC">
 			<option value="1">Yes</option>
 			<option value="0">No</option>

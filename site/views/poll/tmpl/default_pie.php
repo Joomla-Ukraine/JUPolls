@@ -23,119 +23,31 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-$db       = JFactory::getDBO();
-$user     = JFactory::getUser();
-$date     = JFactory::getDate();
 $doc = JFactory::getDocument();
-$pathway  = $this->mainframe->getPathway();
 
-$poll_id = JRequest::getInt('id', 0);
+$options = $this->options;
 $params  = $this->params;
-
-$poll = JTable::getInstance('Poll', 'Table');
-$poll->load($poll_id);
-
-if($poll->id > 0 && $poll->published != 1)
-{
-    JError::raiseError(403, JText::_('Access Forbidden'));
-
-    return;
-}
-
-$doc->setTitle($params->get('page_title'));
-
-$pathway->addItem($poll->title, '');
-
-$params->def('show_page_title', 1);
-$params->def('page_title', $poll->title);
-
-if($poll->id > 0)
-{
-    if(empty($poll->title))
-    {
-        $poll->id    = 0;
-        $poll->title = JText::_('COM_MIJOPOLLS_SELECT_POLL');
-    }
-
-    $_db     = JFactory::getDBO();
-    $poll_id = $poll->id;
-
-    $query = "SELECT o.*, COUNT(v.id) AS hits,
-    	(SELECT COUNT(id) FROM #__mijopolls_votes WHERE poll_id=" . $poll_id . ") AS voters"
-        . " FROM #__mijopolls_options AS o"
-        . " LEFT JOIN #__mijopolls_votes AS v"
-        . " ON (o.id = v.option_id AND v.poll_id = " . $poll_id . ")"
-        . " WHERE o.poll_id = " . $poll_id
-        . " AND o.text <> ''"
-        . " GROUP BY o.id "
-        . " ORDER BY o.ordering ";
-
-    $_db->setQuery($query);
-
-    if($votes = $_db->loadObjectList())
-    {
-        $options = $votes;
-    }
-}
-else
-{
-    $options = array();
-}
-
-//get the number of voters
-$voters = isset($options[0]) ? $options[0]->voters : 0;
-
-$num_of_options = count($options);
-
-for ($i = 0; $i < $num_of_options; $i++)
-{
-    $vote =& $options[$i];
-
-    if($voters > 0)
-    {
-        $vote->percent = round(100 * $vote->hits / $voters, 1);
-    }
-    else
-    {
-        if($params->get('show_what') == 1)
-        {
-            $vote->percent = round(100 / $num_of_options, 1);
-        }
-        else
-        {
-            $vote->percent = 0;
-        }
-    }
-
-}
-
-$title_lenght = $params->get('title_lenght');
 
 foreach ($options as $vote_array)
 {
+    $hits = '(0)';
     if($params->get('show_hits'))
     {
         $hits = " (" . $vote_array->hits . ")";
     }
-    else
-    {
-        $hits = '';
-    }
 
     $poll      = explode("===", $vote_array->text);
-    $poll_text = strip_tags(trim($poll[0]));
+    $poll_text = html_entity_decode(strip_tags(trim($poll[0])));
 
-    if($params->get('show_zero_votes'))
+    if($params->get('show_zero_votes', 1))
     {
-        $text     = JString::substr(html_entity_decode($poll_text, ENT_QUOTES, "utf-8"), 0, $title_lenght) . $hits;
-        $values[] = '[\'' . $poll_text . '\', ' . $vote_array->hits . ']';
+        $values[] = '[\'' . $poll_text . '\', ' . $hits . ']';
     }
     else
     {
         if($vote_array->percent)
         {
-            $text     = JString::substr(html_entity_decode($poll_text, ENT_QUOTES, "utf-8"), 0, $title_lenght) . $hits;
-            $values[] = '[\'' . $poll_text . '\', ' . $vote_array->hits . ']';
+            $values[] = '[\'' . $poll_text . '\', ' . $hits . ']';
         }
     }
 }
@@ -146,22 +58,18 @@ $js = 'google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
-        [\'Task\', \'' . $titler . '\'],
+        [\'Task\', \'\'],
         ' . $json_values . '
     ]);
-
     var options = {
         title: \'\',
         is3D: true,
         width: 728,
         chartArea:{left:5,top:0,width:"728",height:"550"}
     };
-
     var chart = new google.visualization.PieChart(document.getElementById(\'chart_div\'));
     chart.draw(data, options);
 }';
-
-$doc = JFactory::getDocument();
 
 $doc->addScript('//www.google.com/jsapi');
 $doc->addScriptDeclaration($js);

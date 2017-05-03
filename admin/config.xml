@@ -56,7 +56,7 @@
 			<option value="0">JNO</option>
 		</field>
 
-		<field name="show_dropdown" type="radio" class="btn-group" default="0" label="COM_MIJOPOLLS_SHOW_DROPDOWN" description="COM_MIJOPOLLS_SHOW_DROPDOWN_DESC">
+		<field name="show_dropdown" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_DROPDOWN" description="COM_MIJOPOLLS_SHOW_DROPDOWN_DESC">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>

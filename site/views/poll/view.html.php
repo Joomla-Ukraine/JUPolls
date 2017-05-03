@@ -23,11 +23,13 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\String\StringHelper;
+
 class MijopollsViewPoll extends JViewLegacy
 {
     function display($tpl = null)
     {
-        $app = JFactory::getApplication();
+        $app     = JFactory::getApplication();
         $poll_id = $app->input->getInt('id', 0);
 
         $poll = JTable::getInstance('Poll', 'Table');
@@ -40,11 +42,11 @@ class MijopollsViewPoll extends JViewLegacy
             return;
         }
 
-        $db       = JFactory::getDBO();
-        $user     = JFactory::getUser();
-        $date     = JFactory::getDate();
-        $doc = JFactory::getDocument();
-        $pathway  = $app->getPathway();
+        $db      = JFactory::getDBO();
+        $user    = JFactory::getUser();
+        $date    = JFactory::getDate();
+        $doc     = JFactory::getDocument();
+        $pathway = $app->getPathway();
 
         $now = $date->toSql();
 
@@ -93,7 +95,7 @@ class MijopollsViewPoll extends JViewLegacy
         // Check if there is a poll corresponding to id and if poll is published
         if($poll->id > 0)
         {
-            if(empty($poll->title))
+            if($poll->title)
             {
                 $poll->id    = 0;
                 $poll->title = JText::_('COM_MIJOPOLLS_SELECT_POLL');
@@ -162,7 +164,7 @@ class MijopollsViewPoll extends JViewLegacy
 
             if($params->get('show_zero_votes'))
             {
-                $text     = JString::substr(html_entity_decode($vote_array->text, ENT_QUOTES, "utf-8"), 0, $title_lenght) . $hits;
+                $text     = StringHelper::substr(html_entity_decode($vote_array->text, ENT_QUOTES, "utf-8"), 0, $title_lenght) . $hits;
                 $values[] = '
 				    "value":' . $vote_array->percent . ',
 					"label":"' . addslashes($text) . '",
@@ -173,7 +175,7 @@ class MijopollsViewPoll extends JViewLegacy
             {
                 if($vote_array->percent)
                 {
-                    $text     = JString::substr(html_entity_decode($vote_array->text, ENT_QUOTES, "utf-8"), 0, $title_lenght) . $hits;
+                    $text     = StringHelper::substr(html_entity_decode($vote_array->text, ENT_QUOTES, "utf-8"), 0, $title_lenght) . $hits;
                     $values[] = '
 					    "value":' . $vote_array->percent . ',
 						"label":"' . addslashes($text) . '",
@@ -183,7 +185,7 @@ class MijopollsViewPoll extends JViewLegacy
             }
         }
 
-        $cookieName      = JApplication::getHash($app->getName() . 'poll' . $poll_id);
+        $cookieName      = JApplicationHelper::getHash($app->getName() . 'poll' . $poll_id);
         $cookieVoted     = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
         $cookieVotedDone = @$_COOKIE['_donepoll' . $poll_id];
 
@@ -253,8 +255,7 @@ class MijopollsViewPoll extends JViewLegacy
                     else
                     {
                         $allowToVote = 0;
-                        $return      = JRequest::getURI();
-                        $return      = base64_encode($return);
+                        $return      = base64_encode(JURI::current());
                         $link        = 'index.php?option=com_users&view=login&return=' . $return;
                         $msg         = JText::sprintf('COM_MIJOPOLLS_REGISTER_TO_VOTE', '<a href="' . $link . '">', '</a>');
                     }
@@ -299,9 +300,15 @@ class MijopollsViewPoll extends JViewLegacy
                 $allowToVote = 0;
             }
 
-            if($now < $publish_up) $msg = JText::_('COM_MIJOPOLLS_VOTE_NOT_STARTED');
+            if($now < $publish_up)
+            {
+                $msg = JText::_('COM_MIJOPOLLS_VOTE_NOT_STARTED');
+            }
 
-            if($now > $publish_down) $msg = JText::_('COM_MIJOPOLLS_VOTE_ENDED');
+            if($now > $publish_down)
+            {
+                $msg = JText::_('COM_MIJOPOLLS_VOTE_ENDED');
+            }
         }
         else
         {
