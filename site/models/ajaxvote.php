@@ -34,7 +34,7 @@ class MijopollsModelAjaxvote extends MijosoftModel
     function getVoted()
     {
         // Check for request forgeries
-        JRequest::checkToken() or jexit('Invalid Token');
+        JSession::checkToken() or jexit('Invalid Token');
 
         $app = JFactory::getApplication();
         $poll_id   = JRequest::getInt('id', 0);

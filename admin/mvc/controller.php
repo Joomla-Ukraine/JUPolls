@@ -66,7 +66,7 @@ class MijopollsController extends JControllerLegacy
     public function save()
     {
         // Check for request forgeries
-        JRequest::checkToken() or jexit('Invalid Token');
+        JSession::checkToken() or jexit('Invalid Token');
 
         $db = JFactory::getDBO();
 
@@ -182,7 +182,7 @@ class MijopollsController extends JControllerLegacy
     public function remove()
     {
         // Check for request forgeries
-        JRequest::checkToken() or jexit('Invalid Token');
+        JSession::checkToken() or jexit('Invalid Token');
 
         $db  = JFactory::getDBO();
         $cid = JRequest::getVar('cid', array(), '', 'array');
@@ -211,7 +211,7 @@ class MijopollsController extends JControllerLegacy
     public function deleteVotes()
     {
         // Check for request forgeries
-        JRequest::checkToken() or jexit('Invalid Token');
+        JSession::checkToken() or jexit('Invalid Token');
 
         $poll_id = JRequest::getVar('poll_id', 0, 'POST', 'INT');
         $model   = $this->getModel('votes');
@@ -235,7 +235,7 @@ class MijopollsController extends JControllerLegacy
         $app = JFactory::getApplication();
 
         // Check for request forgeries
-        JRequest::checkToken() or jexit('Invalid Token');
+        JSession::checkToken() or jexit('Invalid Token');
 
         $user = JFactory::getUser();
 
@@ -262,7 +262,7 @@ class MijopollsController extends JControllerLegacy
     public function cancel()
     {
         // Check for request forgeries
-        JRequest::checkToken() or jexit('Invalid Token');
+        JSession::checkToken() or jexit('Invalid Token');
 
         $id  = JRequest::getVar('id', 0, '', 'int');
         $row = JTable::getInstance('poll', 'Table');
@@ -275,7 +275,7 @@ class MijopollsController extends JControllerLegacy
     public function resetVotes()
     {
         // Check for request forgeries
-        JRequest::checkToken() or jexit('Invalid Token');
+        JSession::checkToken() or jexit('Invalid Token');
 
         $model = $this->getModel('polls');
 
@@ -296,7 +296,7 @@ class MijopollsController extends JControllerLegacy
     public function vote()
     {
         // Check for request forgeries
-        JRequest::checkToken() or jexit('Invalid Token');
+        JSession::checkToken() or jexit('Invalid Token');
 
         $app = JFactory::getApplication();
         $poll_id   = $app->input->getInt('id', 0);
