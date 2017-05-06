@@ -163,7 +163,7 @@ class MijopollsController extends JControllerLegacy
             }
         }
 
-        switch (JRequest::getCmd('task'))
+        switch (JFactory::getApplication()->input->get('task'))
         {
             case 'apply':
                 $msg  = JText::_('COM_MIJOPOLLS_POLL_SAVED');
@@ -240,7 +240,7 @@ class MijopollsController extends JControllerLegacy
         $user = JFactory::getUser();
 
         $cid     = JRequest::getVar('cid', array(), '', 'array');
-        $publish = (JRequest::getCmd('task') == 'publish' ? 1 : 0);
+        $publish = ($app->input->get('task') == 'publish' ? 1 : 0);
 
         $table = JTable::getInstance('poll', 'Table');
         JArrayHelper::toInteger($cid);

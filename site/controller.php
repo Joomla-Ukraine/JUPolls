@@ -38,7 +38,7 @@ class MijopollsController extends JControllerLegacy
     public function display($cachable = false, $urlparams = false)
     {
         $cachable = false;
-        $vName    = JRequest::getCmd('view', 'polls');
+        $vName    = $this->input->get('view', 'polls');
 
         JRequest::setVar('view', $vName);
 

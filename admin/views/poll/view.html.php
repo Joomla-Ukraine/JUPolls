@@ -70,7 +70,7 @@ class MijopollsViewPoll extends MijopollsView
             $row->lag = 24 * 60;
         }
 
-        $task         = JRequest::getCmd('task');
+        $task         = JFactory::getApplication()->input->get('task');
         $this->params = $this->get('Form');
 
         $this->row     = $row;

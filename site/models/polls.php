@@ -42,14 +42,14 @@ class MijopollsModelPolls extends JModelLegacy
 
         // Get the pagination request variables
         $this->setState('limit', $this->app->getUserStateFromRequest('limit', 'limit', $config_list_limit, 'int'));
-        $this->setState('limitstart', JRequest::getVar('limitstart', 0, '', 'int'));
+        $this->setState('limitstart', $this->app->input->get('limitstart', 0, '', 'int'));
 
         // In case limit has been changed, adjust limitstart accordingly
         $this->setState('limitstart', ($this->getState('limit') != 0 ? (floor($this->getState('limitstart') / $this->getState('limit')) * $this->getState('limit')) : 0));
 
         // Get the filter request variables
-        $this->setState('filter_order', JRequest::getCmd('filter_order', 'ordering'));
-        $this->setState('filter_order_dir', JRequest::getCmd('filter_order_Dir', 'ASC'));
+        $this->setState('filter_order', $this->app->input->get('filter_order', 'ordering'));
+        $this->setState('filter_order_dir', $this->app->input->get('filter_order_Dir', 'ASC'));
 
     }
 

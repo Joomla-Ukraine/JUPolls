@@ -41,7 +41,7 @@ class JElementPoll extends JElement
         $db->setQuery($query);
         $options = $db->loadObjectList();
 
-        if(JRequest::getCmd('option') == "com_modules")
+        if(JFactory::getApplication()->input->get('option') == "com_modules")
         {
             array_unshift($options, JHTML::_('select.option', '', '- - - - - - - - - - -', 'id', 'title'));
             array_unshift($options, JHTML::_('select.option', '0', JText::_('Show random poll'), 'id', 'title'));

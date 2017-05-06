@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-$controller = JRequest::getCmd('controller', 'polls');
+$controller = JFactory::getApplication()->input->get('controller', 'polls');
 
 JHTML::_('behavior.switcher');
 

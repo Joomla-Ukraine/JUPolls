@@ -49,5 +49,5 @@ $classname = 'MijopollsController' . ucfirst($controller);
 
 // Create the controller
 $controller = new $classname();
-$controller->execute(JRequest::getCmd('task'));
+$controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();

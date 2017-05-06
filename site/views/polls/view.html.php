@@ -28,7 +28,7 @@ class MijopollsViewPolls extends JViewLegacy
     function display($tpl = null)
     {
         $app          = JFactory::getApplication();
-        $this->option = JRequest::getCmd('option');
+        $this->option = $app->input->get('option');
 
         $filter_order     = $app->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.title', 'string');
         $filter_order_Dir = $app->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
