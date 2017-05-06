@@ -40,7 +40,7 @@ class MijopollsController extends JControllerLegacy
         $cachable = false;
         $vName    = $this->input->get('view', 'polls');
 
-        JRequest::setVar('view', $vName);
+        $this->input->set('view', $vName);
 
         return parent::display($cachable, array('Itemid' => 'INT'));
     }

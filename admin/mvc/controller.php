@@ -42,23 +42,23 @@ class MijopollsController extends JControllerLegacy
     {
         if(JFactory::getApplication()->isAdmin())
         {
-            $controller = JRequest::getVar('controller', 'polls');
+            $controller = $this->input->get('controller', 'polls');
         }
         else
         {
-            $controller = JRequest::getVar('view', 'polls');
+            $controller = $this->input->get('view', 'polls');
         }
 
-        JRequest::setVar('view', $controller);
+        $this->input->set('view', $controller);
 
         parent::display($cachable, $urlparams);
     }
 
     public function edit()
     {
-        JRequest::setVar('view', 'poll');
-        JRequest::setVar('edit', true);
-        JRequest::setVar('hidemainmenu', 1);
+        $this->input->set('view', 'poll');
+        $this->input->set('edit', true);
+        $this->input->set('hidemainmenu', 1);
 
         parent::display();
     }
