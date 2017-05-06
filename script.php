@@ -41,7 +41,6 @@ class com_MijopollsInstallerScript
             JPATH_SITE . '/components/com_mijopolls',
             JPATH_SITE . '/modules/mod_mijopolls',
             JPATH_SITE . '/plugins/mijopolls',
-            JPATH_SITE . '/plugins/content/mijopolls',
             JPATH_SITE . '/media/mijopolls'
         );
 
@@ -125,9 +124,6 @@ class com_MijopollsInstallerScript
         $installer->install($src . '/extensions/mod_mijopolls');
 
         $installer = new JInstaller();
-        $installer->install($src . '/extensions/plg_mijopolls');
-
-        $installer = new JInstaller();
         $installer->install($src . '/extensions/plg_mijopollssearch');
 
         if($this->_is_new_installation == true)
@@ -160,7 +156,8 @@ class com_MijopollsInstallerScript
                 try
                 {
                     $db->setQuery("ALTER TABLE `#__mijopolls_votes` ADD `browser` VARCHAR( 155 ) NOT NULL AFTER `ip`;");
-                    $db->query();
+                    $db->execute();
+
                     $app->enqueueMessage('Add column `browser` to `#__mijopolls_votes`', 'message');
                 }
                 catch (Exception $e)
@@ -171,7 +168,8 @@ class com_MijopollsInstallerScript
                 try
                 {
                     $db->setQuery("ALTER TABLE `#__mijopolls_options` DROP `color`;");
-                    $db->query();
+                    $db->execute();
+
                     $app->enqueueMessage('Remove column `color` to `#__mijopolls_options`', 'message');
                 }
                 catch (Exception $e)
