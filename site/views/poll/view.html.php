@@ -29,24 +29,25 @@ class MijopollsViewPoll extends JViewLegacy
 {
     function display($tpl = null)
     {
-        $app     = JFactory::getApplication();
-        $poll_id = $app->input->getInt('id', 0);
+        $this->mainframe = JFactory::getApplication();
+
+        $poll_id = $this->mainframe->input->getInt('id', 0);
 
         $poll = JTable::getInstance('Poll', 'Table');
         $poll->load($poll_id);
 
         if($poll->id > 0 && $poll->published != 1)
         {
-            $app->enqueueMessage(JText::_('Access Forbidden'), 'error');
+            $this->mainframe->enqueueMessage(JText::_('Access Forbidden'), 'error');
 
             return;
         }
 
-        $db      = JFactory::getDBO();
-        $user    = JFactory::getUser();
-        $date    = JFactory::getDate();
-        $doc     = JFactory::getDocument();
-        $pathway = $app->getPathway();
+        $db       = JFactory::getDBO();
+        $user     = JFactory::getUser();
+        $date     = JFactory::getDate();
+        $document = JFactory::getDocument();
+        $pathway  = $this->mainframe->getPathway();
 
         $now = $date->toSql();
 
@@ -54,7 +55,7 @@ class MijopollsViewPoll extends JViewLegacy
 
         // Adds parameter handling
         $temp   = new JRegistry($poll->params);
-        $params = clone($app->getParams());
+        $params = clone($this->mainframe->getParams());
         $params->merge($temp);
 
         $menu = JSite::getMenu()->getActive();
@@ -81,10 +82,10 @@ class MijopollsViewPoll extends JViewLegacy
         {
             $poll_desc = str_replace("\r\n", ' ', $poll_param->description);
             $poll_desc = trim($poll_desc);
-            $doc->setMetaData('description', $poll_desc, 'content');
+            $document->setMetaData('description', $poll_desc, 'content');
         }
 
-        $doc->setTitle($params->get('page_title'));
+        $document->setTitle($params->get('page_title'));
 
         //Set pathway information
         $pathway->addItem($poll->title, '');
@@ -93,18 +94,16 @@ class MijopollsViewPoll extends JViewLegacy
         $params->def('page_title', $poll->title);
 
         // Check if there is a poll corresponding to id and if poll is published
+        $options = array();
         if($poll->id > 0)
         {
-            if($poll->title)
+            if(empty($poll->title))
             {
                 $poll->id    = 0;
                 $poll->title = JText::_('COM_MIJOPOLLS_SELECT_POLL');
             }
+
             $options = $this->get('Options');
-        }
-        else
-        {
-            $options = array();
         }
 
         $pList = $this->get('Polls');
@@ -128,6 +127,7 @@ class MijopollsViewPoll extends JViewLegacy
         );
 
         $voters         = isset($options[0]) ? $options[0]->voters : 0;
+
         $num_of_options = count($options);
         for ($i = 0; $i < $num_of_options; $i++)
         {
@@ -138,13 +138,10 @@ class MijopollsViewPoll extends JViewLegacy
             }
             else
             {
+                $vote->percent = 0;
                 if($params->get('show_what') == 1)
                 {
                     $vote->percent = round(100 / $num_of_options, 1);
-                }
-                else
-                {
-                    $vote->percent = 0;
                 }
             }
         }
@@ -153,13 +150,10 @@ class MijopollsViewPoll extends JViewLegacy
 
         foreach ($options as $vote_array)
         {
+            $hits = '';
             if($params->get('show_hits'))
             {
                 $hits = " (" . $vote_array->hits . ")";
-            }
-            else
-            {
-                $hits = '';
             }
 
             if($params->get('show_zero_votes'))
@@ -185,8 +179,8 @@ class MijopollsViewPoll extends JViewLegacy
             }
         }
 
-        $cookieName      = JApplicationHelper::getHash($app->getName() . 'poll' . $poll_id);
-        $cookieVoted     = JRequest::getVar($cookieName, '0', 'COOKIE', 'INT');
+        $cookieName      = JApplicationHelper::getHash($this->mainframe->getName() . 'poll' . $poll_id);
+        $cookieVoted     = $this->mainframe->input->get($cookieName, '0', 'COOKIE', 'INT');
         $cookieVotedDone = @$_COOKIE['_donepoll' . $poll_id];
 
         $ipVoted = $model->ipVoted($poll, $poll_id);
@@ -196,9 +190,11 @@ class MijopollsViewPoll extends JViewLegacy
         $publish_up   = strtotime($poll->publish_up);
         $publish_down = strtotime($poll->publish_down);
 
-        $msgdone = 0;
+        $msgdone     = 0;
+        $allowToVote = 0;
         if($params->get('allow_voting'))
         {
+            $allowToVote = 0;
             if(($now > $publish_up) && ($now < $publish_down))
             {
                 if($params->get('only_registered'))
@@ -215,14 +211,11 @@ class MijopollsViewPoll extends JViewLegacy
                             $db->setQuery($query);
                             $userVoted = ($db->loadResult()) ? 1 : 0;
 
+                            $allowToVote = 1;
                             if($userVoted)
                             {
                                 $allowToVote = 0;
                                 $msg         = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
-                            }
-                            else
-                            {
-                                $allowToVote = 1;
                             }
 
                             if($cookieVotedDone)
@@ -234,14 +227,11 @@ class MijopollsViewPoll extends JViewLegacy
                         }
                         else
                         {
+                            $allowToVote = 1;
                             if($cookieVoted)
                             {
                                 $allowToVote = 0;
                                 $msg         = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
-                            }
-                            else
-                            {
-                                $allowToVote = 1;
                             }
 
                             if($cookieVotedDone)
@@ -255,7 +245,8 @@ class MijopollsViewPoll extends JViewLegacy
                     else
                     {
                         $allowToVote = 0;
-                        $return      = base64_encode(JURI::current());
+                        $return      = JURI::current();
+                        $return      = base64_encode($return);
                         $link        = 'index.php?option=com_users&view=login&return=' . $return;
                         $msg         = JText::sprintf('COM_MIJOPOLLS_REGISTER_TO_VOTE', '<a href="' . $link . '">', '</a>');
                     }
@@ -269,21 +260,15 @@ class MijopollsViewPoll extends JViewLegacy
                     }
                     else
                     {
+                        $allowToVote = 1;
                         if($params->get('ip_check'))
                         {
+                            $allowToVote = 1;
                             if($ipVoted)
                             {
                                 $allowToVote = 0;
                                 $msg         = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
                             }
-                            else
-                            {
-                                $allowToVote = 1;
-                            }
-                        }
-                        else
-                        {
-                            $allowToVote = 1;
                         }
                     }
 
@@ -295,10 +280,6 @@ class MijopollsViewPoll extends JViewLegacy
                     }
                 }
             }
-            else
-            {
-                $allowToVote = 0;
-            }
 
             if($now < $publish_up)
             {
@@ -309,10 +290,6 @@ class MijopollsViewPoll extends JViewLegacy
             {
                 $msg = JText::_('COM_MIJOPOLLS_VOTE_ENDED');
             }
-        }
-        else
-        {
-            $allowToVote = 0;
         }
 
         $this->lists       = $lists;
