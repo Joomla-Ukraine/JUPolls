@@ -56,8 +56,6 @@ class TablePoll extends JTable
 
     function check()
     {
-        $app = JFactory::getApplication();
-
         // check for valid name
         if(trim($this->title) == '')
         {
@@ -78,15 +76,20 @@ class TablePoll extends JTable
         if(empty($this->alias))
         {
             $this->alias = $this->title;
-        }
 
-        $this->alias = JFilterOutput::stringURLSafe($this->alias);
-        if(trim(str_replace('-', '', $this->alias)) == '')
-        {
+            if(JFactory::getConfig()->get('unicodeslugs') == 1)
+            {
+                $this->alias = JFilterOutput::stringURLUnicodeSlug($this->title);
+            }
+            else
+            {
+                $this->alias = JFilterOutput::stringURLSafe($this->title);
+            }
 
-            $datenow = JFactory::getDate();
-            $datenow->setOffset($app->getCfg('offset'));
-            $this->alias = $datenow->toFormat("%Y-%m-%d-%H-%M-%S");
+            if(empty($this->alias) || trim(str_replace('-', '', $this->alias)) == '')
+            {
+                $this->alias = 'poll';
+            }
         }
 
         return true;
