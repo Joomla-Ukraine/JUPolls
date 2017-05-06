@@ -299,8 +299,8 @@ class MijopollsController extends JControllerLegacy
         JRequest::checkToken() or jexit('Invalid Token');
 
         $app = JFactory::getApplication();
-        $poll_id   = JRequest::getInt('id', 0);
-        $option_id = JRequest::getInt('voteid', 0);
+        $poll_id   = $app->input->getInt('id', 0);
+        $option_id = $app->input->getInt('voteid', 0);
         $poll      = JTable::getInstance('Poll', 'Table');
 
         if(!$poll->load($poll_id) || $poll->published != 1)
