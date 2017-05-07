@@ -1,120 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-     <fieldset name="image" label="COM_MIJOPOLLS_PARAMS_IMAGE">
+    <fieldset name="image" label="COM_MIJOPOLLS_PARAMS_IMAGE">
 
         <field
-            name="description"
-            type="textarea"
-            default=""
-            class="span12"
-            label="COM_MIJOPOLLS_DESCRIPTION"
-            />
+                name="description"
+                type="textarea"
+                default=""
+                class="span12"
+                rows="6"
+                label="COM_MIJOPOLLS_DESCRIPTION"
+        />
 
         <field
-            name="cover"
-            type="media"
-            default=""
-            directory="polls"
-            label="COM_MIJOPOLLS_MEDIA"
-            />
+                name="cover"
+                type="media"
+                class="span12"
+                default=""
+                directory="polls"
+                label="COM_MIJOPOLLS_MEDIA"
+        />
 
-     </fieldset>
+    </fieldset>
 
-     <fieldset name="general" label="COM_MIJOPOLLS_PARAMS_GENERAL">
+    <fieldset name="general" label="COM_MIJOPOLLS_PARAMS_GENERAL">
 
-		<field
-            name="only_registered"
-            type="radio"
-            class="btn-group"
-            default="0"
-            label="COM_MIJOPOLLS_ONLY_REGISTERED"
-            description="COM_MIJOPOLLS_ONLY_REGISTERED_DESC"
-            >
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="only_registered"
+                type="radio"
+                class="btn-group"
+                default="0"
+                label="COM_MIJOPOLLS_ONLY_REGISTERED"
+                description="COM_MIJOPOLLS_ONLY_REGISTERED_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-            name="one_vote_per_user"
-            type="radio"
-            class="btn-group"
-            default="1"
-            label="COM_MIJOPOLLS_ONE_VOTE_PER_USER"
-            description="COM_MIJOPOLLS_ONE_VOTE_PER_USER_DESC"
-            >
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="one_vote_per_user"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_MIJOPOLLS_ONE_VOTE_PER_USER"
+                description="COM_MIJOPOLLS_ONE_VOTE_PER_USER_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-            name="ip_check"
-            type="radio"
-            class="btn-group"
-            default="1"
-            label="COM_MIJOPOLLS_ONE_VOTE_PER_IP"
-            description="COM_MIJOPOLLS_ONE_VOTE_PER_IP_DESC"
-            >
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="ip_check"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_MIJOPOLLS_ONE_VOTE_PER_IP"
+                description="COM_MIJOPOLLS_ONE_VOTE_PER_IP_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-            name="show_component_msg"
-            type="radio"
-            class="btn-group"
-            default="1"
-            label="COM_MIJOPOLLS_SHOW_MSG"
-            description="COM_MIJOPOLLS_SHOW_MSG_DESC"
-            >
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="show_component_msg"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_MIJOPOLLS_SHOW_MSG"
+                description="COM_MIJOPOLLS_SHOW_MSG_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-            name="allow_voting"
-            type="radio"
-            class="btn-group"
-            default="1"
-            label="COM_MIJOPOLLS_ALLOW_VOTING"
-            description="COM_MIJOPOLLS_ALLOW_VOTING_DESC"
-            >
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="allow_voting"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_MIJOPOLLS_ALLOW_VOTING"
+                description="COM_MIJOPOLLS_ALLOW_VOTING_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-	</fieldset>
+    </fieldset>
 
-	<fieldset name="results" label="COM_MIJOPOLLS_RESULTS">
+    <fieldset name="results" label="COM_MIJOPOLLS_RESULTS">
 
-		<field name="show_what" type="list" default="0" label="COM_MIJOPOLLS_SHOW_RESULTS_AS" description="COM_MIJOPOLLS_SHOW_RESULTS_AS_DESC">
-			<option value="0">COM_MIJOPOLLS_JOOMLA_DEFAULT_WAY</option>
-			<option value="1">COM_MIJOPOLLS_PIE_CHART</option>
-		</field>
+        <field name="show_what" type="list" default="0" label="COM_MIJOPOLLS_SHOW_RESULTS_AS"
+               description="COM_MIJOPOLLS_SHOW_RESULTS_AS_DESC">
+            <option value="0">COM_MIJOPOLLS_JOOMLA_DEFAULT_WAY</option>
+            <option value="1">COM_MIJOPOLLS_PIE_CHART</option>
+        </field>
 
-		<field name="show_hits" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_HITS" description="COM_MIJOPOLLS_SHOW_HITS_DESC">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field name="show_hits" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_HITS"
+               description="COM_MIJOPOLLS_SHOW_HITS_DESC">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field name="show_voters" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_VOTERS" description="COM_MIJOPOLLS_SHOW_VOTERS_DESC">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field name="show_voters" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_VOTERS"
+               description="COM_MIJOPOLLS_SHOW_VOTERS_DESC">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field name="show_times" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_TIMES" description="COM_MIJOPOLLS_SHOW_TIMES_DESC">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field name="show_times" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_TIMES"
+               description="COM_MIJOPOLLS_SHOW_TIMES_DESC">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field name="show_dropdown" type="radio" class="btn-group" default="0" label="COM_MIJOPOLLS_SHOW_DROPDOWN" description="COM_MIJOPOLLS_SHOW_DROPDOWN_DESC">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field name="show_dropdown" type="radio" class="btn-group" default="0" label="COM_MIJOPOLLS_SHOW_DROPDOWN"
+               description="COM_MIJOPOLLS_SHOW_DROPDOWN_DESC">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field name="show_title" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_TITLE" description="COM_MIJOPOLLS_SHOW_TITLE_DESC">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field name="show_title" type="radio" class="btn-group" default="1" label="COM_MIJOPOLLS_SHOW_TITLE"
+               description="COM_MIJOPOLLS_SHOW_TITLE_DESC">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
     </fieldset>
 </form>
