@@ -1,0 +1,17 @@
+{
+	"name": "Joomla-Ukraine/JUPolls",
+	"type": "project",
+	"description": "JUPolls",
+	"keywords": ["joomla", "cms"],
+	"homepage": "https://github.com/Joomla-Ukraine/JUPolls",
+	"license": "GPL-2.0+",
+	"require": {
+		"php": ">=5.3.10"
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "1.*",
+		"phpmd/phpmd": "*",
+		"phing/phing": "2.*",
+        "codeception/codeception": "*"
+	}
+}
