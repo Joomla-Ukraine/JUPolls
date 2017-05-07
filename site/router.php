@@ -46,7 +46,10 @@ function MijopollsBuildRoute(&$query)
 
     if(is_array($items))
     {
-        if(!isset($query['view']) && !isset($query['id']) && isset($query['Itemid'])) $itemid = (int) $query['Itemid'];
+        if(!isset($query['view']) && !isset($query['id']) && isset($query['Itemid']))
+        {
+            $itemid = (int) $query['Itemid'];
+        }
 
         if(!$itemid)
         {
@@ -68,8 +71,10 @@ function MijopollsBuildRoute(&$query)
         {
             foreach ($items as $item)
             {
-                if(isset($query['view']) && $query['view'] == 'poll' &&
-                    isset($item->query['view']) && $item->query['view'] == 'polls'
+                if(isset($query['view']) &&
+                    $query['view'] == 'poll' &&
+                    isset($item->query['view']) &&
+                    $item->query['view'] == 'polls'
                 )
                 {
                     if(isset($query['id']))
@@ -79,8 +84,9 @@ function MijopollsBuildRoute(&$query)
                         break;
 
                         $url = str_replace('index.php?', '', $item->link);
+
                         parse_str($url, $vars);
-                        JInput::set($vars, 'get');
+                        JRequest::set($vars, 'get');
                     }
                 }
             }
