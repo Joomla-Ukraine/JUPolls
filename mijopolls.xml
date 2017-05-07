@@ -2,12 +2,12 @@
 <extension type="component" version="3.0" method="upgrade">
     <name>COM_MIJOPOLLS</name>
     <author>Denys Nosov</author>
-    <creationDate>03.04.2017</creationDate>
+    <creationDate>07.05.2017</creationDate>
     <authorEmail>denys@joomla-ua.org</authorEmail>
     <authorUrl>http://joomla-ua.org</authorUrl>
     <copyright>Copyright (C) Joomla! Ukraine</copyright>
     <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
-    <version>1.5.8</version>
+    <version>1.5.9</version>
     <description>JUPolls is a simple and flexible component for voting.</description>
 
     <files folder="site">
@@ -42,6 +42,7 @@
             <filename>index.html</filename>
             <filename>toolbar.php</filename>
             <filename>mijopolls.php</filename>
+            <folder>assets</folder>
             <folder>elements</folder>
             <folder>models</folder>
             <folder>mvc</folder>

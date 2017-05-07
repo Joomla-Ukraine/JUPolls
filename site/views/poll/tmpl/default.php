@@ -67,15 +67,16 @@ $param      = $this->params;
 <?php endif; ?>
 
     <div class="panel panel-default panel-flat">
+
     <div class="panel-body">
+
         <div class="row">
             <?php if($this->allowToVote) : ?>
                 <div class="col-md-6 span6" id="poll_comp_form">
                     <form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="poll_form2" role="form">
                         <?php
                         $i = 0;
-                        foreach ($this->options as $poll_option) :
-                            ?>
+                        foreach ($this->options as $poll_option) : ?>
                             <div>
                                 <label for="voteid<?php echo $poll_option->id; ?>" class="poll">
                                     <input type="radio" name="voteid" id="voteid<?php echo $poll_option->id; ?>"
@@ -137,8 +138,8 @@ $param      = $this->params;
                         <div class="col-md-6 span6">
                             <?php endif; ?>
                             <a class="btn btn-success pull-right"
-                               href="<?php echo JRoute::_('index.php?option=com_mijopolls&view=poll&Itemid=' . $menu_items[0]->id); ?>"><i
-                                        class="icon-list fa fa-chart-bar"></i> <?php echo JText::_('COM_MIJOPOLLS_POLLS'); ?>
+                               href="<?php echo JRoute::_('index.php?option=com_mijopolls&view=poll&Itemid=' . $menu_items[0]->id); ?>">
+                                <i class="icon-list fa fa-chart-bar"></i> <?php echo JText::_('COM_MIJOPOLLS_POLLS'); ?>
                             </a>
                             <?php if(!$this->allowToVote) : ?>
                         </div>
