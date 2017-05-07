@@ -56,7 +56,7 @@ class MijopollsController extends JControllerLegacy
 
         if(!$poll->load($poll_id) || $poll->published != 1)
         {
-            $app->enqueueMessage(JText::_('ALERTNOTAUTH 3'), 'error');
+            $app->enqueueMessage(JText::_('ALERTNOTAUTH'), 'error');
 
             return;
         }
