@@ -100,6 +100,17 @@
         </field>
 
         <field
+                name="show_comments"
+                type="list"
+                default="1"
+                label="COM_JUPOLLS_SHOW_COMMENTS"
+                description="COM_JUPOLLS_SHOW_COMMENTS_DESC"
+        >
+            <option value="0">No</option>
+            <option value="1">JComments</option>
+        </field>
+
+        <field
                 name="show_hits"
                 type="radio"
                 class="btn-group"
