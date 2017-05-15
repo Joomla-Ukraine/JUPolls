@@ -105,9 +105,15 @@ class JUPollsViewPoll extends JViewLegacy
 
             $options = $this->get('Options');
         }
+        else
+        {
+            $this->mainframe->enqueueMessage(JText::_('COM_JUPOLLS_SELECT_POLL'), 'error');
+            $this->mainframe->redirect(JRoute::_('index.php?option=com_jupolls'));
+
+            return;
+        }
 
         $pList = $this->get('Polls');
-
         foreach ($pList as $k => $p)
         {
             $pList[$k]->url = JRoute::_('index.php?option=com_jupolls&view=poll&id=' . $p->slug);
@@ -126,7 +132,7 @@ class JUPollsViewPoll extends JViewLegacy
             JRoute::_('index.php?option=com_jupolls&view=poll&id=' . $poll->id . ':' . $poll->alias)
         );
 
-        $voters         = isset($options[0]) ? $options[0]->voters : 0;
+        $voters = isset($options[0]) ? $options[0]->voters : 0;
 
         $num_of_options = count($options);
         for ($i = 0; $i < $num_of_options; $i++)
