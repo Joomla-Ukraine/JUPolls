@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -24,12 +24,12 @@
 defined('_JEXEC') or die('Restricted access');
 
 $lang_file = JFactory::getLanguage();
-$lang_file->load('com_mijopolls', JPATH_SITE);
+$lang_file->load('com_jupolls', JPATH_SITE);
 
 require_once(__DIR__ . '/helper.php');
 
 $menu    = $app->getMenu();
-$items   = $menu->getItems('link', 'index.php?option=com_mijopolls&view=poll');
+$items   = $menu->getItems('link', 'index.php?option=com_jupolls&view=poll');
 $itemid  = isset($items[0]) ? '&Itemid=' . $items[0]->id : '';
 $details = "";
 
@@ -37,7 +37,7 @@ $poll_id = $params->get('id');
 
 if(!$poll_id)
 {
-    $ids = modMijopollsHelper::getActivePolls();
+    $ids = modJUPollsHelper::getActivePolls();
 
     if(count($ids) > 1)
     {
@@ -51,14 +51,14 @@ if(!$poll_id)
 
 if($poll_id > 0)
 {
-    $results = modMijopollsHelper::getResults($poll_id);
+    $results = modJUPollsHelper::getResults($poll_id);
 }
 else
 {
     return '<div class="panel panel-default panel-flat"><div class="panel-body"><b class="text-grey">Опитування відсутні!</b><br><a href="/polls">Переглянути архів »»</a></div></div>';
 }
 
-JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_mijopolls/tables');
+JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_jupolls/tables');
 $poll = JTable::getInstance('Poll', 'Table');
 
 if(!$poll->load($poll_id)) return;
@@ -69,13 +69,13 @@ $params->merge($pollParams);
 
 $slug = ($poll->alias == '') ? $poll->id : $poll->id . ":" . $poll->alias;
 
-$voted = modMijopollsHelper::alreadyVoted($poll_id);
+$voted = modJUPollsHelper::alreadyVoted($poll_id);
 
 $user      = JFactory::getUser();
-$userVoted = modMijopollsHelper::userVoted($user->id, $poll_id);
+$userVoted = modJUPollsHelper::userVoted($user->id, $poll_id);
 $guest     = $user->guest;
 
-$ipVoted = modMijopollsHelper::ipVoted($poll_id);
+$ipVoted = modJUPollsHelper::ipVoted($poll_id);
 
 $display_poll = 0;
 
@@ -105,8 +105,8 @@ if(($now > $publish_up) && ($now < $publish_down))
                 {
                     //display the poll with disabled options
                     $display_submit = 0;
-                    $msg            = JText::_("MOD_MIJOPOLLS_ALREADY_VOTED");
-                    $details        = JText::_("MOD_MIJOPOLLS_ONLY_ONE_VOTE_PER_USER");
+                    $msg            = JText::_("MOD_JUPOLLS_ALREADY_VOTED");
+                    $details        = JText::_("MOD_JUPOLLS_ONLY_ONE_VOTE_PER_USER");
                     //user has not voted yet
                 }
                 else
@@ -125,8 +125,8 @@ if(($now > $publish_up) && ($now < $publish_down))
                 {
                     $display_poll   = 0;
                     $display_submit = 0;
-                    $msg            = JText::_("MOD_MIJOPOLLS_ALREADY_VOTED");
-                    $details        = JText::sprintf("MOD_MIJOPOLLS_ONLY_ONE_VOTE_PER_HOUR", $poll->lag / 60);
+                    $msg            = JText::_("MOD_JUPOLLS_ALREADY_VOTED");
+                    $details        = JText::sprintf("MOD_JUPOLLS_ONLY_ONE_VOTE_PER_HOUR", $poll->lag / 60);
 
                     //hm check the ip please but only if allowed to do that
                 }
@@ -137,8 +137,8 @@ if(($now > $publish_up) && ($now < $publish_down))
                         //display the poll with disabled options
                         $display_poll   = 0;
                         $display_submit = 0;
-                        $msg            = JText::_("MOD_MIJOPOLLS_ALREADY_VOTED");
-                        $details        = JText::_("MOD_MIJOPOLLS_ONLY_ONE_VOTE_PER_IP");
+                        $msg            = JText::_("MOD_JUPOLLS_ALREADY_VOTED");
+                        $details        = JText::_("MOD_JUPOLLS_ONLY_ONE_VOTE_PER_IP");
                         //if user's ip has not been logged
                     }
                     //if user has not voted
@@ -162,7 +162,7 @@ if(($now > $publish_up) && ($now < $publish_down))
             $return = base64_encode($return);
             $link   = 'index.php?option=com_users&view=login&return=' . $return;
 
-            $msg = JText::sprintf('MOD_MIJOPOLLS_PLEASE_REGISTER_TO_VOTE', '<a href="' . $link . '">', '</a>');
+            $msg = JText::sprintf('MOD_JUPOLLS_PLEASE_REGISTER_TO_VOTE', '<a href="' . $link . '">', '</a>');
         }
     }
     else
@@ -171,8 +171,8 @@ if(($now > $publish_up) && ($now < $publish_down))
         {
             $display_poll   = 0;
             $display_submit = 0;
-            $msg            = JText::_("MOD_MIJOPOLLS_ALREADY_VOTED");
-            $details        = JText::sprintf("MOD_MIJOPOLLS_ONLY_ONE_VOTE_PER_HOUR", $poll->lag / 60);
+            $msg            = JText::_("MOD_JUPOLLS_ALREADY_VOTED");
+            $details        = JText::sprintf("MOD_JUPOLLS_ONLY_ONE_VOTE_PER_HOUR", $poll->lag / 60);
         }
         else
         {
@@ -182,8 +182,8 @@ if(($now > $publish_up) && ($now < $publish_down))
                 {
                     $display_poll   = 0;
                     $display_submit = 0;
-                    $msg            = JText::_("MOD_MIJOPOLLS_ALREADY_VOTED");
-                    $details        = JText::_("MOD_MIJOPOLLS_ONLY_ONE_VOTE_PER_IP");
+                    $msg            = JText::_("MOD_JUPOLLS_ALREADY_VOTED");
+                    $details        = JText::_("MOD_JUPOLLS_ONLY_ONE_VOTE_PER_IP");
                 }
                 else
                 {
@@ -204,17 +204,17 @@ if(($now > $publish_up) && ($now < $publish_down))
 else
 {
     $display_submit = 0;
-    $msg            = JText::_("MOD_MIJOPOLLS_VOTING_HAS_NOT_STARTED");
+    $msg            = JText::_("MOD_JUPOLLS_VOTING_HAS_NOT_STARTED");
     $publish_up     = JFactory::getDate($poll->publish_up);
-    $details        = JText::_("MOD_MIJOPOLLS_IT_WILL_START_ON") . ": " . $publish_up->format($params->get('msg_date_format'));
+    $details        = JText::_("MOD_JUPOLLS_IT_WILL_START_ON") . ": " . $publish_up->format($params->get('msg_date_format'));
 }
 
 if($now > $publish_down)
 {
     $display_poll = 0;
-    $msg          = JText::_("MOD_MIJOPOLLS_VOTING_HAS_ENDED");
+    $msg          = JText::_("MOD_JUPOLLS_VOTING_HAS_ENDED");
     $publish_down = JFactory::getDate($poll->publish_down);
-    $details      = JText::_("MOD_MIJOPOLLS_ON") . ": " . $publish_down->format($params->get('msg_date_format'));
+    $details      = JText::_("MOD_JUPOLLS_ON") . ": " . $publish_down->format($params->get('msg_date_format'));
 }
 
 $disabled = ($display_submit) ? '' : 'disabled="disabled"';
@@ -222,9 +222,9 @@ $disabled = ($display_submit) ? '' : 'disabled="disabled"';
 
 if($poll && $poll->id)
 {
-    $layout  = JModuleHelper::getLayoutPath('mod_mijopolls');
+    $layout  = JModuleHelper::getLayoutPath('mod_jupolls');
     $tabcnt  = 0;
-    $options = modMijopollsHelper::getPollOptions($poll_id);
-    $itemid  = modMijopollsHelper::getItemid($poll_id);
+    $options = modJUPollsHelper::getPollOptions($poll_id);
+    $itemid  = modJUPollsHelper::getItemid($poll_id);
     require($layout);
 }

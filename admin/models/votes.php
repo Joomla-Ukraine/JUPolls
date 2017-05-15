@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsModelVotes extends MijopollsModel
+class JUPollsModelVotes extends JUPollsModel
 {
 
     var $_query = null;
@@ -93,8 +93,8 @@ class MijopollsModelVotes extends MijopollsModel
 
             $this->_query = "SELECT v.id, v.date, o.text, INET_NTOA(ip) AS ip, v.browser, 
 			CASE WHEN v.user_id <> 0 THEN u.name ELSE " . $db->Quote(JText::_('Guest')) . " END AS name
-			FROM #__mijopolls_votes AS v
-			LEFT JOIN #__mijopolls_options AS o ON o.id = v.option_id
+			FROM #__jupolls_votes AS v
+			LEFT JOIN #__jupolls_options AS o ON o.id = v.option_id
 			LEFT JOIN #__users AS u ON u.id = v.user_id "
                 . $where
                 . $orderby;
@@ -145,8 +145,8 @@ class MijopollsModelVotes extends MijopollsModel
 
         // list of apolls for dropdown selection
         $query = "SELECT m.id, m.title, COUNT(v.id) AS votes"
-            . " FROM #__mijopolls_polls AS m"
-            . " LEFT JOIN #__mijopolls_votes AS v"
+            . " FROM #__jupolls_polls AS m"
+            . " LEFT JOIN #__jupolls_votes AS v"
             . " ON m.id = v.poll_id"
             . " GROUP BY m.id ORDER BY id";
 
@@ -164,7 +164,7 @@ class MijopollsModelVotes extends MijopollsModel
         //Make the URLs for the dropdown
         foreach ($pList as $k => $p)
         {
-            $pList[$k]->url = 'index.php?option=com_mijopolls&controller=votes&task=view&id=' . $p->id;
+            $pList[$k]->url = 'index.php?option=com_jupolls&controller=votes&task=view&id=' . $p->id;
         }
         array_unshift($pList, JHTML::_('select.option', '', JText::_('Select Poll from the list'), 'url', 'title'));
 
@@ -172,7 +172,7 @@ class MijopollsModelVotes extends MijopollsModel
         $lists = array();
 
         $lists['polls'] = JHTML::_('select.genericlist', $pList, 'id', 'class="inputbox" size="1" style="width:400px" onchange="if (this.options[selectedIndex].value != \'\') {document.location.href=this.options[selectedIndex].value}"',
-            'url', 'title', 'index.php?option=com_mijopolls&controller=votes&task=view&id=' . $poll_id);
+            'url', 'title', 'index.php?option=com_jupolls&controller=votes&task=view&id=' . $poll_id);
 
         return $lists;
     }
@@ -182,7 +182,7 @@ class MijopollsModelVotes extends MijopollsModel
         $poll_id = JRequest::getInt('id', 0, 'GET');
 
         $db = JFactory::getDBO();
-        $db->setQuery("SELECT title FROM #__mijopolls_polls WHERE id = " . (int) $poll_id);
+        $db->setQuery("SELECT title FROM #__jupolls_polls WHERE id = " . (int) $poll_id);
 
         return $db->loadResult();
     }
@@ -196,7 +196,7 @@ class MijopollsModelVotes extends MijopollsModel
         $cids = implode(',', $cid);
 
         //Delete the chosen votes, dates, ips, users, etc from #__apolls_date table
-        $db->setQuery("DELETE FROM #__mijopolls_votes WHERE id IN (" . $cids . ")");
+        $db->setQuery("DELETE FROM #__jupolls_votes WHERE id IN (" . $cids . ")");
 
         if(!$db->query())
         {

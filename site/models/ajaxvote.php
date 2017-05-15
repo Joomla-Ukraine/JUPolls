@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsModelAjaxvote extends MijosoftModel
+class JUPollsModelAjaxvote extends JUPollsModel
 {
 
     var $_query = null;
@@ -49,7 +49,7 @@ class MijopollsModelAjaxvote extends MijosoftModel
         }
 
         require_once(JPATH_COMPONENT . '/models/poll.php');
-        $model      = new MijopollsModelPoll();
+        $model      = new JUPollsModelPoll();
         $params     = new JRegistry($poll->params);
         $cookieName = JApplicationHelper::getHash($app->getName() . 'poll' . $poll_id);
 
@@ -61,13 +61,13 @@ class MijopollsModelAjaxvote extends MijosoftModel
         {
             /*if($voted_cookie || $voted_ip)
             {
-                $msg = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
+                $msg = JText::_('COM_JUPOLLS_ALREADY_VOTED');
                 $tom = "error";
             }
 
             if(!$option_id)
             {
-                $msg = JText::_('COM_MIJOPOLLS_NO_SELECTED');
+                $msg = JText::_('COM_JUPOLLS_NO_SELECTED');
                 $tom = "error";
             }
             */
@@ -121,8 +121,8 @@ class MijopollsModelAjaxvote extends MijosoftModel
             $poll_id = JRequest::getVar('id', 0, 'POST', 'int');
 
             $this->_query = "SELECT o.id, o.text, COUNT(v.id) AS votes"
-                . " FROM #__mijopolls_options AS o "
-                . " LEFT JOIN #__mijopolls_votes AS v "
+                . " FROM #__jupolls_options AS o "
+                . " LEFT JOIN #__jupolls_votes AS v "
                 . " ON o.id = v.option_id "
                 . " WHERE o.poll_id = " . (int) $poll_id
                 . " GROUP BY o.id ";

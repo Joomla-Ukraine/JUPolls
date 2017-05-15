@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -25,14 +25,14 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.environment.browser');
 
-class modMijopollsHelper
+class modJUPollsHelper
 {
     function getPollOptions($poll_id)
     {
         $db = JFactory::getDBO();
 
         $query = "SELECT o.id, o.text, o.ordering" .
-            " FROM #__mijopolls_options AS o " .
+            " FROM #__jupolls_options AS o " .
             " WHERE o.poll_id = " . (int) $poll_id .
             " AND o.text <> ''" .
             " ORDER BY o.ordering";
@@ -60,7 +60,7 @@ class modMijopollsHelper
     function userVoted($user_id, $poll_id)
     {
         $db    = JFactory::getDBO();
-        $query = "SELECT date FROM #__mijopolls_votes WHERE poll_id=" . (int) $poll_id . " AND user_id=" . (int) $user_id;
+        $query = "SELECT date FROM #__jupolls_votes WHERE poll_id=" . (int) $poll_id . " AND user_id=" . (int) $user_id;
         $db->setQuery($query);
 
         return $userVoted = ($db->loadResult()) ? 1 : 0;
@@ -77,7 +77,7 @@ class modMijopollsHelper
 
         $query = $db->getQuery(true);
         $query->select('ip');
-        $query->from('#__mijopolls_votes');
+        $query->from('#__jupolls_votes');
         $query->where('poll_id = ' . $db->Quote($poll_id));
         $query->where('(ip = ' . $db->Quote($ip) . ' AND browser = ' . $db->Quote($agent) . ')');
         $db->setQuery($query);
@@ -89,9 +89,9 @@ class modMijopollsHelper
     {
         $db    = JFactory::getDBO();
         $query = "SELECT o.*, COUNT(v.id) AS hits,
-		(SELECT COUNT(id) FROM #__mijopolls_votes WHERE poll_id=" . $poll_id . ") AS votes
-		FROM #__mijopolls_options AS o
-		LEFT JOIN  #__mijopolls_votes AS v
+		(SELECT COUNT(id) FROM #__jupolls_votes WHERE poll_id=" . $poll_id . ") AS votes
+		FROM #__jupolls_options AS o
+		LEFT JOIN  #__jupolls_votes AS v
 		ON (o.id = v.option_id AND v.poll_id = " . (int) $poll_id . ")
 		WHERE o.poll_id=" . (int) $poll_id . "
 		AND o.text <> ''
@@ -106,7 +106,7 @@ class modMijopollsHelper
     function getActivePolls()
     {
         $db    = JFactory::getDBO();
-        $query = 'SELECT id FROM `#__mijopolls_polls` WHERE published = 1 AND (NOW() <= publish_down) ORDER BY rand()';
+        $query = 'SELECT id FROM `#__jupolls_polls` WHERE published = 1 AND (NOW() <= publish_down) ORDER BY rand()';
         $db->setQuery($query, 0, 1);
 
         if($ids = $db->loadResult())
@@ -121,7 +121,7 @@ class modMijopollsHelper
 
     function getItemid($poll_id)
     {
-        $component = JComponentHelper::getComponent('com_mijopolls');
+        $component = JComponentHelper::getComponent('com_jupolls');
         $menus     = JApplication::getMenu('site', array());
         $items     = $menus->getItems('component_id', $component->id);
 

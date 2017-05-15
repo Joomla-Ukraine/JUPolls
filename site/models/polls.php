@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsModelPolls extends JModelLegacy
+class JUPollsModelPolls extends JModelLegacy
 {
     var $_query = null;
     var $_data = null;
@@ -97,9 +97,9 @@ class MijopollsModelPolls extends JModelLegacy
             $this->_query = "SELECT m.*,
 			CASE WHEN CHAR_LENGTH(m.alias) THEN CONCAT_WS(':', m.id, m.alias) ELSE m.id END as slug, 
 			CASE WHEN publish_down>NOW() THEN 'active' ELSE 'ended' END AS status,"
-                . " (SELECT COUNT(v.id) FROM #__mijopolls_votes AS v WHERE v.poll_id = m.id) AS voters, COUNT(o.id) AS numoptions "
-                . " FROM #__mijopolls_polls AS m "
-                . " LEFT JOIN #__mijopolls_options AS o "
+                . " (SELECT COUNT(v.id) FROM #__jupolls_votes AS v WHERE v.poll_id = m.id) AS voters, COUNT(o.id) AS numoptions "
+                . " FROM #__jupolls_polls AS m "
+                . " LEFT JOIN #__jupolls_options AS o "
                 . " ON o.poll_id = m.id "
                 . " WHERE m.published=1 AND o.text <> ''"
                 . $where

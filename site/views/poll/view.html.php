@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -25,7 +25,7 @@ defined('_JEXEC') or die('Restricted access');
 
 use Joomla\String\StringHelper;
 
-class MijopollsViewPoll extends JViewLegacy
+class JUPollsViewPoll extends JViewLegacy
 {
     function display($tpl = null)
     {
@@ -100,7 +100,7 @@ class MijopollsViewPoll extends JViewLegacy
             if(empty($poll->title))
             {
                 $poll->id    = 0;
-                $poll->title = JText::_('COM_MIJOPOLLS_SELECT_POLL');
+                $poll->title = JText::_('COM_JUPOLLS_SELECT_POLL');
             }
 
             $options = $this->get('Options');
@@ -110,10 +110,10 @@ class MijopollsViewPoll extends JViewLegacy
 
         foreach ($pList as $k => $p)
         {
-            $pList[$k]->url = JRoute::_('index.php?option=com_mijopolls&view=poll&id=' . $p->slug);
+            $pList[$k]->url = JRoute::_('index.php?option=com_jupolls&view=poll&id=' . $p->slug);
         }
 
-        array_unshift($pList, JHTML::_('select.option', '', JText::_('COM_MIJOPOLLS_SELECT_POLL'), 'url', 'title'));
+        array_unshift($pList, JHTML::_('select.option', '', JText::_('COM_JUPOLLS_SELECT_POLL'), 'url', 'title'));
 
         $lists          = array();
         $lists['polls'] = JHTML::_(
@@ -123,7 +123,7 @@ class MijopollsViewPoll extends JViewLegacy
             'class="inputbox" size="1" style="width:400px" onchange="if (this.options[selectedIndex].value != \'\') {document.location.href=this.options[selectedIndex].value}"',
             'url',
             'title',
-            JRoute::_('index.php?option=com_mijopolls&view=poll&id=' . $poll->id . ':' . $poll->alias)
+            JRoute::_('index.php?option=com_jupolls&view=poll&id=' . $poll->id . ':' . $poll->alias)
         );
 
         $voters         = isset($options[0]) ? $options[0]->voters : 0;
@@ -205,7 +205,7 @@ class MijopollsViewPoll extends JViewLegacy
                         {
                             $query = $db->getQuery(true);
                             $query->select("date");
-                            $query->from('#__mijopolls_votes');
+                            $query->from('#__jupolls_votes');
                             $query->where('poll_id = ' . (int) $poll_id);
                             $query->where('user_id = ' . (int) $user->id);
                             $db->setQuery($query);
@@ -215,13 +215,13 @@ class MijopollsViewPoll extends JViewLegacy
                             if($userVoted)
                             {
                                 $allowToVote = 0;
-                                $msg         = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
+                                $msg         = JText::_('COM_JUPOLLS_ALREADY_VOTED');
                             }
 
                             if($cookieVotedDone)
                             {
                                 $allowToVote = 0;
-                                $msg         = JText::_('COM_MIJOPOLLS_THANK_YOU');
+                                $msg         = JText::_('COM_JUPOLLS_THANK_YOU');
                                 $msgdone     = 1;
                             }
                         }
@@ -231,13 +231,13 @@ class MijopollsViewPoll extends JViewLegacy
                             if($cookieVoted)
                             {
                                 $allowToVote = 0;
-                                $msg         = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
+                                $msg         = JText::_('COM_JUPOLLS_ALREADY_VOTED');
                             }
 
                             if($cookieVotedDone)
                             {
                                 $allowToVote = 0;
-                                $msg         = JText::_('COM_MIJOPOLLS_THANK_YOU');
+                                $msg         = JText::_('COM_JUPOLLS_THANK_YOU');
                                 $msgdone     = 1;
                             }
                         }
@@ -248,7 +248,7 @@ class MijopollsViewPoll extends JViewLegacy
                         $return      = JURI::current();
                         $return      = base64_encode($return);
                         $link        = 'index.php?option=com_users&view=login&return=' . $return;
-                        $msg         = JText::sprintf('COM_MIJOPOLLS_REGISTER_TO_VOTE', '<a href="' . $link . '">', '</a>');
+                        $msg         = JText::sprintf('COM_JUPOLLS_REGISTER_TO_VOTE', '<a href="' . $link . '">', '</a>');
                     }
                 }
                 else
@@ -256,7 +256,7 @@ class MijopollsViewPoll extends JViewLegacy
                     if($cookieVoted)
                     {
                         $allowToVote = 0;
-                        $msg         = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
+                        $msg         = JText::_('COM_JUPOLLS_ALREADY_VOTED');
                     }
                     else
                     {
@@ -267,7 +267,7 @@ class MijopollsViewPoll extends JViewLegacy
                             if($ipVoted)
                             {
                                 $allowToVote = 0;
-                                $msg         = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
+                                $msg         = JText::_('COM_JUPOLLS_ALREADY_VOTED');
                             }
                         }
                     }
@@ -275,7 +275,7 @@ class MijopollsViewPoll extends JViewLegacy
                     if($cookieVotedDone)
                     {
                         $allowToVote = 0;
-                        $msg         = JText::_('COM_MIJOPOLLS_THANK_YOU');
+                        $msg         = JText::_('COM_JUPOLLS_THANK_YOU');
                         $msgdone     = 1;
                     }
                 }
@@ -283,12 +283,12 @@ class MijopollsViewPoll extends JViewLegacy
 
             if($now < $publish_up)
             {
-                $msg = JText::_('COM_MIJOPOLLS_VOTE_NOT_STARTED');
+                $msg = JText::_('COM_JUPOLLS_VOTE_NOT_STARTED');
             }
 
             if($now > $publish_down)
             {
-                $msg = JText::_('COM_MIJOPOLLS_VOTE_ENDED');
+                $msg = JText::_('COM_JUPOLLS_VOTE_ENDED');
             }
         }
 

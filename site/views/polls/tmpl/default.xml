@@ -7,32 +7,32 @@
 	</layout>
     <fields name="params">
 		<fieldset name="component" label="Component">
-			<field name="show_filter_box" type="radio" default="1" label="COM_MIJOPOLLS_MENU_SHOW_FILTER" description="COM_MIJOPOLLS_MENU_SHOW_FILTER_DESC">
+			<field name="show_filter_box" type="radio" default="1" label="COM_JUPOLLS_MENU_SHOW_FILTER" description="COM_JUPOLLS_MENU_SHOW_FILTER_DESC">
 				<option value="1">JYES</option>
 				<option value="0">JNO</option>
 			</field>
-			<field name="show_status" type="radio" default="1" label="COM_MIJOPOLLS_MENU_SHOW_STATUS" description="COM_MIJOPOLLS_MENU_SHOW_STATUS_DESC">
+			<field name="show_status" type="radio" default="1" label="COM_JUPOLLS_MENU_SHOW_STATUS" description="COM_JUPOLLS_MENU_SHOW_STATUS_DESC">
 				<option value="1">JYES</option>
 				<option value="0">JNO</option>
 			</field>
-			<field name="show_status_as" type="list" default="1" label="COM_MIJOPOLLS_MENU_SHOW_STATUS_AS" description="COM_MIJOPOLLS_MENU_SHOW_STATUS_AS_DESC">
+			<field name="show_status_as" type="list" default="1" label="COM_JUPOLLS_MENU_SHOW_STATUS_AS" description="COM_JUPOLLS_MENU_SHOW_STATUS_AS_DESC">
 				<option value="1">Image</option>
 				<option value="0">Text</option>
 			</field>
-			<field name="show_start_date" type="radio" default="1" label="COM_MIJOPOLLS_MENU_SHOW_START_DATE" description="COM_MIJOPOLLS_MENU_SHOW_START_DATE_DESC">
+			<field name="show_start_date" type="radio" default="1" label="COM_JUPOLLS_MENU_SHOW_START_DATE" description="COM_JUPOLLS_MENU_SHOW_START_DATE_DESC">
 				<option value="1">JYES</option>
 				<option value="0">JNO</option>
 			</field>			
-			<field name="show_end_date" type="radio" default="1" label="COM_MIJOPOLLS_MENU_SHOW_END_DATE" description="COM_MIJOPOLLS_MENU_SHOW_END_DATE_DESC">
+			<field name="show_end_date" type="radio" default="1" label="COM_JUPOLLS_MENU_SHOW_END_DATE" description="COM_JUPOLLS_MENU_SHOW_END_DATE_DESC">
 				<option value="1">JYES</option>
 				<option value="0">JNO</option>
 			</field>
-			<field name="date_format" type="text" default="F j, Y" label="COM_MIJOPOLLS_MENU_DATE_FORMAT" description="COM_MIJOPOLLS_MENU_DATE_FORMAT_DESC" size="25" />
-			<field name="show_num_voters" type="radio" default="1" label="COM_MIJOPOLLS_MENU_SHOW_NUM_VOTERS" description="COM_MIJOPOLLS_MENU_SHOW_NUM_VOTERS_DESC">
+			<field name="date_format" type="text" default="F j, Y" label="COM_JUPOLLS_MENU_DATE_FORMAT" description="COM_JUPOLLS_MENU_DATE_FORMAT_DESC" size="25" />
+			<field name="show_num_voters" type="radio" default="1" label="COM_JUPOLLS_MENU_SHOW_NUM_VOTERS" description="COM_JUPOLLS_MENU_SHOW_NUM_VOTERS_DESC">
 				<option value="1">JYES</option>
 				<option value="0">JNO</option>
 			</field>
-			<field name="show_num_options" type="radio" default="1" label="COM_MIJOPOLLS_MENU_SHOW_NUM_OPTIONS" description="COM_MIJOPOLLS_MENU_SHOW_NUM_OPTIONS_DESC">
+			<field name="show_num_options" type="radio" default="1" label="COM_JUPOLLS_MENU_SHOW_NUM_OPTIONS" description="COM_JUPOLLS_MENU_SHOW_NUM_OPTIONS_DESC">
 				<option value="1">JYES</option>
 				<option value="0">JNO</option>
 			</field>

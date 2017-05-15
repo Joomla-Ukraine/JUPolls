@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-function MijopollsBuildRoute(&$query)
+function JUPollsBuildRoute(&$query)
 {
     static $items;
 
@@ -39,7 +39,7 @@ function MijopollsBuildRoute(&$query)
 
     if(!$items)
     {
-        $component = JComponentHelper::getComponent('com_mijopolls');
+        $component = JComponentHelper::getComponent('com_jupolls');
         $menu      = $app->getMenu();
         $items     = $menu->getItems('component_id', $component->id);
     }
@@ -120,7 +120,7 @@ function MijopollsBuildRoute(&$query)
     return $segments;
 }
 
-function MijopollsParseRoute($segments)
+function JUPollsParseRoute($segments)
 {
     $vars = array();
 

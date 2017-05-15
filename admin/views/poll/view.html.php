@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -25,18 +25,18 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.html.pane');
 
-class MijopollsViewPoll extends MijopollsView
+class JUPollsViewPoll extends JUPollsView
 {
     function display($tpl = null)
     {
         $doc = JFactory::getDocument();
-        $doc->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
+        $doc->addStyleSheet('components/com_jupolls/assets/css/jupolls.css');
 
         $cid  = JRequest::getVar('cid', array(0), '', 'array');
         $edit = JRequest::getVar('edit', true);
         $text = (($edit) ? JText::_('Edit') : JText::_('New'));
 
-        JToolBarHelper::title(JText::_('COM_MIJOPOLLS_POLL') . ': <small><small>[ ' . $text . ' ]</small></small>', 'mijopolls');
+        JToolBarHelper::title(JText::_('COM_JUPOLLS_POLL') . ': <small><small>[ ' . $text . ' ]</small></small>', 'jupolls');
         JToolBarHelper::save();
         JToolBarHelper::apply();
         JToolBarHelper::cancel();
@@ -49,8 +49,8 @@ class MijopollsViewPoll extends MijopollsView
         // fail if checked out not by 'me'
         if($row->isCheckedOut($user->get('id')))
         {
-            $msg = JText::sprintf('DESCBEINGEDITTED', JText::_('COM_MIJOPOLLS_THE_POLL'), $row->title);
-            $this->setRedirect('index.php?option=com_mijopolls', $msg);
+            $msg = JText::sprintf('DESCBEINGEDITTED', JText::_('COM_JUPOLLS_THE_POLL'), $row->title);
+            $this->setRedirect('index.php?option=com_jupolls', $msg);
         }
 
         if($row->id == 0)

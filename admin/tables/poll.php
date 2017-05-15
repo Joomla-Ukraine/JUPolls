@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -39,7 +39,7 @@ class TablePoll extends JTable
 
     function __construct(&$db)
     {
-        parent::__construct('#__mijopolls_polls', 'id', $db);
+        parent::__construct('#__jupolls_polls', 'id', $db);
     }
 
     function bind($array, $ignore = '')
@@ -108,13 +108,13 @@ class TablePoll extends JTable
         {
             $db = JFactory::getDBO();
 
-            $db->setQuery("DELETE FROM #__mijopolls_options WHERE poll_id = " . (int) $oid);
+            $db->setQuery("DELETE FROM #__jupolls_options WHERE poll_id = " . (int) $oid);
             if(!$db->query())
             {
                 $this->_error .= $db->getErrorMsg() . "\n";
             }
 
-            $db->setQuery("DELETE FROM #__mijopolls_votes WHERE poll_id = " . (int) $oid);
+            $db->setQuery("DELETE FROM #__jupolls_votes WHERE poll_id = " . (int) $oid);
             if(!$db->query())
             {
                 $this->_error .= $db->getErrorMsg() . "\n";
@@ -130,8 +130,8 @@ class TablePoll extends JTable
     function getOptions($poll_id)
     {
         $query = "SELECT o.*, COUNT(v.id) AS hits"
-            . " FROM #__mijopolls_options AS o"
-            . " LEFT JOIN #__mijopolls_votes AS v"
+            . " FROM #__jupolls_options AS o"
+            . " LEFT JOIN #__jupolls_votes AS v"
             . " ON (o.id = v.option_id AND v.poll_id = " . (int) $poll_id . ")"
             . " WHERE o.poll_id = " . (int) $poll_id
             . " AND text <> '' GROUP BY o.id ORDER BY o.ordering";

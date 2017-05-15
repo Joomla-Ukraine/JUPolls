@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -28,19 +28,19 @@ JHtml::_('behavior.multiselect');
 JHtml::_('formbehavior.chosen', 'select');
 ?>
 
-<form action="index.php?option=com_mijopolls&amp;controller=votes&amp;task=view" method="post" name="adminForm"
+<form action="index.php?option=com_jupolls&amp;controller=votes&amp;task=view" method="post" name="adminForm"
       id="adminForm">
     <table>
         <tr>
             <td align="left" width="100%">
-                <?php echo JText::_('COM_MIJOPOLLS_FILTER_USERS'); ?>:
+                <?php echo JText::_('COM_JUPOLLS_FILTER_USERS'); ?>:
                 <input type="text" name="search" id="search" value="<?php echo $this->lists['search']; ?>"
                        class="text_area" onchange="document.adminForm.submit();"/>
-                <button onclick="this.form.submit();"><?php echo JText::_('COM_MIJOPOLLS_GO'); ?></button>
-                <button onclick="document.getElementById('search').value='';this.form.getElementById('filter_state').value='';this.form.submit();"><?php echo JText::_('COM_MIJOPOLLS_RESET'); ?></button>
+                <button onclick="this.form.submit();"><?php echo JText::_('COM_JUPOLLS_GO'); ?></button>
+                <button onclick="document.getElementById('search').value='';this.form.getElementById('filter_state').value='';this.form.submit();"><?php echo JText::_('COM_JUPOLLS_RESET'); ?></button>
             </td>
             <td>
-                <?php echo JText::_('COM_MIJOPOLLS_VIEW_RESULTS_FOR') . ':'; ?>
+                <?php echo JText::_('COM_JUPOLLS_VIEW_RESULTS_FOR') . ':'; ?>
                 <?php echo $this->lists['polls']; ?>
             </td>
         </tr>
@@ -51,9 +51,9 @@ JHtml::_('formbehavior.chosen', 'select');
         <tr>
             <th width="1%"><?php echo JText::_('#'); ?></th>
             <th width="1%"><input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);"/></th>
-            <th width="80%"><?php echo JHTML::_('grid.sort', JText::_('COM_MIJOPOLLS_OPTION'), 'o.text', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-            <th width="18%"><?php echo JHTML::_('grid.sort', JText::_('COM_MIJOPOLLS_DATE'), 'v.date', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-            <th width="18%"><?php echo JHTML::_('grid.sort', JText::_('COM_MIJOPOLLS_USER'), 'u.name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+            <th width="80%"><?php echo JHTML::_('grid.sort', JText::_('COM_JUPOLLS_OPTION'), 'o.text', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+            <th width="18%"><?php echo JHTML::_('grid.sort', JText::_('COM_JUPOLLS_DATE'), 'v.date', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+            <th width="18%"><?php echo JHTML::_('grid.sort', JText::_('COM_JUPOLLS_USER'), 'u.name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
             <th><?php echo JHTML::_('grid.sort', JText::_('IP'), 'ip', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
             <th><?php echo JHTML::_('grid.sort', JText::_('HASH'), 'browser', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
 
@@ -91,7 +91,7 @@ JHtml::_('formbehavior.chosen', 'select');
         </tfoot>
     </table>
 
-    <input type="hidden" name="option" value="com_mijopolls"/>
+    <input type="hidden" name="option" value="com_jupolls"/>
     <input type="hidden" name="task" value="view"/>
     <input type="hidden" name="boxchecked" value="0"/>
     <input type="hidden" name="poll_id" value="<?php echo $this->poll_id; ?>"/>

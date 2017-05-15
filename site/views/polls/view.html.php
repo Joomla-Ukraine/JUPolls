@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsViewPolls extends JViewLegacy
+class JUPollsViewPolls extends JViewLegacy
 {
     function display($tpl = null)
     {

@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -28,12 +28,12 @@ $controller = JFactory::getApplication()->input->get('controller', 'polls');
 JHTML::_('behavior.switcher');
 
 $controllers = array(
-    'polls' => JText::_('COM_MIJOPOLLS_POLLS'),
-    'votes' => JText::_('COM_MIJOPOLLS_VOTES')
+    'polls' => JText::_('COM_JUPOLLS_POLLS'),
+    'votes' => JText::_('COM_JUPOLLS_VOTES')
 );
 
 foreach ($controllers as $key => $val)
 {
     $active = ($controller == $key);
-    JSubMenuHelper::addEntry($val, 'index.php?option=com_mijopolls&controller=' . $key, $active);
+    JSubMenuHelper::addEntry($val, 'index.php?option=com_jupolls&controller=' . $key, $active);
 }

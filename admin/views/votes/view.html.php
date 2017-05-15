@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsViewVotes extends MijopollsView
+class JUPollsViewVotes extends JUPollsView
 {
     /**
      * @param null $tpl
@@ -31,15 +31,15 @@ class MijopollsViewVotes extends MijopollsView
     function display($tpl = null)
     {
         $doc = JFactory::getDocument();
-        $doc->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
+        $doc->addStyleSheet('components/com_jupolls/assets/css/jupolls.css');
 
         $title = $this->get('Title');
 
-        $t_title = ($title) ? JText::_('COM_MIJOPOLLS_VOTES_FOR') . ': ' . $title : JText::_('COM_MIJOPOLLS_SELECT_POLL');
-        JToolBarHelper::title($t_title, 'mijopolls');
-        JToolBarHelper::deleteList(JText::_('COM_MIJOPOLLS_DELETE_CONFIRM'), "deleteVotes", JText::_('COM_MIJOPOLLS_DELETE'));
+        $t_title = ($title) ? JText::_('COM_JUPOLLS_VOTES_FOR') . ': ' . $title : JText::_('COM_JUPOLLS_SELECT_POLL');
+        JToolBarHelper::title($t_title, 'jupolls');
+        JToolBarHelper::deleteList(JText::_('COM_JUPOLLS_DELETE_CONFIRM'), "deleteVotes", JText::_('COM_JUPOLLS_DELETE'));
         JToolBarHelper::divider();
-        JToolBarHelper::preferences('com_mijopolls', 500);
+        JToolBarHelper::preferences('com_jupolls', 500);
 
         $this->mainframe = JFactory::getApplication();
         $this->option    = JRequest::getWord('option');

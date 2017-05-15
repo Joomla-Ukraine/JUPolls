@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,15 +23,15 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsViewPolls extends MijopollsView
+class JUPollsViewPolls extends JUPollsView
 {
 
     function display($tpl = null)
     {
         $doc = JFactory::getDocument();
-        $doc->addStyleSheet('components/com_mijopolls/assets/css/mijopolls.css');
+        $doc->addStyleSheet('components/com_jupolls/assets/css/jupolls.css');
 
-        JToolBarHelper::title(JText::_('COM_MIJOPOLLS_POLLS'), 'mijopolls');
+        JToolBarHelper::title(JText::_('COM_JUPOLLS_POLLS'), 'jupolls');
         JToolBarHelper::addNew();
         JToolBarHelper::editList();
         JToolBarHelper::deleteList();
@@ -39,8 +39,8 @@ class MijopollsViewPolls extends MijopollsView
         JToolBarHelper::publishList();
         JToolBarHelper::unpublishList();
         JToolBarHelper::divider();
-        JToolBarHelper::custom('resetVotes', 'cancel.png', 'cancel.png', JText::_('COM_MIJOPOLLS_RESET_VOTES'), true);
-        JToolBarHelper::preferences('com_mijopolls', 500);
+        JToolBarHelper::custom('resetVotes', 'cancel.png', 'cancel.png', JText::_('COM_JUPOLLS_RESET_VOTES'), true);
+        JToolBarHelper::preferences('com_jupolls', 500);
 
         $this->mainframe = JFactory::getApplication();
         $this->option    = JRequest::getWord('option');

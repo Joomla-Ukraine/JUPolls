@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -25,7 +25,7 @@ defined('_JEXEC') or die ('Restricted access');
 
 jimport('joomla.application.component.controller');
 
-class MijopollsController extends JControllerLegacy
+class JUPollsController extends JControllerLegacy
 {
     public function __construct()
     {
@@ -117,7 +117,7 @@ class MijopollsController extends JControllerLegacy
                     $obj->poll_id  = (int) $row->id;
                     $obj->text     = $text;
                     $obj->ordering = $orderings[$i];
-                    $db->insertObject('#__mijopolls_options', $obj);
+                    $db->insertObject('#__jupolls_options', $obj);
                 }
             }
             else
@@ -128,7 +128,7 @@ class MijopollsController extends JControllerLegacy
                     $obj->id       = (int) $i;
                     $obj->text     = $text;
                     $obj->ordering = $orderings[$i];
-                    $db->updateObject('#__mijopolls_options', $obj, 'id');
+                    $db->updateObject('#__jupolls_options', $obj, 'id');
                 }
                 else
                 {
@@ -158,7 +158,7 @@ class MijopollsController extends JControllerLegacy
                     $obj->poll_id  = (int) $row->id;
                     $obj->text     = $text;
                     $obj->ordering = $extra_ordering[$k];
-                    $db->insertObject('#__mijopolls_options', $obj);
+                    $db->insertObject('#__jupolls_options', $obj);
                 }
             }
         }
@@ -166,13 +166,13 @@ class MijopollsController extends JControllerLegacy
         switch (JFactory::getApplication()->input->get('task'))
         {
             case 'apply':
-                $msg  = JText::_('COM_MIJOPOLLS_POLL_SAVED');
-                $link = 'index.php?option=com_mijopolls&controller=poll&task=edit&cid[]=' . $row->id;
+                $msg  = JText::_('COM_JUPOLLS_POLL_SAVED');
+                $link = 'index.php?option=com_jupolls&controller=poll&task=edit&cid[]=' . $row->id;
                 break;
             case 'save':
             default:
-                $msg  = JText::_('COM_MIJOPOLLS_POLL_SAVED');
-                $link = 'index.php?option=com_mijopolls';
+                $msg  = JText::_('COM_JUPOLLS_POLL_SAVED');
+                $link = 'index.php?option=com_jupolls';
                 break;
         }
 
@@ -200,12 +200,12 @@ class MijopollsController extends JControllerLegacy
             }
             else
             {
-                $msg = JTEXT::_('COM_MIJOPOLLS_POLL_DELETED');
+                $msg = JTEXT::_('COM_JUPOLLS_POLL_DELETED');
                 $tom = "";
             }
         }
 
-        $this->setRedirect('index.php?option=com_mijopolls', $msg, $tom);
+        $this->setRedirect('index.php?option=com_jupolls', $msg, $tom);
     }
 
     public function deleteVotes()
@@ -218,16 +218,16 @@ class MijopollsController extends JControllerLegacy
 
         if($model->deleteVotes())
         {
-            $msg = Jtext::_("COM_MIJOPOLLS_DELETED_VOTES_YES");
+            $msg = Jtext::_("COM_JUPOLLS_DELETED_VOTES_YES");
             $tom = "";
         }
         else
         {
-            $msg = Jtext::_("COM_MIJOPOLLS_DELETED_VOTES_NO");
+            $msg = Jtext::_("COM_JUPOLLS_DELETED_VOTES_NO");
             $tom = "error";
         }
 
-        $this->setRedirect('index.php?option=com_mijopolls&controller=votes&task=view&id=' . $poll_id, $msg, $tom);
+        $this->setRedirect('index.php?option=com_jupolls&controller=votes&task=view&id=' . $poll_id, $msg, $tom);
     }
 
     public function publish()
@@ -256,7 +256,7 @@ class MijopollsController extends JControllerLegacy
             JError::raiseError(500, JText::_('Select an item to' . $action, true));
         }
 
-        $app->redirect('index.php?option=com_mijopolls');
+        $app->redirect('index.php?option=com_jupolls');
     }
 
     public function cancel()
@@ -269,7 +269,7 @@ class MijopollsController extends JControllerLegacy
 
         $row->checkin($id);
 
-        $this->setRedirect('index.php?option=com_mijopolls');
+        $this->setRedirect('index.php?option=com_jupolls');
     }
 
     public function resetVotes()
@@ -281,16 +281,16 @@ class MijopollsController extends JControllerLegacy
 
         if($model->resetVotes())
         {
-            $msg = Jtext::_("COM_MIJOPOLLS_DELETED_POLL_VOTES_YES");
+            $msg = Jtext::_("COM_JUPOLLS_DELETED_POLL_VOTES_YES");
             $tom = "";
         }
         else
         {
-            $msg = Jtext::_("VCOM_MIJOPOLLS_DELETED_POLL_VOTES_NO");
+            $msg = Jtext::_("VCOM_JUPOLLS_DELETED_POLL_VOTES_NO");
             $tom = "error";
         }
 
-        $this->setRedirect('index.php?option=com_mijopolls&controller=polls', $msg, $tom);
+        $this->setRedirect('index.php?option=com_jupolls&controller=polls', $msg, $tom);
     }
 
     public function vote()
@@ -322,13 +322,13 @@ class MijopollsController extends JControllerLegacy
         {
             if($voted_cookie || $voted_ip)
             {
-                $msg = JText::_('COM_MIJOPOLLS_ALREADY_VOTED');
+                $msg = JText::_('COM_JUPOLLS_ALREADY_VOTED');
                 $tom = "error";
             }
 
             if(!$option_id)
             {
-                $msg = JText::_('COM_MIJOPOLLS_NO_SELECTED');
+                $msg = JText::_('COM_JUPOLLS_NO_SELECTED');
                 $tom = "error";
             }
         }
@@ -340,12 +340,12 @@ class MijopollsController extends JControllerLegacy
                 setcookie($cookieName, '1', time() + 60 * $poll->lag);
             }
 
-            $msg = JText::_('COM_MIJOPOLLS_THANK_YOU');
+            $msg = JText::_('COM_JUPOLLS_THANK_YOU');
             $tom = "";
 
             if(JFactory::getUser()->id != 0)
             {
-                JPluginHelper::importPlugin('mijopolls');
+                JPluginHelper::importPlugin('jupolls');
                 $dispatcher = JDispatcher::getInstance();
                 $dispatcher->trigger('onAfterVote', array($poll, $option_id));
             }
@@ -353,10 +353,10 @@ class MijopollsController extends JControllerLegacy
 
         // set Itemid id for links
         $menu  = $app->getMenu();
-        $items = $menu->getItems('link', 'index.php?option=com_mijopolls');
+        $items = $menu->getItems('link', 'index.php?option=com_jupolls');
 
         $itemid = isset($items[0]) ? '&Itemid=' . $items[0]->id : '';
 
-        $this->setRedirect(JRoute::_('index.php?option=com_mijopolls&view=poll&id=' . $poll_id . ':' . $poll->alias . $itemid, false));
+        $this->setRedirect(JRoute::_('index.php?option=com_jupolls&view=poll&id=' . $poll_id . ':' . $poll->alias . $itemid, false));
     }
 }

@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -25,7 +25,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.application.component.modeladmin');
 
-class MijopollsModelPoll extends JModelAdmin
+class JUPollsModelPoll extends JModelAdmin
 {
     var $_id = null;
     var $_data = null;
@@ -124,7 +124,7 @@ class MijopollsModelPoll extends JModelAdmin
 
     public function getForm($data = array(), $loadData = true)
     {
-        $form = $this->loadForm('com_mijopolls.poll', 'poll', array('control' => 'params', 'load_data' => $loadData));
+        $form = $this->loadForm('com_jupolls.poll', 'poll', array('control' => 'params', 'load_data' => $loadData));
 
         if(empty($form))
         {
@@ -136,7 +136,7 @@ class MijopollsModelPoll extends JModelAdmin
 
     protected function loadFormData()
     {
-        $data = JFactory::getApplication()->getUserState('com_mijopolls.edit.poll.data', array());
+        $data = JFactory::getApplication()->getUserState('com_jupolls.edit.poll.data', array());
 
         if(empty($data))
         {
@@ -190,7 +190,7 @@ class MijopollsModelPoll extends JModelAdmin
     //delete empty options to clear the db
     function deleteOption($id)
     {
-        $query = "DELETE FROM #__mijopolls_options WHERE id = " . $this->_db->Quote((int) $id) . " LIMIT 1";
+        $query = "DELETE FROM #__jupolls_options WHERE id = " . $this->_db->Quote((int) $id) . " LIMIT 1";
         $this->_db->setQuery($query);
 
         if(!$this->_db->query())

@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class plgSearchMijopollssearch extends JPlugin
+class plgSearchJUPollssearch extends JPlugin
 {
 
     function __construct(& $subject, $config)
@@ -33,7 +33,7 @@ class plgSearchMijopollssearch extends JPlugin
 
     function onContentSearchAreas()
     {
-        static $areas = array('mijopolls' => 'Polls');
+        static $areas = array('jupolls' => 'Polls');
 
         return $areas;
     }
@@ -61,7 +61,7 @@ class plgSearchMijopollssearch extends JPlugin
         $db    = JFactory::getDBO();
         $query = $db->getQuery(true);
         $query->select('id, title, alias, publish_up AS created');
-        $query->from('#__mijopolls_polls');
+        $query->from('#__jupolls_polls');
         $query->where('(title LIKE ' . $text . ' OR alias LIKE ' . $text . ')');
         $query->where('published = 1');
         $query->group('id');
@@ -69,7 +69,7 @@ class plgSearchMijopollssearch extends JPlugin
         $db->setQuery($query, 0, $limit);
         /*
         $query	= 'SELECT id, title, alias, publish_up AS created'
-        . ' FROM #__mijopolls_polls'
+        . ' FROM #__jupolls_polls'
         . ' WHERE (title LIKE '.$text.' OR alias LIKE '.$text.') AND published = 1'
         . ' GROUP BY id'
         . ' ORDER BY title'
@@ -85,7 +85,7 @@ class plgSearchMijopollssearch extends JPlugin
 
         foreach ($rows as $key => $row)
         {
-            $rows[$key]->href = 'index.php?option=com_mijopolls&amp;view=poll&amp;id=' . $row->id . ":" . $row->alias . self::getItemid($row->id);
+            $rows[$key]->href = 'index.php?option=com_jupolls&amp;view=poll&amp;id=' . $row->id . ":" . $row->alias . self::getItemid($row->id);
         }
 
         return $rows;
@@ -93,7 +93,7 @@ class plgSearchMijopollssearch extends JPlugin
 
     function getItemid($poll_id)
     {
-        $component = JComponentHelper::getComponent('com_mijopolls');
+        $component = JComponentHelper::getComponent('com_jupolls');
         $menus     = JApplication::getMenu('site', array());
         $items     = $menus->getItems('component_id', $component->id);
         $match     = false;

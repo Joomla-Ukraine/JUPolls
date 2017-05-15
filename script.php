@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -27,7 +27,7 @@ defined('_JEXEC') or die ('Restricted access');
 jimport('joomla.installer.installer');
 jimport('joomla.filesystem.folder');
 
-class com_MijopollsInstallerScript
+class com_JUPollsInstallerScript
 {
     private $_current_version = null;
     private $_is_new_installation = true;
@@ -37,11 +37,11 @@ class com_MijopollsInstallerScript
         $app = JFactory::getApplication();
 
         $folders = array(
-            JPATH_SITE . '/administrator/components/com_mijopolls',
-            JPATH_SITE . '/components/com_mijopolls',
-            JPATH_SITE . '/modules/mod_mijopolls',
-            JPATH_SITE . '/plugins/mijopolls',
-            JPATH_SITE . '/media/mijopolls'
+            JPATH_SITE . '/administrator/components/com_jupolls',
+            JPATH_SITE . '/components/com_jupolls',
+            JPATH_SITE . '/modules/mod_jupolls',
+            JPATH_SITE . '/plugins/jupolls',
+            JPATH_SITE . '/media/jupolls'
         );
 
         foreach ($folders AS $folder)
@@ -63,7 +63,7 @@ class com_MijopollsInstallerScript
         }
 
         $db = JFactory::getDBO();
-        $db->setQuery('SELECT params FROM #__extensions WHERE element = "com_mijopolls" AND type = "component"');
+        $db->setQuery('SELECT params FROM #__extensions WHERE element = "com_jupolls" AND type = "component"');
         $config = $db->loadResult();
 
         if(!empty($config))
@@ -80,7 +80,7 @@ class com_MijopollsInstallerScript
         $db  = JFactory::getDBO();
         $src = $parent->getParent()->getPath('source');
 
-        $db->setQuery("CREATE TABLE IF NOT EXISTS `#__mijopolls_polls` (
+        $db->setQuery("CREATE TABLE IF NOT EXISTS `#__jupolls_polls` (
 		  `id` int(11) unsigned NOT NULL auto_increment,
 		  `title` varchar(255) NOT NULL default '',
 		  `alias` varchar(255) NOT NULL default '',
@@ -96,7 +96,7 @@ class com_MijopollsInstallerScript
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;");
         $db->execute();
 
-        $db->setQuery("CREATE TABLE IF NOT EXISTS `#__mijopolls_options` (
+        $db->setQuery("CREATE TABLE IF NOT EXISTS `#__jupolls_options` (
 		  `id` int(11) NOT NULL auto_increment,
 		  `poll_id` int(11) NOT NULL default '0',
 		  `text` text NOT NULL,
@@ -107,7 +107,7 @@ class com_MijopollsInstallerScript
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;");
         $db->execute();
 
-        $db->setQuery("CREATE TABLE IF NOT EXISTS `#__mijopolls_votes` (
+        $db->setQuery("CREATE TABLE IF NOT EXISTS `#__jupolls_votes` (
 		  `id` bigint(20) NOT NULL auto_increment,
 		  `date` datetime NOT NULL default '0000-00-00 00:00:00',
 		  `option_id` int(11) NOT NULL default '0',
@@ -121,24 +121,24 @@ class com_MijopollsInstallerScript
         $db->execute();
 
         $installer = new JInstaller();
-        $installer->install($src . '/extensions/mod_mijopolls');
+        $installer->install($src . '/extensions/mod_jupolls');
 
         $installer = new JInstaller();
-        $installer->install($src . '/extensions/plg_mijopollssearch');
+        $installer->install($src . '/extensions/plg_jupollssearch');
 
         if($this->_is_new_installation == true)
         {
-            $this->_installMijopolls();
+            $this->_installJUPolls();
         }
         else
         {
-            $this->_updateMijopolls();
+            $this->_updateJUPolls();
 
             $query = $db->getQuery(true);
             $query->select('*');
             $query->from('#__extensions');
             $query->where('`type` = "component"');
-            $query->where('`element` = "com_mijopolls"');
+            $query->where('`element` = "com_jupolls"');
             $db->setQuery($query);
             $manifests = $db->loadObjectList();
 
@@ -155,10 +155,10 @@ class com_MijopollsInstallerScript
 
                 try
                 {
-                    $db->setQuery("ALTER TABLE `#__mijopolls_votes` ADD `browser` VARCHAR( 155 ) NOT NULL AFTER `ip`;");
+                    $db->setQuery("ALTER TABLE `#__jupolls_votes` ADD `browser` VARCHAR( 155 ) NOT NULL AFTER `ip`;");
                     $db->execute();
 
-                    $app->enqueueMessage('Add column `browser` to `#__mijopolls_votes`', 'message');
+                    $app->enqueueMessage('Add column `browser` to `#__jupolls_votes`', 'message');
                 }
                 catch (Exception $e)
                 {
@@ -167,23 +167,23 @@ class com_MijopollsInstallerScript
 
                 try
                 {
-                    $db->setQuery("ALTER TABLE `#__mijopolls_options` DROP `color`;");
+                    $db->setQuery("ALTER TABLE `#__jupolls_options` DROP `color`;");
                     $db->execute();
 
-                    $app->enqueueMessage('Remove column `color` to `#__mijopolls_options`', 'message');
+                    $app->enqueueMessage('Remove column `color` to `#__jupolls_options`', 'message');
                 }
                 catch (Exception $e)
                 {
                     $app->enqueueMessage($e->getMessage(), 'error');
                 }
 
-                $db->setQuery("ALTER TABLE `#__mijopolls_votes` ENGINE=InnoDB");
+                $db->setQuery("ALTER TABLE `#__jupolls_votes` ENGINE=InnoDB");
                 $db->execute();
 
-                $db->setQuery("ALTER TABLE `#__mijopolls_options` ENGINE=InnoDB");
+                $db->setQuery("ALTER TABLE `#__jupolls_options` ENGINE=InnoDB");
                 $db->execute();
 
-                $db->setQuery("ALTER TABLE `#__mijopolls_polls` ENGINE=InnoDB");
+                $db->setQuery("ALTER TABLE `#__jupolls_polls` ENGINE=InnoDB");
                 $db->execute();
             }
         }
@@ -191,14 +191,14 @@ class com_MijopollsInstallerScript
         $this->_installationOutput($status);
     }
 
-    protected function _installMijopolls()
+    protected function _installJUPolls()
     {
         if(empty($this->_current_version)) return;
 
         if($this->_current_version = '1.0.0') return;
     }
 
-    protected function _updateMijopolls()
+    protected function _updateJUPolls()
     {
         if(empty($this->_current_version)) return;
 
@@ -211,7 +211,7 @@ class com_MijopollsInstallerScript
 
         $db = JFactory::getDBO();
 
-        $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'module' AND element = 'mod_mijopolls' LIMIT 1");
+        $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'module' AND element = 'mod_jupolls' LIMIT 1");
         $id = $db->loadResult();
 
         if($id)
@@ -219,8 +219,8 @@ class com_MijopollsInstallerScript
             $installer = new JInstaller();
             $installer->uninstall('module', $id);
         }
-
-        $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'plugin' AND element = 'mijopolls' AND folder = 'content' LIMIT 1");
+/*
+        $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'plugin' AND element = 'jupolls' AND folder = 'content' LIMIT 1");
         $id = $db->loadResult();
 
         if($id)
@@ -228,8 +228,8 @@ class com_MijopollsInstallerScript
             $installer = new JInstaller();
             $installer->uninstall('plugin', $id);
         }
-
-        $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'plugin' AND element = 'mijopollssearch' AND folder = 'search' LIMIT 1");
+*/
+        $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'plugin' AND element = 'jupollssearch' AND folder = 'search' LIMIT 1");
         $id = $db->loadResult();
 
         if($id)
@@ -274,7 +274,7 @@ class com_MijopollsInstallerScript
     {
         ?>
         <h2>JUPolls Installation</h2>
-        <h2><a href="index.php?option=com_mijopolls">Go to JUPolls</a></h2>
+        <h2><a href="index.php?option=com_jupolls">Go to JUPolls</a></h2>
         <table class="adminlist table table-striped">
             <thead>
             <tr>
@@ -292,22 +292,22 @@ class com_MijopollsInstallerScript
                 <th colspan="3"><?php echo JText::_('Core'); ?></th>
             </tr>
             <tr class="row0">
-                <td class="key" colspan="2"><?php echo 'MijoPolls ' . JText::_('Component'); ?></td>
+                <td class="key" colspan="2"><?php echo 'JUPolls ' . JText::_('Component'); ?></td>
                 <td><strong><?php echo JText::_('Installed'); ?></strong></td>
             </tr>
             <tr class="row1">
-                <td class="key" colspan="2"><?php echo 'MijoPolls ' . JText::_('Module'); ?></td>
+                <td class="key" colspan="2"><?php echo 'JUPolls ' . JText::_('Module'); ?></td>
                 <td><strong><?php echo JText::_('Installed'); ?></strong></td>
             </tr>
             <tr>
                 <th colspan="3"><?php echo JText::_('Plugins'); ?></th>
             </tr>
             <tr class="row1">
-                <td class="key" colspan="2"><?php echo 'Content - Load MijoPolls'; ?></td>
+                <td class="key" colspan="2"><?php echo 'Content - Load JUPolls'; ?></td>
                 <td><strong><?php echo JText::_('Installed'); ?></strong></td>
             </tr>
             <tr class="row0">
-                <td class="key" colspan="2"><?php echo 'Search - MijoPolls'; ?></td>
+                <td class="key" colspan="2"><?php echo 'Search - JUPolls'; ?></td>
                 <td><strong><?php echo JText::_('Installed'); ?></strong></td>
             </tr>
             </tbody>
@@ -318,7 +318,7 @@ class com_MijopollsInstallerScript
     private function _uninstallationOutput($status)
     {
         ?>
-        <h2>MijoPolls Removal</h2>
+        <h2>JUPolls Removal</h2>
         <table class="adminlist table table-striped">
             <thead>
             <tr>
@@ -340,18 +340,18 @@ class com_MijopollsInstallerScript
                 <td><strong><?php echo JText::_('Removed'); ?></strong></td>
             </tr>
             <tr class="row1">
-                <td class="key" colspan="2"><?php echo 'MijoPolls ' . JText::_('Module'); ?></td>
+                <td class="key" colspan="2"><?php echo 'JUPolls ' . JText::_('Module'); ?></td>
                 <td><strong><?php echo JText::_('Removed'); ?></strong></td>
             </tr>
             <tr>
                 <th colspan="3"><?php echo JText::_('Plugins'); ?></th>
             </tr>
             <tr class="row0">
-                <td class="key" colspan="2"><?php echo 'Content - Load MijoPolls'; ?></td>
+                <td class="key" colspan="2"><?php echo 'Content - Load JUPolls'; ?></td>
                 <td><strong><?php echo JText::_('Removed'); ?></strong></td>
             </tr>
             <tr class="row0">
-                <td class="key" colspan="2"><?php echo 'Search - MijoPolls'; ?></td>
+                <td class="key" colspan="2"><?php echo 'Search - JUPolls'; ?></td>
                 <td><strong><?php echo JText::_('Removed'); ?></strong></td>
             </tr>
             </tbody>

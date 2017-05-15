@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -25,7 +25,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.environment.browser');
 
-class MijopollsModelPoll extends JModelLegacy
+class JUPollsModelPoll extends JModelLegacy
 {
     public function vote($poll_id, $option_id)
     {
@@ -46,7 +46,7 @@ class MijopollsModelPoll extends JModelLegacy
 
         $dt = $date->toSql();
 
-        $query = "INSERT INTO #__mijopolls_votes (date, option_id, poll_id, ip, browser, user_id) VALUES ('{$dt}', '{$option_id}', '{$poll_id}', '{$ip}', '{$agent}', '{$user->id}')";
+        $query = "INSERT INTO #__jupolls_votes (date, option_id, poll_id, ip, browser, user_id) VALUES ('{$dt}', '{$option_id}', '{$poll_id}', '{$ip}', '{$agent}', '{$user->id}')";
         $db->setQuery($query);
 
         if(!$db->query())
@@ -65,9 +65,9 @@ class MijopollsModelPoll extends JModelLegacy
         $poll_id = JFactory::getApplication()->input->getInt('id', 0);
 
         $query = "SELECT o.*, COUNT(v.id) AS hits,
-    	(SELECT COUNT(id) FROM #__mijopolls_votes WHERE poll_id=" . $poll_id . ") AS voters"
-            . " FROM #__mijopolls_options AS o"
-            . " LEFT JOIN #__mijopolls_votes AS v"
+    	(SELECT COUNT(id) FROM #__jupolls_votes WHERE poll_id=" . $poll_id . ") AS voters"
+            . " FROM #__jupolls_options AS o"
+            . " LEFT JOIN #__jupolls_votes AS v"
             . " ON (o.id = v.option_id AND v.poll_id = " . $poll_id . ")"
             . " WHERE o.poll_id = " . $poll_id
             . " AND o.text <> ''"
@@ -92,7 +92,7 @@ class MijopollsModelPoll extends JModelLegacy
 
         $query = $db->getQuery(true);
         $query->select("id, title, CASE WHEN CHAR_LENGTH(alias) THEN CONCAT_WS(':', id, alias) ELSE id END AS slug");
-        $query->from('#__mijopolls_polls');
+        $query->from('#__jupolls_polls');
         $query->where('published = 1');
         $query->order('id');
         $db->setQuery($query);
@@ -126,7 +126,7 @@ class MijopollsModelPoll extends JModelLegacy
         $db    = JFactory::getDBO();
         $query = $db->getQuery(true);
         $query->select('*');
-        $query->from('#__mijopolls_votes');
+        $query->from('#__jupolls_votes');
         $query->where('poll_id = ' . $db->Quote($poll_id));
         $query->where('(ip = ' . $db->Quote($ip) . ' AND browser = ' . $db->Quote($agent) . ')');
         $db->setQuery($query);

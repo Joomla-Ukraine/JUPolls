@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -25,7 +25,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.application.component.controller');
 
-class MijopollsController extends JControllerLegacy
+class JUPollsController extends JControllerLegacy
 {
     /**
      * @param bool $cachable
@@ -75,14 +75,14 @@ class MijopollsController extends JControllerLegacy
         {
             if($voted_cookie || $voted_ip)
             {
-                $app->enqueueMessage(JText::_('COM_MIJOPOLLS_ALREADY_VOTED'), 'error');
+                $app->enqueueMessage(JText::_('COM_JUPOLLS_ALREADY_VOTED'), 'error');
 
                 return;
             }
 
             if(!$option_id)
             {
-                $app->enqueueMessage(JText::_('COM_MIJOPOLLS_NO_SELECTED'), 'error');
+                $app->enqueueMessage(JText::_('COM_JUPOLLS_NO_SELECTED'), 'error');
 
                 return;
             }
@@ -96,16 +96,16 @@ class MijopollsController extends JControllerLegacy
 
             if(JFactory::getUser()->id != 0)
             {
-                JPluginHelper::importPlugin('mijopolls');
+                JPluginHelper::importPlugin('jupolls');
                 $dispatcher = JDispatcher::getInstance();
                 $dispatcher->trigger('onAfterVote', array($poll, $option_id));
             }
         }
 
         $menu   = $app->getMenu();
-        $items  = $menu->getItems('link', 'index.php?option=com_mijopolls');
+        $items  = $menu->getItems('link', 'index.php?option=com_jupolls');
         $itemid = isset($items[0]) ? '&Itemid=' . $items[0]->id : '';
 
-        $this->setRedirect(JRoute::_('index.php?option=com_mijopolls&view=poll&id=' . $poll_id . ':' . $poll->alias . $itemid, false));
+        $this->setRedirect(JRoute::_('index.php?option=com_jupolls&view=poll&id=' . $poll_id . ':' . $poll->alias . $itemid, false));
     }
 }

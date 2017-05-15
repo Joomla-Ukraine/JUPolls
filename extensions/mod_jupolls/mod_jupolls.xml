@@ -5,20 +5,20 @@
     <creationDate>06.04.2016</creationDate>
     <authorEmail>denys@joomla-ua.org</authorEmail>
     <authorUrl>http://oomla-ua.org</authorUrl>
-    <copyright>Copyright (C) Joomla! Ukraine</copyright>
+    <copyright>Copyright (C) 2016-2017 Joomla! Ukraine</copyright>
     <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
     <version>1.5.3</version>
     <description>JUPolls is a simple and flexible component for voting.</description>
 
     <files>
-        <filename module="mod_mijopolls">mod_mijopolls.php</filename>
-        <filename module="mod_mijopolls">index.html</filename>
-        <filename module="mod_mijopolls">helper.php</filename>
-        <folder module="mod_mijopolls">tmpl</folder>
+        <filename module="mod_jupolls">mod_jupolls.php</filename>
+        <filename module="mod_jupolls">index.html</filename>
+        <filename module="mod_jupolls">helper.php</filename>
+        <folder module="mod_jupolls">tmpl</folder>
     </files>
 
     <languages folder="languages">
-        <language tag="en-GB">en-GB.mod_mijopolls.ini</language>
+        <language tag="en-GB">en-GB.mod_jupolls.ini</language>
     </languages>
 
     <config>
@@ -37,18 +37,18 @@
 
                 <field type="spacer"/>
 
-                <field name="id" type="text" default="" label="MOD_MIJOPOLLS_POLL_ID"
-                       description="MOD_MIJOPOLLS_POLL_ID_DESC"/>
+                <field name="id" type="text" default="" label="MOD_JUPOLLS_POLL_ID"
+                       description="MOD_JUPOLLS_POLL_ID_DESC"/>
                 <!--
-                <field name="ajax" type="radio" class="btn-group" default="0" label="MOD_MIJOPOLLS_AJAX_VOTE"
-                       description="MOD_MIJOPOLLS_AJAX_VOTE_DESC">
+                <field name="ajax" type="radio" class="btn-group" default="0" label="MOD_JUPOLLS_AJAX_VOTE"
+                       description="MOD_JUPOLLS_AJAX_VOTE_DESC">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>
                 -->
 
                 <field name="show_poll_title" type="radio" class="btn-group" default="1"
-                       label="MOD_MIJOPOLLS_SHOW_POLL_TITLE" description="MOD_MIJOPOLLS_SHOW_POLL_TITLE_DESC">
+                       label="MOD_JUPOLLS_SHOW_POLL_TITLE" description="MOD_JUPOLLS_SHOW_POLL_TITLE_DESC">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>
@@ -56,63 +56,63 @@
                 <field type="spacer"/>
                 <!--
                 <field name="only_one_color" type="radio" class="btn-group" default="0"
-                       label="MOD_MIJOPOLLS_ONLY_ONE_COLOR" description="MOD_MIJOPOLLS_ONLY_ONE_COLOR_DESC">
+                       label="MOD_JUPOLLS_ONLY_ONE_COLOR" description="MOD_JUPOLLS_ONLY_ONE_COLOR_DESC">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>
 
-                <field name="poll_bars_color" type="text" default="cccccc" size="7" label="MOD_MIJOPOLLS_BARS_COLOR"
-                       description="MOD_MIJOPOLLS_BARS_COLOR_DESC"/>
+                <field name="poll_bars_color" type="text" default="cccccc" size="7" label="MOD_JUPOLLS_BARS_COLOR"
+                       description="MOD_JUPOLLS_BARS_COLOR_DESC"/>
                 <field name="poll_bars_border_color" type="text" default="cccccc" size="7"
-                       label="MOD_MIJOPOLLS_BARS_BORDER_COLOR" description="MOD_MIJOPOLLS_BARS_BORDER_COLOR_DESC"/>
+                       label="MOD_JUPOLLS_BARS_BORDER_COLOR" description="MOD_JUPOLLS_BARS_BORDER_COLOR_DESC"/>
                 <field type="spacer"/>
                 -->
 
                 <field name="show_view_details" type="radio" class="btn-group" default="1"
-                       label="MOD_MIJOPOLLS_SHOW_VIEW_DETAILS" description="MOD_MIJOPOLLS_SHOW_VIEW_DETAILS_DESC">
+                       label="MOD_JUPOLLS_SHOW_VIEW_DETAILS" description="MOD_JUPOLLS_SHOW_VIEW_DETAILS_DESC">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>
 
                 <field name="show_rel_article" type="radio" class="btn-group" default="1"
-                       label="MOD_MIJOPOLLS_SHOW_REL_ARTICLE" description="MOD_MIJOPOLLS_SHOW_REL_ARTICLE_DESC">
+                       label="MOD_JUPOLLS_SHOW_REL_ARTICLE" description="MOD_JUPOLLS_SHOW_REL_ARTICLE_DESC">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>
 
                 <field name="rel_article" type="text" default="" size="40"
-                       label="MOD_MIJOPOLLS_RELATED_ARTICLE_LINK"
-                       description="MOD_MIJOPOLLS_RELATED_ARTICLE_LINK_DESC"/>
+                       label="MOD_JUPOLLS_RELATED_ARTICLE_LINK"
+                       description="MOD_JUPOLLS_RELATED_ARTICLE_LINK_DESC"/>
 
                 <field name="rel_article_window" type="radio" class="btn-group" default="_self"
-                       label="MOD_MIJOPOLLS_IN_NEW_WINDOW" description="MOD_MIJOPOLLS_IN_NEW_WINDOW_DESC">
+                       label="MOD_JUPOLLS_IN_NEW_WINDOW" description="MOD_JUPOLLS_IN_NEW_WINDOW_DESC">
                     <option value="_blank">Yes</option>
                     <option value="_self">No</option>
                 </field>
 
                 <field type="spacer"/>
 
-                <field name="show_total" type="radio" class="btn-group" default="1" label="MOD_MIJOPOLLS_SHOW_TOTAL"
-                       description="MOD_MIJOPOLLS_SHOW_TOTAL_DESC">
+                <field name="show_total" type="radio" class="btn-group" default="1" label="MOD_JUPOLLS_SHOW_TOTAL"
+                       description="MOD_JUPOLLS_SHOW_TOTAL_DESC">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>
 
-                <field name="show_msg" type="radio" class="btn-group" default="1" label="MOD_MIJOPOLLS_SHOW_MESSAGES"
-                       description="MOD_MIJOPOLLS_SHOW_MESSAGES_DESC">
+                <field name="show_msg" type="radio" class="btn-group" default="1" label="MOD_JUPOLLS_SHOW_MESSAGES"
+                       description="MOD_JUPOLLS_SHOW_MESSAGES_DESC">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>
 
                 <field name="show_detailed_msg" type="radio" class="btn-group" default="1"
-                       label="MOD_MIJOPOLLS_SHOW_DETAILED_MESSAGES"
-                       description="MOD_MIJOPOLLS_SHOW_DETAILED_MESSAGES_DESC">
+                       label="MOD_JUPOLLS_SHOW_DETAILED_MESSAGES"
+                       description="MOD_JUPOLLS_SHOW_DETAILED_MESSAGES_DESC">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>
 
                 <field name="msg_date_format" type="text" default="F j, Y" size="25"
-                       label="MOD_MIJOPOLLS_MSG_DATE_FORMAT" description="MOD_MIJOPOLLS_MSG_DATE_FORMAT_DESC"/>
+                       label="MOD_JUPOLLS_MSG_DATE_FORMAT" description="MOD_JUPOLLS_MSG_DATE_FORMAT_DESC"/>
 
             </fieldset>
         </fields>

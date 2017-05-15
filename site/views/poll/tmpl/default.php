@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-$component  = JComponentHelper::getComponent('com_mijopolls');
+$component  = JComponentHelper::getComponent('com_jupolls');
 $app        = JFactory::getApplication();
 $menus      = $app->getMenu('site');
 $menu_items = $menus->getItems('component_id', $component->id);
@@ -94,10 +94,10 @@ $param      = $this->params;
 
                         <div class="form-group" style="padding-top: 18px;">
                             <input type="submit" name="task_button" class="btn btn-primary"
-                                   value="<?php echo JText::_('COM_MIJOPOLLS_VOTE'); ?>"/>
+                                   value="<?php echo JText::_('COM_JUPOLLS_VOTE'); ?>"/>
                         </div>
 
-                        <input type="hidden" name="option" value="com_mijopolls"/>
+                        <input type="hidden" name="option" value="com_jupolls"/>
                         <input type="hidden" name="task" value="vote"/>
                         <input type="hidden" name="id" value="<?php echo $this->poll->id; ?>"/>
                         <?php echo JHTML::_('form.token'); ?>
@@ -115,18 +115,18 @@ $param      = $this->params;
                             <?php endif; ?>
                             <dl class="dl-horizontal">
                                 <dt>
-                                    <?php echo JText::_('COM_MIJOPOLLS_NUM_OF_VOTERS'); ?>:
+                                    <?php echo JText::_('COM_JUPOLLS_NUM_OF_VOTERS'); ?>:
                                 </dt>
                                 <dd>
                                     <strong class="text-primary"><?php if(isset($this->options[0])) echo $this->options[0]->voters; ?></strong>
                                 </dd>
                                 <?php if($param->get('show_times')): ?>
                                     <dt>
-                                        <?php echo JText::_('COM_MIJOPOLLS_START'); ?>:
+                                        <?php echo JText::_('COM_JUPOLLS_START'); ?>:
                                     </dt>
                                     <dd class="text-muted"><?php echo JHtml::date($this->poll->publish_up, JText::_('DATE_FORMAT_LC')); ?></dd>
                                     <dt>
-                                        <?php echo JText::_('COM_MIJOPOLLS_END'); ?>:
+                                        <?php echo JText::_('COM_JUPOLLS_END'); ?>:
                                     </dt>
                                     <dd class="text-muted">
                                         <?php echo JHtml::date($this->poll->publish_down, JText::_('DATE_FORMAT_LC')); ?>
@@ -138,8 +138,8 @@ $param      = $this->params;
                         <div class="col-md-6 span6">
                             <?php endif; ?>
                             <a class="btn btn-success pull-right"
-                               href="<?php echo JRoute::_('index.php?option=com_mijopolls&view=poll&Itemid=' . $menu_items[0]->id); ?>">
-                                <i class="icon-list fa fa-chart-bar"></i> <?php echo JText::_('COM_MIJOPOLLS_POLLS'); ?>
+                               href="<?php echo JRoute::_('index.php?option=com_jupolls&view=poll&Itemid=' . $menu_items[0]->id); ?>">
+                                <i class="icon-list fa fa-chart-bar"></i> <?php echo JText::_('COM_JUPOLLS_POLLS'); ?>
                             </a>
                             <?php if(!$this->allowToVote) : ?>
                         </div>
@@ -155,7 +155,7 @@ $param      = $this->params;
     <form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="poll" id="poll">
         <div class="contentpane<?php echo $param->get('pageclass_sfx') ?>">
             <label for="id">
-                <?php echo JText::_('COM_MIJOPOLLS_VIEW_RESULTS'); ?>
+                <?php echo JText::_('COM_JUPOLLS_VIEW_RESULTS'); ?>
                 <?php echo $this->lists['polls']; ?>
             </label>
         </div>
@@ -191,6 +191,6 @@ if($component->params->get('show_comments') == 1 && $param->get('show_comments',
     if(file_exists($jcomments))
     {
         require_once($jcomments);
-        echo JComments::showComments($this->poll->id, 'com_mijopolls', $this->poll->title);
+        echo JComments::showComments($this->poll->id, 'com_jupolls', $this->poll->title);
     }
 }

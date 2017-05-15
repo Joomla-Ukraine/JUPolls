@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,18 +23,15 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-require_once(JPATH_COMPONENT . '/mvc/model.php');
-require_once(JPATH_COMPONENT . '/mvc/view.php');
-require_once(JPATH_COMPONENT . '/mvc/controller.php');
+JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/tables');
 
-require_once(JPATH_COMPONENT . '/toolbar.php');
+require_once(JPATH_COMPONENT_ADMINISTRATOR . '/mvc/model.php');
+require_once(JPATH_COMPONENT_ADMINISTRATOR . '/mvc/view.php');
+require_once(JPATH_COMPONENT_ADMINISTRATOR . '/mvc/controller.php');
 
-JTable::addIncludePath(JPATH_COMPONENT . '/tables');
-
-if($controller = JRequest::getWord('controller'))
+if($controller = JRequest::getWord('view'))
 {
     $path = JPATH_COMPONENT . '/controllers/' . $controller . '.php';
-
     if(file_exists($path))
     {
         require_once $path;
@@ -45,9 +42,9 @@ if($controller = JRequest::getWord('controller'))
     }
 }
 
-$classname = 'MijopollsController' . ucfirst($controller);
-
-// Create the controller
+$classname  = 'JUPollsController' . ucfirst($controller);
 $controller = new $classname();
+
+$controller->registerTask('results', 'display');
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();

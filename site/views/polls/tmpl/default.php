@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -61,31 +61,31 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <thead>
         <tr>
             <th>
-                <?php echo JText::_('COM_MIJOPOLLS_TITLE'); ?>
+                <?php echo JText::_('COM_JUPOLLS_TITLE'); ?>
             </th>
             <?php if($this->params->get('show_start_date')) : ?>
                 <th width="18%">
-                    <?php echo JText::_('COM_MIJOPOLLS_START'); ?>
+                    <?php echo JText::_('COM_JUPOLLS_START'); ?>
                 </th>
             <?php endif; ?>
             <?php if($this->params->get('show_end_date')) : ?>
                 <th width="18%">
-                    <?php echo JText::_('COM_MIJOPOLLS_END'); ?>
+                    <?php echo JText::_('COM_JUPOLLS_END'); ?>
                 </th>
             <?php endif; ?>
             <?php if($this->params->get('show_status')) : ?>
                 <th width="5%">
-                    <?php echo JText::_('COM_MIJOPOLLS_STATUS'); ?>
+                    <?php echo JText::_('COM_JUPOLLS_STATUS'); ?>
                 </th>
             <?php endif; ?>
             <?php if($this->params->get('show_num_voters')) : ?>
                 <th width="5%">
-                    <?php echo JText::_('COM_MIJOPOLLS_VOTES'); ?>
+                    <?php echo JText::_('COM_JUPOLLS_VOTES'); ?>
                 </th>
             <?php endif; ?>
             <?php if($this->params->get('show_num_options')): ?>
                 <th width="5%">
-                    <?php echo JText::_('COM_MIJOPOLLS_OPTIONS'); ?>
+                    <?php echo JText::_('COM_JUPOLLS_OPTIONS'); ?>
                 </th>
             <?php endif; ?>
         </tr>
@@ -98,7 +98,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         {
             $row = $this->items[$i];
 
-            $component  = JComponentHelper::getComponent('com_mijopolls');
+            $component  = JComponentHelper::getComponent('com_jupolls');
             $menus      = JApplication::getMenu('site', array());
             $menu_items = $menus->getItems('component_id', $component->id);
             $itemid     = null;
@@ -116,7 +116,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
                 }
             }
 
-            $link = JRoute::_('index.php?option=com_mijopolls&view=poll&id=' . $row->slug . $itemid);
+            $link = JRoute::_('index.php?option=com_jupolls&view=poll&id=' . $row->slug . $itemid);
             ?>
             <tr>
                 <td>
@@ -135,9 +135,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
                 <?php if($this->params->get('show_status')) : ?>
                     <td>
                         <?php if($this->params->get('show_status_as')) : ?>
-                            <img src="<?php echo JURI::base(); ?>media/mijopolls/images/poll-<?php echo $row->status; ?>.gif"/>
+                            <img src="<?php echo JURI::base(); ?>media/jupolls/images/poll-<?php echo $row->status; ?>.gif"/>
                         <?php else: ?>
-                            <?php echo JText::_('COM_MIJOPOLLS_' . $row->status); ?>
+                            <?php echo JText::_('COM_JUPOLLS_' . $row->status); ?>
                         <?php endif; ?>
                     </td>
                 <?php endif; ?>
@@ -163,7 +163,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
         <?php echo $this->pagination->getPagesCounter(); ?>
     </div>
 
-    <input type="hidden" name="option" value="com_mijopolls"/>
+    <input type="hidden" name="option" value="com_jupolls"/>
     <input type="hidden" name="view" value="polls"/>
     <input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>"/>
     <input type="hidden" name="filter_order_Dir" value=""/>

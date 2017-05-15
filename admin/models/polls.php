@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -23,7 +23,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class MijopollsModelPolls extends MijopollsModel
+class JUPollsModelPolls extends JUPollsModel
 {
 
     var $_query = null;
@@ -88,10 +88,10 @@ class MijopollsModelPolls extends MijopollsModel
             $where   = $this->_buildViewWhere();
             $orderby = $this->_buildViewOrderBy();
 
-            $this->_query = "SELECT m.*, u.name AS editor, COUNT(o.id) AS options, (SELECT count(v.id) FROM #__mijopolls_votes AS v
-			WHERE v.poll_id = m.id) AS votes FROM #__mijopolls_polls AS m 
+            $this->_query = "SELECT m.*, u.name AS editor, COUNT(o.id) AS options, (SELECT count(v.id) FROM #__jupolls_votes AS v
+			WHERE v.poll_id = m.id) AS votes FROM #__jupolls_polls AS m 
 			LEFT JOIN #__users AS u ON u.id = m.checked_out 
-			LEFT JOIN #__mijopolls_options AS o ON o.poll_id = m.id AND o.text <> ''"
+			LEFT JOIN #__jupolls_options AS o ON o.poll_id = m.id AND o.text <> ''"
                 . $where
                 . " GROUP BY m.id"
                 . $orderby;
@@ -152,7 +152,7 @@ class MijopollsModelPolls extends MijopollsModel
         JArrayHelper::toInteger($cid);
         $cids = implode(',', $cid);
 
-        $query = "DELETE FROM #__mijopolls_votes WHERE poll_id IN (" . $cids . ")";
+        $query = "DELETE FROM #__jupolls_votes WHERE poll_id IN (" . $cids . ")";
         $db->setQuery($query);
 
         if($db->query())

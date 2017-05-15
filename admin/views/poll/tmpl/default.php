@@ -3,7 +3,7 @@
  * JUPolls
  *
  * @package          Joomla.Site
- * @subpackage       com_mijopolls
+ * @subpackage       com_jupolls
  *
  * @author           Denys Nosov, denys@joomla-ua.org
  * @copyright        2016-2017 (C) Joomla! Ukraine, http://joomla-ua.org. All rights reserved.
@@ -31,8 +31,8 @@ JHTML::_('behavior.calendar');
 JHtml::_('jquery.framework');
 
 $doc = JFactory::getDocument();
-$doc->addScript('../media/mijopolls/js/jquery.tablednd.js');
-$doc->addScript('../media/mijopolls/js/jquery.mijopolls.js');
+$doc->addScript('../media/jupolls/js/jquery.tablednd.js');
+$doc->addScript('../media/jupolls/js/jquery.jupolls.js');
 
 
 $row = $this->row;
@@ -40,20 +40,20 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
 
 ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_mijopolls&controller=poll&layout=edit&id=' . (int) $row->id); ?>"
+<form action="<?php echo JRoute::_('index.php?option=com_jupolls&controller=poll&layout=edit&id=' . (int) $row->id); ?>"
       method="post" name="adminForm" id="adminForm" class="form-validate form-horizontal">
 
     <div class="span10">
 
         <ul class="nav nav-tabs">
             <li class="active">
-                <a href="#details" data-toggle="tab"><?php echo JText::_('COM_MIJOPOLLS_DETAILS'); ?></a>
+                <a href="#details" data-toggle="tab"><?php echo JText::_('COM_JUPOLLS_DETAILS'); ?></a>
             </li>
             <li>
-                <a href="#general" data-toggle="tab"><?php echo JText::_('COM_MIJOPOLLS_PARAMS_GENERAL'); ?></a>
+                <a href="#general" data-toggle="tab"><?php echo JText::_('COM_JUPOLLS_PARAMS_GENERAL'); ?></a>
             </li>
             <li>
-                <a href="#results" data-toggle="tab"><?php echo JText::_('COM_MIJOPOLLS_RESULTS'); ?></a>
+                <a href="#results" data-toggle="tab"><?php echo JText::_('COM_JUPOLLS_RESULTS'); ?></a>
             </li>
         </ul>
 
@@ -65,7 +65,7 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
                     <div class="span8">
                         <div class="control-group">
                             <label class="control-label" for="title">
-                                <?php echo JText::_('COM_MIJOPOLLS_TITLE'); ?>
+                                <?php echo JText::_('COM_JUPOLLS_TITLE'); ?>
                             </label>
                             <div class="controls">
                                 <input class="span8" type="text" name="title" id="title"
@@ -74,7 +74,7 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="alias">
-                                <?php echo JText::_('COM_MIJOPOLLS_ALIAS'); ?>
+                                <?php echo JText::_('COM_JUPOLLS_ALIAS'); ?>
                             </label>
                             <div class="controls">
                                 <input class="span8" type="text" name="alias" id="alias"
@@ -96,19 +96,19 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
                     <div class="span4">
                         <div class="control-group">
                             <label class="control-label" for="lag">
-                                <?php echo JText::_('COM_MIJOPOLLS_LAG'); ?>
+                                <?php echo JText::_('COM_JUPOLLS_LAG'); ?>
                             </label>
                             <div class="controls">
                                 <input class="span2" type="text" name="lag" id="lag"
                                        value="<?php echo $row->lag / 60; ?>">
-                                <span class="help-inline muted"><?php echo JText::_('COM_MIJOPOLLS_HOURS_BETWEEN_VOTES'); ?></span>
+                                <span class="help-inline muted"><?php echo JText::_('COM_JUPOLLS_HOURS_BETWEEN_VOTES'); ?></span>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label" for="start">
-                                <?php echo JText::_('COM_MIJOPOLLS_START_DATE'); ?><br>
-                                <span class="muted"><?php echo JText::_('COM_MIJOPOLLS_START_DATE_DESC'); ?></span>
+                                <?php echo JText::_('COM_JUPOLLS_START_DATE'); ?><br>
+                                <span class="muted"><?php echo JText::_('COM_JUPOLLS_START_DATE_DESC'); ?></span>
                             </label>
                             <div class="controls">
                                 <?php
@@ -132,8 +132,8 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
 
                         <div class="control-group">
                             <label class="control-label" for="end">
-                                <?php echo JText::_('COM_MIJOPOLLS_END_DATE'); ?><br>
-                                <span class="muted"><?php echo JText::_('COM_MIJOPOLLS_END_DATE_DESC'); ?></span>
+                                <?php echo JText::_('COM_JUPOLLS_END_DATE'); ?><br>
+                                <span class="muted"><?php echo JText::_('COM_JUPOLLS_END_DATE_DESC'); ?></span>
                             </label>
                             <div class="controls">
                                 <?php
@@ -155,7 +155,7 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
 
                         <div class="control-group">
                             <label class="control-label">
-                                <?php echo JText::_('COM_MIJOPOLLS_PUBLISHED'); ?>
+                                <?php echo JText::_('COM_JUPOLLS_PUBLISHED'); ?>
                             </label>
                             <?php echo JHTML::_('select.booleanlist', 'published', 'class="radio inline"', $row->published); ?>
                         </div>
@@ -163,26 +163,26 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
                 </div>
 
                 <fieldset class="adminform">
-                    <legend><?php echo JText::_('COM_MIJOPOLLS_OPTIONS_DRAG_DROP'); ?></legend>
+                    <legend><?php echo JText::_('COM_JUPOLLS_OPTIONS_DRAG_DROP'); ?></legend>
 
                     <table class="admintable" id="reorder" style="width:90%;">
                         <tr style=" font-weight:bold;" class="nodrag">
                             <td style="width:40px;">
                                 <a href="#" id="options-add<?php if($this->edit) echo '-extra'; ?>">
-                                    <img src="../media/mijopolls/images/poll-add.png"
-                                         alt="<?php echo JText::_('COM_MIJOPOLLS_OPTION_ADD'); ?>""/>
+                                    <img src="../media/jupolls/images/poll-add.png"
+                                         alt="<?php echo JText::_('COM_JUPOLLS_OPTION_ADD'); ?>""/>
                                 </a>
                                 <a href="#" id="options-remove<?php if($this->edit) echo '-extra'; ?>">
-                                    <img src="../media/mijopolls/images/poll-remove.png"
-                                         alt="<?php echo JText::_('COM_MIJOPOLLS_OPTION_REMOVE'); ?>"/>
+                                    <img src="../media/jupolls/images/poll-remove.png"
+                                         alt="<?php echo JText::_('COM_JUPOLLS_OPTION_REMOVE'); ?>"/>
                                 </a>
                             </td>
                             <td>
-                                <b><?php echo JText::_('COM_MIJOPOLLS_OPTION'); ?></b>
+                                <b><?php echo JText::_('COM_JUPOLLS_OPTION'); ?></b>
                             </td>
 
                             <td>
-                                <?php echo JText::_('COM_MIJOPOLLS_VOTES'); ?>
+                                <?php echo JText::_('COM_JUPOLLS_VOTES'); ?>
                             </td>
                         </tr>
                         <?php
@@ -239,10 +239,10 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
                     <hr/>
                     <div id="options-reset-box">
                         <a href="#" id="options-reset" class="btn btn-warning">
-                            <?php echo JText::_('COM_MIJOPOLLS_RESET_VOTES'); ?>
+                            <?php echo JText::_('COM_JUPOLLS_RESET_VOTES'); ?>
                         </a>
                         <span style="color:red; display:none;">
-                            <?php echo JText::_('COM_MIJOPOLLS_RESET_VOTES_DESC'); ?>
+                            <?php echo JText::_('COM_JUPOLLS_RESET_VOTES_DESC'); ?>
                         </span>
                     </div>
                     <?php
@@ -278,7 +278,7 @@ JFilterOutput::objectHTMLSafe($row, ENT_QUOTES);
             </div>
         </div>
 
-        <input type="hidden" name="option" value="com_mijopolls"/>
+        <input type="hidden" name="option" value="com_jupolls"/>
         <input type="hidden" name="task" value=""/>
         <input type="hidden" id="reset" name="reset" value="0"/>
         <input type="hidden" id="is_there_extra" name="is_there_extra" value="0"/>

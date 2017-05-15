@@ -25,11 +25,11 @@ defined('_JEXEC') or die('Restricted access');
 <div id="polls">
     <?php if ($params->get('show_poll_title')) : ?>
     <p class="top">
-        <strong><a href="<?php echo JRoute::_('index.php?option=com_mijopolls&view=poll&id='.$slug.$itemid); ?>"><?php echo $poll->title; ?></a></strong>
+        <strong><a href="<?php echo JRoute::_('index.php?option=com_jupolls&view=poll&id='.$slug.$itemid); ?>"><?php echo $poll->title; ?></a></strong>
     </p>
     <?php endif; ?>
 
-    <form action="<?php echo JRoute::_('index.php?option=com_mijopolls&view=poll&id='.$slug.$itemid); ?>" method="post" name="poll_vote_<?php echo $poll->id;?>" id="poll_vote_<?php echo $poll->id;?>"  class="bottom">
+    <form action="<?php echo JRoute::_('index.php?option=com_jupolls&view=poll&id='.$slug.$itemid); ?>" method="post" name="poll_vote_<?php echo $poll->id;?>" id="poll_vote_<?php echo $poll->id;?>"  class="bottom">
         <?php if ($display_poll == 1) : ?>
         <div id="polldiv_<?php echo $poll->id;?>" class="poll">
             <?php
@@ -74,10 +74,10 @@ defined('_JEXEC') or die('Restricted access');
         </div>
 
 	    <div class="form-group<?php echo (count($results) > 5 ? ' buttonscr' : ''); ?>" id="poll_buttons_<?php echo $poll->id;?>" >
-	        <input type="submit" id="submit_vote_<?php echo $poll->id; ?>" name="task_button" class="btn btn-primary btn-sm" value="<?php echo JText::_('MOD_MIJOPOLLS_VOTE'); ?>" <?php echo $disabled; ?> />
-	        <span class="right text-muted"><i class="fa fa-bar-chart"></i> <?php echo JText::_('MOD_MIJOPOLLS_TOTAL_VOTES').": ".$row->votes; ?></span>
+	        <input type="submit" id="submit_vote_<?php echo $poll->id; ?>" name="task_button" class="btn btn-primary btn-sm" value="<?php echo JText::_('MOD_JUPOLLS_VOTE'); ?>" <?php echo $disabled; ?> />
+	        <span class="right text-muted"><i class="fa fa-bar-chart"></i> <?php echo JText::_('MOD_JUPOLLS_TOTAL_VOTES').": ".$row->votes; ?></span>
 	    </div>
-    	<input type="hidden" name="option" value="com_mijopolls" />
+    	<input type="hidden" name="option" value="com_jupolls" />
     	<input type="hidden" name="id" value="<?php echo $poll->id;?>" />
     	<input type="hidden" name="task" value="vote" />
         <?php echo JHTML::_('form.token');  ?>
@@ -127,7 +127,7 @@ defined('_JEXEC') or die('Restricted access');
     </div>
 
 	<div class="clearfix text-muted">
-	    <span class="pull-right"><i class="fa fa-bar-chart"></i> <?php echo JText::_('MOD_MIJOPOLLS_TOTAL_VOTES').": ".$row->votes; ?></span>
+	    <span class="pull-right"><i class="fa fa-bar-chart"></i> <?php echo JText::_('MOD_JUPOLLS_TOTAL_VOTES').": ".$row->votes; ?></span>
 	</div>
     
 <?php endif;?>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
-    <name>COM_MIJOPOLLS</name>
+    <name>COM_JUPOLLS</name>
     <author>Denys Nosov</author>
     <creationDate>07.05.2017</creationDate>
     <authorEmail>denys@joomla-ua.org</authorEmail>
     <authorUrl>http://joomla-ua.org</authorUrl>
-    <copyright>Copyright (C) Joomla! Ukraine</copyright>
+    <copyright>Copyright (C) 2016-2017 Joomla! Ukraine</copyright>
     <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
     <version>1.5.9</version>
     <description>JUPolls is a simple and flexible component for voting.</description>
 
     <files folder="site">
-        <filename>mijopolls.php</filename>
+        <filename>jupolls.php</filename>
         <filename>index.html</filename>
         <filename>router.php</filename>
         <folder>models</folder>
@@ -19,29 +19,29 @@
     </files>
 
     <languages folder="languages/site">
-        <language tag="en-GB">en-GB.com_mijopolls.ini</language>
-        <language tag="uk-UA">uk-UA.com_mijopolls.ini</language>
-        <language tag="ru-RU">ru-RU.com_mijopolls.ini</language>
-        <language tag="ru-RU">ru-RU.mod_mijopolls.ini</language>
+        <language tag="en-GB">en-GB.com_jupolls.ini</language>
+        <language tag="uk-UA">uk-UA.com_jupolls.ini</language>
+        <language tag="ru-RU">ru-RU.com_jupolls.ini</language>
+        <language tag="ru-RU">ru-RU.mod_jupolls.ini</language>
     </languages>
 
-    <media folder="media" destination="mijopolls">
+    <media folder="media" destination="jupolls">
         <folder>js</folder>
         <folder>images</folder>
     </media>
 
     <administration>
-        <menu link="option=com_mijopolls">COM_MIJOPOLLS</menu>
+        <menu link="option=com_jupolls">COM_JUPOLLS</menu>
         <submenu>
-            <menu link="option=com_mijopolls&amp;controller=polls">COM_MIJOPOLLS_POLLS</menu>
-            <menu link="option=com_mijopolls&amp;controller=votes">COM_MIJOPOLLS_VOTES</menu>
+            <menu link="option=com_jupolls&amp;controller=polls">COM_JUPOLLS_POLLS</menu>
+            <menu link="option=com_jupolls&amp;controller=votes">COM_JUPOLLS_VOTES</menu>
         </submenu>
 
         <files folder="admin">
             <filename>config.xml</filename>
             <filename>index.html</filename>
             <filename>toolbar.php</filename>
-            <filename>mijopolls.php</filename>
+            <filename>jupolls.php</filename>
             <folder>assets</folder>
             <folder>elements</folder>
             <folder>models</folder>
@@ -51,8 +51,8 @@
         </files>
 
         <languages folder="languages/admin">
-            <language tag="en-GB">en-GB.com_mijopolls.ini</language>
-            <language tag="en-GB">en-GB.com_mijopolls.sys.ini</language>
+            <language tag="en-GB">en-GB.com_jupolls.ini</language>
+            <language tag="en-GB">en-GB.com_jupolls.sys.ini</language>
         </languages>
 
     </administration>
