@@ -59,18 +59,14 @@ foreach ($this->options as $row)
                 <i class="icon-list fa fa-chart-bar"></i> <?php echo $row->hits; ?>
             </span>
         <?php endif; ?>
-        <div class="checkbox">
-            <div class="progress progress-striped">
-
-                <div
-                        class="progress-bar bar <?php echo $color; ?>"
-                        role="progressbar"
-                        aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0" aria-valuemax="100"
-                        style="width: <?php echo $width; ?>%"
-                >
-                    <?php echo $percent; ?>%
-                </div>
-
+        <div class="progress progress-striped">
+            <div
+                    class="progress-bar bar <?php echo $color; ?>"
+                    role="progressbar"
+                    aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0" aria-valuemax="100"
+                    style="width: <?php echo $width; ?>%"
+            >
+                <?php echo $percent; ?>%
             </div>
         </div>
     </div>

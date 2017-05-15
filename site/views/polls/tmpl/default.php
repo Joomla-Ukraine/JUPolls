@@ -29,7 +29,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <form action="<?php echo JRoute::_(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
     <?php if($this->params->get('show_filter_box')) : ?>
-        <div id="filter-bar" class=" row">
+        <div id="filter-bar" class="container-fluid row">
             <div class="btn-toolbar">
                 <div class="col-md-6 span6">
                     <div class="btn-group filter-search input-group pull-left ">

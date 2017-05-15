@@ -66,8 +66,7 @@ $param      = $this->params;
     </div>
 <?php endif; ?>
 
-    <div class="panel panel-default panel-flat">
-
+    <div class="container-fluid panel panel-default panel-flat">
     <div class="panel-body">
 
         <div class="row">
@@ -151,15 +150,17 @@ $param      = $this->params;
         </div>
     </div>
 
+    <hr>
+
 <?php if($component->params->get('show_dropdown') == 1 && $param->get('show_dropdown') == 1) : ?>
-    <form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="poll" id="poll">
-        <div class="contentpane<?php echo $param->get('pageclass_sfx') ?>">
+    <div class="<?php echo $param->get('pageclass_sfx') ?>">
+        <form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="poll" id="poll">
             <label for="id">
                 <?php echo JText::_('COM_JUPOLLS_VIEW_RESULTS'); ?>
                 <?php echo $this->lists['polls']; ?>
             </label>
-        </div>
-    </form>
+        </form>
+    </div>
 <?php endif; ?>
 
 <?php
