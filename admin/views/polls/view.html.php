@@ -45,8 +45,8 @@ class JUPollsViewPolls extends JUPollsView
         $this->mainframe = JFactory::getApplication();
         $this->option    = JRequest::getWord('option');
 
-        $filter_order     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.publish_down DESC', 'string');
-        $filter_order_Dir = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'word');
+        $filter_order     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.publish_down', 'string');
+        $filter_order_Dir = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', 'DESC', 'word');
         $filter_state     = $this->mainframe->getUserStateFromRequest($this->option . '.polls.filter_state', 'filter_state', '', 'word');
         $search           = $this->mainframe->getUserStateFromRequest($this->option . '.polls.search', 'search', '', 'string');
 

@@ -112,8 +112,8 @@ class JUPollsModelPolls extends JModelLegacy
 
     function _buildViewOrderBy()
     {
-        $filter_order     = $this->app->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.publish_down DESC', 'cmd');
-        $filter_order_Dir = $this->app->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
+        $filter_order     = $this->app->getUserStateFromRequest($this->option . '.polls.filter_order', 'filter_order', 'm.publish_down', 'cmd');
+        $filter_order_Dir = $this->app->getUserStateFromRequest($this->option . '.polls.filter_order_Dir', 'filter_order_Dir', 'DESC', 'cmd');
 
         $orderby = ' ORDER BY ' . $filter_order . ' ' . $filter_order_Dir;
 
