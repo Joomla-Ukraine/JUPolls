@@ -5,12 +5,12 @@
 	<creationDate>07.05.2017</creationDate>
 	<copyright>Copyright (C) 2016-2017 Joomla! Ukraine</copyright>
 	<license>GNU GPL</license>
-	<authorEmail>denys@joomla-ua.org<</authorEmail>
+	<authorEmail>denys@joomla-ua.org</authorEmail>
 	<authorUrl>http://joomla-ua.org</authorUrl>
 	<version>1.0.0</version>
 	<description>Search plugin for JUPolls</description>
 	<files>
-		<filename plugin="jupollssearch">jupollssearch.php</filename>
+		<filename plugin="plg_jupollssearch">plg_jupollssearch.php</filename>
 		<filename>index.html</filename>
 	</files>
 	<config>
