@@ -1,55 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <params group="general">
-		<param name="only_registered" type="radio" class="btn-group" default="0" label="COM_JUPOLLS_ONLY_REGISTERED" description="COM_JUPOLLS_ONLY_REGISTERED_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>		
-		<param name="one_vote_per_user" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_ONE_VOTE_PER_USER" description="COM_JUPOLLS_ONE_VOTE_PER_USER_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>
-		<param name="ip_check" type="radio" default="0" class="btn-group" label="COM_JUPOLLS_ONE_VOTE_PER_IP" description="COM_JUPOLLS_ONE_VOTE_PER_IP_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>
-		<param name="show_component_msg" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_MSG" description="COM_JUPOLLS_SHOW_MSG_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>
-		<param name="allow_voting" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_ALLOW_VOTING" description="COM_JUPOLLS_ALLOW_VOTING_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>
-	</params>
-	<params group="results">
-		<param name="show_what" type="list" default="0" label="COM_JUPOLLS_SHOW_RESULTS_AS" description="COM_JUPOLLS_SHOW_RESULTS_AS_DESC">
-			<option value="0">COM_JUPOLLS_JOOMLA_DEFAULT_WAY</option>
-			<option value="1">COM_JUPOLLS_PIE_CHART</option>
-		</param>
-		<field name="show_comments" type="list" default="1" label="COM_JUPOLLS_SHOW_COMMENTS" description="COM_JUPOLLS_SHOW_COMMENTS_DESC">
-			<option value="0">No</option>
-			<option value="1">JComments</option>
-		</field>
-		<param name="show_hits" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_HITS" description="COM_JUPOLLS_SHOW_HITS_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>		
-		<param name="show_voters" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_VOTERS" description="COM_JUPOLLS_SHOW_VOTERS_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>
-		<param name="show_times" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_TIMES" description="COM_JUPOLLS_SHOW_TIMES_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>		
-		<param name="show_dropdown" type="radio" class="btn-group" default="0" label="COM_JUPOLLS_SHOW_DROPDOWN" description="COM_JUPOLLS_SHOW_DROPDOWN_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>
-		<param name="show_title" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_TITLE" description="COM_JUPOLLS_SHOW_TITLE_DESC">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>
+
+        <param
+                name="only_registered"
+                type="radio"
+                class="btn-group"
+                default="0"
+                label="COM_JUPOLLS_ONLY_REGISTERED"
+                description="COM_JUPOLLS_ONLY_REGISTERED_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
+        <param
+                name="one_vote_per_user"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_ONE_VOTE_PER_USER"
+                description="COM_JUPOLLS_ONE_VOTE_PER_USER_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
+        <param
+                name="ip_check"
+                type="radio"
+                default="0"
+                class="btn-group"
+                label="COM_JUPOLLS_ONE_VOTE_PER_IP"
+                description="COM_JUPOLLS_ONE_VOTE_PER_IP_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
+        <param
+                name="show_component_msg"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_MSG"
+                description="COM_JUPOLLS_SHOW_MSG_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
+        <param
+                name="allow_voting"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_ALLOW_VOTING"
+                description="COM_JUPOLLS_ALLOW_VOTING_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+    </params>
+
+    <params group="results">
+        <param
+                name="show_what"
+                type="list"
+                default="0"
+                label="COM_JUPOLLS_SHOW_RESULTS_AS"
+                description="COM_JUPOLLS_SHOW_RESULTS_AS_DESC"
+        >
+            <option value="0">COM_JUPOLLS_JOOMLA_DEFAULT_WAY</option>
+            <option value="1">COM_JUPOLLS_PIE_CHART</option>
+        </param>
+
+        <param
+                name="show_comments"
+                type="list"
+                default="1"
+                label="COM_JUPOLLS_SHOW_COMMENTS"
+                description="COM_JUPOLLS_SHOW_COMMENTS_DESC"
+        >
+            <option value="0">No</option>
+            <option value="1">JComments</option>
+        </param>
+
+        <param
+                name="show_hits"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_HITS"
+                description="COM_JUPOLLS_SHOW_HITS_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
+        <param
+                name="show_voters"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_VOTERS"
+                description="COM_JUPOLLS_SHOW_VOTERS_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
+        <param
+                name="show_times"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_TIMES"
+                description="COM_JUPOLLS_SHOW_TIMES_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
+        <param
+                name="show_dropdown"
+                type="radio"
+                class="btn-group"
+                default="0"
+                label="COM_JUPOLLS_SHOW_DROPDOWN"
+                description="COM_JUPOLLS_SHOW_DROPDOWN_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
+        <param
+                name="show_title"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_TITLE"
+                description="COM_JUPOLLS_SHOW_TITLE_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </param>
+
     </params>
 </root>

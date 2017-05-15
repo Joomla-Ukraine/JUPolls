@@ -88,38 +88,73 @@
 
     <fieldset name="results" label="COM_JUPOLLS_RESULTS">
 
-        <field name="show_what" type="list" default="0" label="COM_JUPOLLS_SHOW_RESULTS_AS"
-               description="COM_JUPOLLS_SHOW_RESULTS_AS_DESC">
+        <field
+                name="show_what"
+                type="list"
+                default="0"
+                label="COM_JUPOLLS_SHOW_RESULTS_AS"
+                description="COM_JUPOLLS_SHOW_RESULTS_AS_DESC"
+        >
             <option value="0">COM_JUPOLLS_JOOMLA_DEFAULT_WAY</option>
             <option value="1">COM_JUPOLLS_PIE_CHART</option>
         </field>
 
-        <field name="show_hits" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_HITS"
-               description="COM_JUPOLLS_SHOW_HITS_DESC">
+        <field
+                name="show_hits"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_HITS"
+                description="COM_JUPOLLS_SHOW_HITS_DESC"
+        >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
         </field>
 
-        <field name="show_voters" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_VOTERS"
-               description="COM_JUPOLLS_SHOW_VOTERS_DESC">
+        <field
+                name="show_voters"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_VOTERS"
+                description="COM_JUPOLLS_SHOW_VOTERS_DESC"
+        >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
         </field>
 
-        <field name="show_times" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_TIMES"
-               description="COM_JUPOLLS_SHOW_TIMES_DESC">
+        <field
+                name="show_times"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_TIMES"
+                description="COM_JUPOLLS_SHOW_TIMES_DESC"
+        >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
         </field>
 
-        <field name="show_dropdown" type="radio" class="btn-group" default="0" label="COM_JUPOLLS_SHOW_DROPDOWN"
-               description="COM_JUPOLLS_SHOW_DROPDOWN_DESC">
+        <field
+                name="show_dropdown"
+                type="radio"
+                class="btn-group"
+                default="0"
+                label="COM_JUPOLLS_SHOW_DROPDOWN"
+                description="COM_JUPOLLS_SHOW_DROPDOWN_DESC"
+        >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
         </field>
 
-        <field name="show_title" type="radio" class="btn-group" default="1" label="COM_JUPOLLS_SHOW_TITLE"
-               description="COM_JUPOLLS_SHOW_TITLE_DESC">
+        <field
+                name="show_title"
+                type="radio"
+                class="btn-group"
+                default="1"
+                label="COM_JUPOLLS_SHOW_TITLE"
+                description="COM_JUPOLLS_SHOW_TITLE_DESC"
+        >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
         </field>
