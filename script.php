@@ -36,6 +36,7 @@ class com_JUPollsInstallerScript
     {
         $app = JFactory::getApplication();
 
+        /*
         $folders = array(
             JPATH_SITE . '/administrator/components/com_jupolls',
             JPATH_SITE . '/components/com_jupolls',
@@ -52,6 +53,7 @@ class com_JUPollsInstallerScript
                 $app->enqueueMessage('Delete folder: ' . $folder, 'message');
             }
         }
+        */
 
         if(JFolder::create(JPATH_ROOT . '/images/polls'))
         {
@@ -153,30 +155,6 @@ class com_JUPollsInstallerScript
             {
                 $db = JFactory::getDbo();
 
-                try
-                {
-                    $db->setQuery("ALTER TABLE `#__jupolls_votes` ADD `browser` VARCHAR( 155 ) NOT NULL AFTER `ip`;");
-                    $db->execute();
-
-                    $app->enqueueMessage('Add column `browser` to `#__jupolls_votes`', 'message');
-                }
-                catch (Exception $e)
-                {
-                    $app->enqueueMessage($e->getMessage(), 'error');
-                }
-
-                try
-                {
-                    $db->setQuery("ALTER TABLE `#__jupolls_options` DROP `color`;");
-                    $db->execute();
-
-                    $app->enqueueMessage('Remove column `color` to `#__jupolls_options`', 'message');
-                }
-                catch (Exception $e)
-                {
-                    $app->enqueueMessage($e->getMessage(), 'error');
-                }
-
                 $db->setQuery("ALTER TABLE `#__jupolls_votes` ENGINE=InnoDB");
                 $db->execute();
 
@@ -193,16 +171,16 @@ class com_JUPollsInstallerScript
 
     protected function _installJUPolls()
     {
-        if(empty($this->_current_version)) return;
-
-        if($this->_current_version = '1.0.0') return;
+        if(empty($this->_current_version)) {
+            return;
+        }
     }
 
     protected function _updateJUPolls()
     {
-        if(empty($this->_current_version)) return;
-
-        if($this->_current_version = '1.0.0') return;
+        if(empty($this->_current_version)) {
+            return;
+        }
     }
 
     public function uninstall($parent)
@@ -219,16 +197,7 @@ class com_JUPollsInstallerScript
             $installer = new JInstaller();
             $installer->uninstall('module', $id);
         }
-/*
-        $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'plugin' AND element = 'jupolls' AND folder = 'content' LIMIT 1");
-        $id = $db->loadResult();
 
-        if($id)
-        {
-            $installer = new JInstaller();
-            $installer->uninstall('plugin', $id);
-        }
-*/
         $db->setQuery("SELECT extension_id FROM #__extensions WHERE type = 'plugin' AND element = 'jupollssearch' AND folder = 'search' LIMIT 1");
         $id = $db->loadResult();
 
@@ -341,13 +310,6 @@ class com_JUPollsInstallerScript
             </tr>
             <tr class="row1">
                 <td class="key" colspan="2"><?php echo 'JUPolls ' . JText::_('Module'); ?></td>
-                <td><strong><?php echo JText::_('Removed'); ?></strong></td>
-            </tr>
-            <tr>
-                <th colspan="3"><?php echo JText::_('Plugins'); ?></th>
-            </tr>
-            <tr class="row0">
-                <td class="key" colspan="2"><?php echo 'Content - Load JUPolls'; ?></td>
                 <td><strong><?php echo JText::_('Removed'); ?></strong></td>
             </tr>
             <tr class="row0">
