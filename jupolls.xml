@@ -2,12 +2,12 @@
 <extension type="component" version="3.0" method="upgrade">
     <name>COM_JUPOLLS</name>
     <author>Denys Nosov</author>
-    <creationDate>07.05.2017</creationDate>
+    <creationDate>15.05.2017</creationDate>
     <authorEmail>denys@joomla-ua.org</authorEmail>
     <authorUrl>http://joomla-ua.org</authorUrl>
     <copyright>Copyright (C) 2016-2017 Joomla! Ukraine</copyright>
     <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
-    <version>1.5.9</version>
+    <version>2.0.0</version>
     <description>JUPolls is a simple and flexible component for voting.</description>
 
     <files folder="site">
@@ -58,5 +58,10 @@
     </administration>
 
     <scriptfile>script.php</scriptfile>
+
+    <update>http://joomla-ua.org/update/com/jupolls.xml</update>
+    <updateservers>
+        <server type="extension" priority="1" name="JUPolls">http://joomla-ua.org/update/com/jupolls.xml</server>
+    </updateservers>
 
 </extension>

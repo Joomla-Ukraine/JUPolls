@@ -2,12 +2,12 @@
 <extension type="module" version="3.0" client="site" method="upgrade">
     <name>Polls</name>
     <author>Denys Nosov</author>
-    <creationDate>06.04.2016</creationDate>
+    <creationDate>15.05.2016</creationDate>
     <authorEmail>denys@joomla-ua.org</authorEmail>
     <authorUrl>http://oomla-ua.org</authorUrl>
     <copyright>Copyright (C) 2016-2017 Joomla! Ukraine</copyright>
     <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
-    <version>1.5.3</version>
+    <version>2.0.0</version>
     <description>JUPolls is a simple and flexible component for voting.</description>
 
     <files>
@@ -44,13 +44,6 @@
                         label="MOD_JUPOLLS_POLL_ID"
                         description="MOD_JUPOLLS_POLL_ID_DESC"
                 />
-                <!--
-                <field name="ajax" type="radio" class="btn-group" default="0" label="MOD_JUPOLLS_AJAX_VOTE"
-                       description="MOD_JUPOLLS_AJAX_VOTE_DESC">
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                </field>
-                -->
 
                 <field
                         name="show_poll_title"

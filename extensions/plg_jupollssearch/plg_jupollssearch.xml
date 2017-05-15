@@ -2,12 +2,12 @@
 <extension type="plugin" version="3.0" group="search" method="upgrade">
 	<name>Search - Polls</name>
 	<author>Denys Nosov</author>
-	<creationDate>07.05.2017</creationDate>
+	<creationDate>15.05.2017</creationDate>
 	<copyright>Copyright (C) 2016-2017 Joomla! Ukraine</copyright>
 	<license>GNU GPL</license>
 	<authorEmail>denys@joomla-ua.org</authorEmail>
 	<authorUrl>http://joomla-ua.org</authorUrl>
-	<version>1.0.0</version>
+	<version>2.0.0</version>
 	<description>Search plugin for JUPolls</description>
 	<files>
 		<filename plugin="plg_jupollssearch">plg_jupollssearch.php</filename>

@@ -245,7 +245,7 @@ class com_JUPollsInstallerScript
                 margin: 0 !important;
                 padding: 0;
                 background: #fff !important;
-                /*position: absolute !important;*/
+                position: absolute !important;
                 top: 83px !important;
                 left: 0 !important;
                 overflow: hidden;
@@ -255,11 +255,13 @@ class com_JUPollsInstallerScript
                 height: 100%;
                 z-index: 100 !important;
             }
+
             .juinstall-content {
                 margin: 5% auto 8% auto !important;
                 padding: 0 0 18px 0;
                 width: 40%;
             }
+
             .juinstall hr {
                 margin-top: 6px;
                 margin-bottom: 6px;
@@ -312,7 +314,7 @@ class com_JUPollsInstallerScript
                 margin: 0 !important;
                 padding: 0;
                 background: #fff !important;
-                /*position: absolute !important;*/
+                position: absolute !important;
                 top: 83px !important;
                 left: 0 !important;
                 overflow: hidden;
@@ -322,11 +324,13 @@ class com_JUPollsInstallerScript
                 height: 100%;
                 z-index: 100 !important;
             }
+
             .juinstall-content {
                 margin: 5% auto 8% auto !important;
                 padding: 0 0 18px 0;
                 width: 40%;
             }
+
             .juinstall hr {
                 margin-top: 6px;
                 margin-bottom: 6px;
