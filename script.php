@@ -109,6 +109,43 @@ class com_JUPollsInstallerScript
               KEY `poll_id` (`poll_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;");
             $db->execute();
+
+            // Migration
+            $nq_p = $db->getQuery(true);
+            $nq_p->select('*')
+                ->from('#__mijopolls_polls');
+            $db->setQuery($nq_p);
+            $config = $db->loadResult();
+
+            if(!empty($config))
+            {
+                $db->setQuery("INSERT IGNORE `#__jupolls_polls` SELECT * FROM `#__mijopolls_polls`;");
+                $db->execute();
+            }
+
+            $nq_o = $db->getQuery(true);
+            $nq_o->select('*')
+                ->from('#__mijopolls_options');
+            $db->setQuery($nq_o);
+            $config = $db->loadResult();
+
+            if(!empty($config))
+            {
+                $db->setQuery("INSERT IGNORE `#__jupolls_options` SELECT * FROM `#__mijopolls_options`;");
+                $db->execute();
+            }
+
+            $nq_v = $db->getQuery(true);
+            $nq_v->select('*')
+                ->from('#__mijopolls_votes');
+            $db->setQuery($nq_v);
+            $config = $db->loadResult();
+
+            if(!empty($config))
+            {
+                $db->setQuery("INSERT IGNORE `#__jupolls_votes` SELECT * FROM `#__mijopolls_votes`;");
+                $db->execute();
+            }
         }
 
         $src = $parent->getParent()->getPath('source');
@@ -208,7 +245,7 @@ class com_JUPollsInstallerScript
                 margin: 0 !important;
                 padding: 0;
                 background: #fff !important;
-                position: absolute !important;
+                /*position: absolute !important;*/
                 top: 83px !important;
                 left: 0 !important;
                 overflow: hidden;
@@ -275,7 +312,7 @@ class com_JUPollsInstallerScript
                 margin: 0 !important;
                 padding: 0;
                 background: #fff !important;
-                position: absolute !important;
+                /*position: absolute !important;*/
                 top: 83px !important;
                 left: 0 !important;
                 overflow: hidden;
